@@ -1,6 +1,6 @@
-# Medium Clone
+# PenCraft
 
-This project aims to create a Medium-like platform using modern technologies for both frontend and backend. It utilizes a robust stack including React for the frontend, Cloudflare Workers for the backend, and a combination of other tools for validation, ORM, database, and authentication.
+This project aims to create a blogging platform using modern technologies for both frontend and backend. It utilizes a robust stack including React for the frontend, Cloudflare Workers for the backend, and a combination of other tools for validation, ORM, database, and authentication.
 
 ## Technologies Used
 
