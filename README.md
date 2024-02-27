@@ -1,0 +1,58 @@
+# Medium Clone
+
+This project aims to create a Medium-like platform using modern technologies for both frontend and backend. It utilizes a robust stack including React for the frontend, Cloudflare Workers for the backend, and a combination of other tools for validation, ORM, database, and authentication.
+
+## Technologies Used
+
+- **Frontend:**
+  - React: A popular JavaScript library for building user interfaces.
+  - Zod: A TypeScript-first schema declaration and validation library.
+  - TypeScript: A statically typed superset of JavaScript that compiles to plain JavaScript.
+  
+- **Backend:**
+  - Cloudflare Workers: A serverless execution environment that allows you to create lightweight, scalable backend applications.
+  - Prisma: A modern database toolkit for TypeScript and Node.js that simplifies database access.
+  - Postgres: A powerful, open-source relational database system.
+  - JWT (JSON Web Tokens): A compact, URL-safe means of representing claims to be transferred between two parties securely.
+
+## Setup Instructions
+
+### Frontend
+
+1. Navigate to the `frontend` directory.
+2. Run `npm install` to install dependencies.
+3. Run `npm start` to start the development server.
+4. Access the development server at `http://localhost:3000`.
+
+### Backend
+
+1. Navigate to the `backend` directory.
+2. Run `npm install` to install dependencies.
+3. Set up your Postgres database and configure the connection in `prisma/schema.prisma`.
+4. Run `npx prisma migrate dev` to apply migrations and generate Prisma client.
+5. Run `npm run dev` to start the backend server.
+6. Access the backend server at `http://localhost:8080`.
+
+## Authentication (Cookies Approach)
+
+For authentication, this project utilizes JSON Web Tokens (JWT) along with a cookies-based approach.
+
+1. Upon successful login, a JWT token is generated server-side and sent to the client.
+2. The JWT token is then stored in an HTTP-only cookie for enhanced security.
+3. Subsequent requests from the client include this token in the cookie header.
+4. The server validates the JWT token to authenticate the user for protected routes.
+
+<!-- ## License
+
+This project is released under the MIT License. See the [LICENSE](LICENSE) file for more details. -->
+
+## Contributors
+
+- Akshit Lakhera
+<!-- - [Other Contributors] -->
+
+Feel free to contribute by forking and submitting pull requests!
+
+<!-- For detailed documentation and contribution guidelines, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file. -->
+
+Happy coding! 🚀
