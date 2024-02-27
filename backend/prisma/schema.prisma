@@ -12,3 +12,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model User {
+  id       String   @id @default(uuid()) //making uuid to protect from collison and also made it string
+  email    String   @unique
+  name     String?
+  password String
+  posts    Post[]
+}
+// Here we are making  one to many realtionship.
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+}
