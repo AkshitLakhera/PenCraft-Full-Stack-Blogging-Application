@@ -1,6 +1,7 @@
-import { PrismaClient } from '@prisma/client/edge'
+import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
+import { use } from 'hono/jsx';
 import { decode, sign, verify } from 'hono/jwt'
 // This is a way to define type in typescript with hono
 const app = new Hono<{
@@ -48,9 +49,47 @@ async function hashPassword(password:string): Promise<string> {
     return hashHex
 }
 
-app.post('/api/v1/signin',(c) => {
-  return c.text('Hello Hono!')
-})
+app.post('/api/v1/signin', async (c) => {
+  try {
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    const body = await c.req.json();
+    const user = await prisma.user.findUnique({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (!user) {
+      // Return a 401 Unauthorized error response if the user is not found
+      // Cloudflare Workers, don't directly support chaining response methods like Express.js does.
+      c.status(401);
+      return c.json({ error: "Incorrect user found" });
+    }
+
+    // Compare the hashed password from the database with the hashed password from the request
+    const hashedPassword = await hashPassword(body.password);
+    if (hashedPassword !== user.password) {
+      // Return a 401 Unauthorized error response if the password is incorrect
+      c.status(401);
+      return c.json({ error: "Incorrect password" });
+    }
+
+    // Generate a JWT token for authentication
+    const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+
+    // Return the JWT token as a response
+    return c.json({ token: jwt });
+  } catch (error) {
+    // Handle any errors that occur during the process
+    console.error('Error signing in:', error);
+    // Return a 500 Internal Server Error response
+    c.status(500);
+    return c.json({ error: 'Internal server error' });
+  }
+});
 
 app.post('/api/v1/blog',(c) => {
   return c.text('Hello Hono!')
