@@ -1,10 +1,12 @@
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
+import { decode, sign, verify } from 'hono/jwt'
 // This is a way to define type in typescript with hono
 const app = new Hono<{
 	Bindings: {
-		DATABASE_URL: string
+		DATABASE_URL: string,
+    JWT_SECRET:string
 	}
 }>();
 
@@ -23,7 +25,10 @@ try {
       password:hashedPassword
     }
   })
-  return c.text("jwt here")
+  // Defined the jwt secret in wrangler.toml and also defiend type inside binding at hono.
+  const jwt = await sign({id:user.id},c.env. JWT_SECRET)
+  return c.json({token:jwt})
+
 }catch(e) {
   return c.status(403)
 }
