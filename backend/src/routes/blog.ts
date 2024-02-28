@@ -29,15 +29,51 @@ blogRouter.use('/api/v1/blog/*', async (c, next) => {
     
     await next()
   })
-  
+
 // Routing
-blogRouter.post('/api/v1/blog',(c) => {
-    console.log(c.get('userId'))
-    return c.text('signin route')
+blogRouter.post('/api/v1/blog',async (c) => {
+    const userId = c.get('userId');
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const body = await c.req.json();
+    const blog =  await prisma.post.create({
+        data :{
+            title:body.title,
+            content:body.content,
+            authorId:userId //blog get saved with specific userId (payload one)
+        }
+    })
+    return c.json({
+		id: blog.id
+	});
   })
-  
-blogRouter.put('/api/v1/blog',(c) => {
-    return c.text('Hello Hono!')
+//    Update blog code
+blogRouter.put('/api/v1/blog',async (c) => {
+    const userId = c.get('userId');
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const body = await c.req.json();
+    const updateBlog = await prisma.post.update({
+        where :{
+            id :body.id,
+            authorId:userId
+        },
+        data :{
+            title :body.title,
+            content:body.content,
+        }
+
+    })
+    if (updateBlog) {
+        return c.json({messgae: "Blog post successfully updated"})
+    } else {
+        c.status(401)
+        return c.json({
+            error : "Blog does n't get updated"
+        })
+    }
   })
   
 blogRouter.get('/api/v1/blog/:id',(c) => {
