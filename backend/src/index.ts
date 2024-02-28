@@ -4,15 +4,43 @@ import { Hono } from 'hono'
 import { use } from 'hono/jsx';
 import { decode, sign, verify } from 'hono/jwt'
 // This is a way to define type in typescript with hono
+
+// This is how we give type to variables in typescript
 const app = new Hono<{
 	Bindings: {
 		DATABASE_URL: string,
-    JWT_SECRET:string
+    JWT_SECRET:string,
+	},
+  Variables : {
+		userId: string
 	}
 }>();
+// Middleware
+app.use('/api/v1/blog/*', async (c, next) => {
+  // Get the header
+  // verify the header
+  // if header is correct we need to proceed
+  // if not correct return error
+  const jwt = c.req.header('Authorization');
+  if (!jwt) {
+    c.status(401);
+		return c.json({ error: "unauthorized" });
+  }
+  const token = await jwt.split("")[1];
+  const payload = await verify(token,c.env.JWT_SECRET)
+  if (!payload){
+    c.status(401)
+    return c.json({error:"Unauthorized"})
+  }
+  c.set('userId',payload.id)
+  
+  await next()
+})
 
 //Always try to initialize as many thing in inside not in global context as it could start worker on specific route and you coould loose data
 // Routing
+
+//                                          Signup
 app.post('/api/v1/signup',async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -48,6 +76,7 @@ async function hashPassword(password:string): Promise<string> {
     const hashHex  =  hashArray.map(byte => byte.toString(16).padStart(2,'0')).join('');;
     return hashHex
 }
+//                                                 Sigin in
 
 app.post('/api/v1/signin', async (c) => {
   try {
