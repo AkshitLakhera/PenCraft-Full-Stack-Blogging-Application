@@ -76,6 +76,17 @@ blogRouter.put('/api/v1/blog',async (c) => {
     }
   })
   
-blogRouter.get('/api/v1/blog/:id',(c) => {
-    return c.text('Hello Hono!')
+//  Route to get all the blogs
+blogRouter.get('/api/v1/blog/:id',async (c) => {
+    const id = c.req.param('id')
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const blogs = await prisma.post.findUnique({
+        where :{
+            id 
+        }
+
+    })
+    return c.json({blogs})
   })
