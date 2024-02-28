@@ -19,7 +19,7 @@ blogRouter.use('/api/v1/blog/*', async (c, next) => {
       c.status(401);
           return c.json({ error: "unauthorized" });
     }
-    const token = await jwt.split("")[1];
+    const token =jwt.split("")[1];
     const payload = await verify(token,c.env.JWT_SECRET)
     if (!payload){
       c.status(401)
