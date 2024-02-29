@@ -14,6 +14,7 @@ This project aims to create a blogging platform using modern technologies for bo
   - Prisma: A modern database toolkit for TypeScript and Node.js that simplifies database access.
   - Postgres: A powerful, open-source relational database system.
   - JWT (JSON Web Tokens): A compact, URL-safe means of representing claims to be transferred between two parties securely.
+  - Using WebCrypto  for hashing passsword before storing in the database.
 
 ## Setup Instructions
 
