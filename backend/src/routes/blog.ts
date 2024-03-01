@@ -2,6 +2,7 @@ import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
 import { sign,verify } from 'hono/jwt'
+import { createPostInput ,updatePost } from '@akshitlakhera/common-zod-app'
 export const blogRouter = new Hono<{
 	Bindings: {
 		DATABASE_URL: string,
@@ -47,6 +48,12 @@ blogRouter.post('/', async (c) => {
         }).$extends(withAccelerate());
 
         const body = await c.req.json();
+        // zod check
+        const { success } = createPostInput.safeParse(body);
+        if (!success) {
+            c.status(400);
+            return c.json({ error: "invalid input" });
+        }
         const blog = await prisma.post.create({
             data: {
                 title: body.title,
@@ -72,6 +79,11 @@ blogRouter.put('/',async (c) => {
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
     const body = await c.req.json();
+    const { success } = updatePost.safeParse(body);
+    if (!success) {
+        c.status(400);
+        return c.json({ error: "invalid input" });
+    }
     const updateBlog = await prisma.post.update({
         where :{
             id :body.id,
