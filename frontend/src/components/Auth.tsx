@@ -1,8 +1,65 @@
-const Auth = () => {
+import { ChangeEvent, useState } from "react";
+import { Link  } from "react-router-dom"
+import { SignupType } from "@akshitlakhera/common-zod-app"; 
+const Auth = ({type} : { type:"signin"|"signup"}) => {
+  const [postInputs,setPostInputs] = useState<SignupType>({
+    email:"",
+    password:"",
+    name:"",
+  });
   return (
-    <div className=" h-screen flex justify-center flex-col ">
-   Auth</div>
+    <div className=" h-screen flex justify-center items-center flex-col ">
+      <div className="flex justify-center ">
+        <div>
+        <div className="max-w-lg text-3xl font-bold px-10">
+          Create an account
+          <div className="text-gray-500 font-medium text-xl mt-1">
+          {type==="signin"? "Don't have account" : "Already have account ?"}
+           
+            <Link className="ml-2 underline"to={type === "signin" ? "/signup" : "/signin"}>  {type === "signin" ? "Sign up" : "Sign in"}</Link>
+          </div>
+          
+          </div>
+
+          <div className="max-w-md mt-6">
+            <InputBox label="Name" placeholder="Enter your Username"  type="text" 
+            onChange={(e) => { 
+              setPostInputs({
+                ...postInputs, name:e.target.value
+              })
+            }} />
+            <InputBox label="Email" placeholder="Enter your Email"  type="text"  onChange={(e) => { 
+              setPostInputs({
+                ...postInputs, email:e.target.value
+              })
+            }}/>
+            <InputBox label="Password" placeholder="Enter your password" type="password"  onChange={(e) => { 
+              setPostInputs({
+                ...postInputs, password:e.target.value
+              })
+            }}/>
+            <button type="button" className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{type === "signup" ? "Sign up" : "Sign in"}</button>
+
+        </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+// Defining type
+interface InputBoxTypes {
+  label :string,
+  placeholder:string,
+  onChange:(e:ChangeEvent<HTMLInputElement>) => void,
+  type:string,
+}
+const InputBox = ({label,placeholder,onChange,type} : InputBoxTypes) => {
+  return (
+    <div className="mt-3" >
+            <label className="block mb-2 text-base font-medium text-gray-900 dark:text-white">{label}</label>
+            <input type={type}  onChange={onChange} id="first_name" className="bg-gray-50 border  mt-2 border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} required />
+        </div>
   )
 }
 
-export default Auth
+export default Auth;
