@@ -11,9 +11,9 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     <div className=" h-screen flex justify-center items-center flex-col ">
       <div className="flex justify-center ">
         <div>
-        <div className="max-w-lg text-3xl font-bold px-10">
-          Create an account
-          <div className="text-gray-500 font-medium text-xl mt-1">
+        <div className="max-w-lg text-4xl font-bold px-10 text-center">
+        {type=== "signin"  ? "Sign In" :"Create an Account"}
+          <div className="text-gray-500 font-medium text-lg mt-1">
           {type==="signin"? "Don't have account" : "Already have account ?"}
            
             <Link className="ml-2 underline"to={type === "signin" ? "/signup" : "/signin"}>  {type === "signin" ? "Sign up" : "Sign in"}</Link>
