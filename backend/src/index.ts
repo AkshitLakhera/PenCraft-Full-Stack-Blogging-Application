@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { userRouter } from './routes/user';
 import { blogRouter }  from './routes/blog' ;
 // This is a way to define type in typescript with hono
@@ -13,6 +14,7 @@ const app = new Hono<{
 		userId: string
 	}
 }>();
+app.use('/*', cors())
 //Always try to initialize as many thing in inside not in global context as it could start worker on specific route and you coould loose data
 // Routing
 app.route('/api/v1/user', userRouter);
