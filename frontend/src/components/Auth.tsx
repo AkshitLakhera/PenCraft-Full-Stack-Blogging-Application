@@ -35,12 +35,13 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
           </div>
 
           <div className="max-w-md mt-6">
-            <InputBox label="Name" placeholder="Enter your Username"  type="text" 
+            {type === "signup" ?  <InputBox label="Name" placeholder="Enter your Username"  type="text" 
             onChange={(e) => { 
               setPostInputs({
                 ...postInputs, name:e.target.value
               })
-            }} />
+            }} /> :null }
+            
             <InputBox label="Email" placeholder="Enter your Email"  type="text"  onChange={(e) => { 
               setPostInputs({
                 ...postInputs, email:e.target.value
