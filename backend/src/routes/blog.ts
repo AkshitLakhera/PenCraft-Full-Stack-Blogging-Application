@@ -105,17 +105,48 @@ blogRouter.put('/',async (c) => {
     }
   })
   
-//  Route to get all the blogs
+//  Route to get all the blogs with specific id
 blogRouter.get('/:id',async (c) => {
     const id = c.req.param('id')
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
-    const blogs = await prisma.post.findUnique({
+    const blog = await prisma.post.findUnique({
         where :{
             id 
+        },
+        select: {
+            id: true,
+            title: true,
+            content: true,
+            author: {
+                select: {
+                    name: true
+                }
+            }
         }
-
     })
-    return c.json({blogs})
+    return c.json({blog})
   })
+//    Route to get all the blogs 
+blogRouter.get('/bluk', async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const blogs = await prisma.post.findMany({
+        select: {
+            content:true,
+            title:true,
+            id:true,
+            author :{
+                select : {
+                    name :true
+                }
+            }
+        }
+    })
+    return c.json({
+        blogs
+    })
+
+})

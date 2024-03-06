@@ -32,7 +32,7 @@ export const Blogs = () => {
             publishedDate={"2 March,2024"}
           />
         </div>
-        A
+    
       </div>
     </div>
   );
