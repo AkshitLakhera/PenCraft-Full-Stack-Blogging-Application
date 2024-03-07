@@ -73,6 +73,7 @@ blogRouter.post('/', async (c) => {
 });
 
 //    Update blog code
+// I can see some problem here lets see
 blogRouter.put('/',async (c) => {
     const userId = c.get('userId');
     const prisma = new PrismaClient({
@@ -117,7 +118,8 @@ blogRouter.get('/bulk', async (c) => {
             id:true,
             author :{
                 select : {
-                    name :true
+                    name :true,
+                    
                 }
             }
         }
