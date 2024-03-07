@@ -11,7 +11,7 @@ export interface Blog {
         "name": string
     }
 }
-
+// Here we  are expecting an object with a property named id of type that's why we are gving type in this way
 export const useBlog = ({ id }: { id: string }) => {
     const [loading, setLoading] = useState(true);
     const [blog, setBlog] = useState<Blog>();

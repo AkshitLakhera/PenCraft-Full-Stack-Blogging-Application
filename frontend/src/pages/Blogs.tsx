@@ -13,6 +13,7 @@ export const Blogs = () => {
       <div className="flex justify-center items-center h-full ">
         <div className="flex flex-col items-center ">
           {blogs.map((blog) =>  <BlogCard
+            id={blog.id}
             authorName={blog.author.name || "Anonymous"}
             title={blog.title}
             content={
