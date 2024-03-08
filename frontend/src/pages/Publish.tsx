@@ -38,18 +38,18 @@ export const Publish = () => {
           value={title}
           onChange={handleTitleChange}
           placeholder="Enter title"
-          className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
+          className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
         />
         <textarea
           value={content}
           onChange={handleContentChange}
           placeholder="Write your content here"
           rows={8}
-          className="border border-gray-300 rounded-md px-3 py-2 w-full"
+          className="border border-gray-300 rounded-md px-3 py-2 w-full focus outline-none"
         />
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4"
+          className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-4"
         >
           Publish
         </button>
