@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useBlog } from "@/hooks"
 import { CompleteBlog } from "@/components/CompleteBlog";
+import { CompleteBlogSkeleton } from "@/components/CompleteBlogSkeleton";
 export const Blog = () => {
   //define type<> format of output
   // Here we will be using userparams to extract data from query params
@@ -9,11 +10,11 @@ export const Blog = () => {
   const {blog ,loading } = useBlog({ id: id || ""}); // passed id in this way
   if(loading){
     return <div>
-      Loading......
+     <CompleteBlogSkeleton/>
     </div>
   }
   if (blog === undefined) {
-    return <div>Loading...</div>;
+    return <div><CompleteBlogSkeleton/></div>;
 }
 
 return <CompleteBlog blog={blog}/>;
