@@ -35,7 +35,7 @@ export const Publish = () => {
       <div className="p-4">
         <input
           type="text"
-          value={title}
+          value={title }
           onChange={handleTitleChange}
           placeholder="Enter title"
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
