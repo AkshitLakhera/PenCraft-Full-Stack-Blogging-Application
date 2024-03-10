@@ -2,14 +2,24 @@
 
 export const Landing = () => {
   return (
-    <div>
-        <TypewriterEffectSmoothDemo/>
+    <div className="bg-black h-screen">
+      <div className="sparkle"><SparklesPreview/></div>
+      <div className=""><TypewriterEffectSmoothDemo/></div>
     </div>
   )
 }
+// Effect  auto complete text  ui acetetnity
 "use client";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { useNavigate } from "react-router-dom";
 export function TypewriterEffectSmoothDemo() {
+  const navigate = useNavigate();
+  const handleSignin = () => {
+    navigate("/signin");
+  }
+  const handleSignup = () => {
+    navigate('/signup');
+  }
     const words = [
       {
         text: "Crafting",
@@ -33,20 +43,52 @@ export function TypewriterEffectSmoothDemo() {
       },
     ];
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-black">
+      <div className="flex flex-col items-center justify-start h-4/6 bg-black ">
         <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base">
           Unlock Your Creativity Here
         </p>
         <TypewriterEffectSmooth words={words} />
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-          <button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-white text-white text-sm">
-            Join now
+          <button onClick={handleSignin} className="w-40 h-10 rounded-xl bg-black border dark:border-white border-white text-white text-sm transition duration-300 ease-in-out hover:bg-white hover:text-black hover:border-black">
+           Sign In
           </button>
-          <button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm">
+          <button onClick={handleSignup} className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm transition duration-300 ease-in-out hover:bg-black hover:text-white hover:border-white">
             Signup
           </button>
         </div>
       </div>
     );
   }
-  
+  //  Effect sparkel ui aceternity
+  "use client";
+import { SparklesCore } from "@/components/ui/sparkles";
+
+export function SparklesPreview() {
+  return (
+    <div className="h-[25rem] w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
+      <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
+        PenCraft
+      </h1>
+      <div className="w-[40rem] h-40 relative">
+        {/* Gradients */}
+        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
+        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
+        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+
+        {/* Core component */}
+        <SparklesCore
+          background="transparent"
+          minSize={0.4}
+          maxSize={1}
+          particleDensity={1200}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
+
+        {/* Radial Gradient to prevent sharp edges */}
+        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+      </div>
+    </div>
+  );
+}
