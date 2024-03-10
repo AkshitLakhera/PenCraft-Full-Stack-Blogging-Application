@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Avatar } from "./BlogCard";
+// import { Avatar } from "./BlogCard";
 export const Appbar = () => {
   return (
     <Link to={"/blogs"}>
@@ -7,7 +7,7 @@ export const Appbar = () => {
         <div className="font-bold text-lg">PenCraft</div>
         <div className="flex  justify-center gap-5">
           <Button/>
-          <Avatar name="Akshit" />
+          {/* <Avatar name="Akshit" /> */}
         </div>
       </div>
     </Link>
