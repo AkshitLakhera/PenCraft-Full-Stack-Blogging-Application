@@ -9,6 +9,11 @@ This project aims to create a blogging platform using modern technologies for bo
   - Zod: A TypeScript-first schema declaration and validation library.
   - TypeScript: A statically typed superset of JavaScript that compiles to plain JavaScript.
   
+  - **Styling:**
+  - Tailwind CSS: A utility-first CSS framework that provides low-level utility classes to build custom designs.
+  - Aceternity UI: A collection of reusable UI components built with Tailwind CSS, designed for rapid development and consistent styling.
+
+  
 - **Backend:**
   - Cloudflare Workers: A serverless execution environment that allows you to create lightweight, scalable backend applications.
   - Prisma: A modern database toolkit for TypeScript and Node.js that simplifies database access.
