@@ -29,7 +29,7 @@ model Post {
   authorId  String
   images    Image[]
 } 
-// Schema for image upload
+// Schema for image upload and we  have added it's  relationship with posts.
 model Image {
   id      String     @id @default(uuid())
   url     String
