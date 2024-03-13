@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { userRouter } from './routes/user';
 import { blogRouter }  from './routes/blog' ;
+import { imageRouter } from './routes/imageroute';
 // This is a way to define type in typescript with hono
 
 // This is how we give type to variables in typescript
@@ -19,4 +20,5 @@ app.use('/*', cors())
 // Routing
 app.route('/api/v1/user', userRouter);
 app.route('/api/v1/blog',blogRouter);
+app.route('/api/v1/image',imageRouter)
 export default app
