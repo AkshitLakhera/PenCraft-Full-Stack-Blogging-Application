@@ -8,10 +8,15 @@
     "@prisma/client": "^5.10.2",
     "@prisma/extension-accelerate": "^0.6.3",
     "hono": "^4.0.7",
-    "prisma": "^5.10.2"
+    "prisma": "^5.10.2",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
+    "@types/backblaze-b2": "^1.5.6",
+    "@types/node": "^20.11.27",
+    "@types/uuid": "^9.0.8",
+    "backblaze-b2": "^1.7.0",
     "prettier": "3.2.5",
     "wrangler": "^3.25.0"
   }
