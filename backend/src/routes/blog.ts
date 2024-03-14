@@ -218,85 +218,85 @@ blogRouter.delete("/:id/delete", async (c) => {
 });
 
 //  Image upload route cloudinary
-// blogRouter.post("/upload", async (c) => {
-//   try {
-//     const formData = await c.req.formData(); // Acess form data from the request
-//     const file = formData.get("file"); //Get the image file from the form data
-//     const body = await c.req.json(); // Parse the JSON body of the request
-//     // Extract postId from the request body
-//     const postId = body.postId; // Assuming postId is passed in the request body
-//     // Check if postId is present and valid
-//     if (!postId) {
-//       console.error("Error uploading image: postId is missing or invalid");
-//       c.status(400); // Bad request
-//       return c.json({ error: "postId is missing or invalid" });
-//     }
-//     // Check if file is not null before calling uploadToCloudinary
-//     if (file instanceof File) {
-//       // Upload image to Cloudinary
-//       const imageUrl = await uploadToCloudinary(file);
-//       const prisma = new PrismaClient({
-//         datasourceUrl: c.env.DATABASE_URL,
-//       }).$extends(withAccelerate());
-
-//       // Store the image URL in your Prisma backend
-//       const newImage = await prisma.image.create({
-//         data: {
-//           url: imageUrl, // Store the URL of the uploaded image
-//           postId: postId, // Associate the image with the user
-//           // You may also associate the image with other entities as needed
-//         },
-//       });
-
-//       // Return the URL of the uploaded image in the response
-//       return c.json({ imageUrl });
-//     } else {
-//       // Handle the case where file is null
-//       console.error("Error uploading image: File is null");
-//       c.status(400); // Bad request
-//       return c.json({ error: "File is null" });
-//     }
-//   } catch (error) {
-//     console.error("Error uploading image:", error);
-//     c.status(500);
-//     return c.json({ error: "Internal server error" });
-//   }
-// });
-//   Route to get the image
-blogRouter.get("/images/:imageId", async (c) => {
+blogRouter.post("/upload", async (c) => {
   try {
-    const imageId = c.req.param("imageId"); // Get the image ID from the request parameters
-
-    // Check if imageId is present and valid
-    if (!imageId) {
-      console.error("Error accessing image: Image ID is missing or invalid");
+    const formData = await c.req.formData(); // Acess form data from the request
+    const file = formData.get("file"); //Get the image file from the form data
+    const body = await c.req.json(); // Parse the JSON body of the request
+    // Extract postId from the request body
+    const postId = body.postId; // Assuming postId is passed in the request body
+    // Check if postId is present and valid
+    if (!postId) {
+      console.error("Error uploading image: postId is missing or invalid");
       c.status(400); // Bad request
-      return c.json({ error: "Image ID is missing or invalid" });
+      return c.json({ error: "postId is missing or invalid" });
     }
+    // Check if file is not null before calling uploadToCloudinary
+    if (file instanceof File) {
+      // Upload image to Cloudinary
+      const imageUrl = await uploadToCloudinary(file);
+      const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+      }).$extends(withAccelerate());
 
-    // Retrieve the image URL from the database using Prisma
-    const prisma = new PrismaClient({
-      datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
+      // Store the image URL in your Prisma backend
+      const newImage = await prisma.image.create({
+        data: {
+          url: imageUrl, // Store the URL of the uploaded image
+          postId: postId, // Associate the image with the user
+          // You may also associate the image with other entities as needed
+        },
+      });
 
-    const image = await prisma.image.findUnique({
-      where: {
-        id: imageId,
-      },
-    });
-
-    // Check if the image with the specified ID exists
-    if (!image) {
-      console.error("Error accessing image: Image not found");
-      c.status(404); // Not found
-      return c.json({ error: "Image not found" });
+      // Return the URL of the uploaded image in the response
+      return c.json({ imageUrl });
+    } else {
+      // Handle the case where file is null
+      console.error("Error uploading image: File is null");
+      c.status(400); // Bad request
+      return c.json({ error: "File is null" });
     }
-
-    // Return the URL of the image in the response
-    return c.json({ imageUrl: image.url });
   } catch (error) {
-    console.error("Error accessing image:", error);
+    console.error("Error uploading image:", error);
     c.status(500);
     return c.json({ error: "Internal server error" });
   }
 });
+//   Route to get the image
+// blogRouter.get("/images/:imageId", async (c) => {
+//   try {
+//     const imageId = c.req.param("imageId"); // Get the image ID from the request parameters
+
+//     // Check if imageId is present and valid
+//     if (!imageId) {
+//       console.error("Error accessing image: Image ID is missing or invalid");
+//       c.status(400); // Bad request
+//       return c.json({ error: "Image ID is missing or invalid" });
+//     }
+
+//     // Retrieve the image URL from the database using Prisma
+//     const prisma = new PrismaClient({
+//       datasourceUrl: c.env.DATABASE_URL,
+//     }).$extends(withAccelerate());
+
+//     const image = await prisma.image.findUnique({
+//       where: {
+//         id: imageId,
+//       },
+//     });
+
+//     // Check if the image with the specified ID exists
+//     if (!image) {
+//       console.error("Error accessing image: Image not found");
+//       c.status(404); // Not found
+//       return c.json({ error: "Image not found" });
+//     }
+
+//     // Return the URL of the image in the response
+//     return c.json({ imageUrl: image.url });
+//   } catch (error) {
+//     console.error("Error accessing image:", error);
+//     c.status(500);
+//     return c.json({ error: "Internal server error" });
+//   }
+// });
