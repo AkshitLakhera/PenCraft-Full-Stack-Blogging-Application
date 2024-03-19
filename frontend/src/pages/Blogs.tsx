@@ -1,41 +1,58 @@
-import { Appbar } from "@/components/Appbar";
-import { BlogCard } from "@/components/BlogCard";
-import { BlogSkeleton } from "@/components/BlogSkeleton";
-import { useBlogs} from  "@/hooks/index"
-// What do you  think that why it is not getting  null in name field I am confused I mean why
-export const Blogs = () => {
-  const { loading , blogs } = useBlogs();
-  if (loading) {
-    return <div>
-      <Appbar/>
-      <div className="flex justify-center items-center h-full ">
-      <div className="flex flex-col items-center ">
-     <BlogSkeleton/>
-     <BlogSkeleton/>
-     <BlogSkeleton/>
-     <BlogSkeleton/>
+import React, { useState } from 'react';
+import { Appbar } from '@/components/Appbar';
+import { BlogCard } from '@/components/BlogCard';
+import { BlogSkeleton } from '@/components/BlogSkeleton';
+import { useBlogs } from '@/hooks/index';
 
+export const Blogs = () => {
+  const { loading, blogs } = useBlogs();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter blogs based on search query
+  const filteredBlogs = blogs.filter(blog =>
+    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearch = (query: React.SetStateAction<string>) => {
+    setSearchQuery(query);
+  };
+
+  if (loading) {
+    return (
+      <div>
+        <Appbar onSearch={handleSearch} />
+        <div className="flex justify-center items-center h-full">
+          <div className="flex flex-col items-center">
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+          </div>
+        </div>
       </div>
-      </div>
-      </div>
+    );
   }
+
   return (
     <div>
-      <Appbar />
-      <div className="flex justify-center items-center h-full ">
-        <div className="flex flex-col items-center ">
-          {blogs.map((blog) =>  <BlogCard
-            id={blog.id}
-            authorName={blog.author.name || "Anonymous"}
-            title={blog.title}
-            content={
-              blog.content
-            }
-            publishedDate={"2 March,2024"}
-          />)}
-          
+      <Appbar onSearch={handleSearch} />
+      <div className="flex justify-center items-center h-full">
+        <div className="flex flex-col items-center">
+          {filteredBlogs.length > 0 ? (
+            filteredBlogs.map((blog) => (
+              <BlogCard
+                key={blog.id}
+                id={blog.id}
+                authorName={blog.author ? blog.author.name || 'Anonymous' : 'Anonymous'}
+                title={blog.title}
+                content={blog.content}
+                publishedDate={'2 March,2024'}
+              />
+            ))
+          ) : (
+            <div>No blogs found</div>
+          )}
         </div>
-    
       </div>
     </div>
   );
