@@ -31,7 +31,7 @@ export const Publish = () => {
 
   return (
     <div>
-      <Appbar />
+   <Appbar onSearch={() => {}} />
       <div className="p-4">
         <input
           type="text"
