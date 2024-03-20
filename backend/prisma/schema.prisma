@@ -18,7 +18,7 @@ model User {
   name     String?
   password String
   posts    Post[]
-  bookmark  Bookmark[]
+  bookmarks  Bookmark[]
 }
 // Here we are making  one to many realtionship.
 model Post {
@@ -31,6 +31,9 @@ model Post {
   bookmarks Bookmark[]
   // images    Image[]
 } 
+
+
+
 // Schema for image upload and we  have added it's  relationship with posts.
 // model Image {
 //   id      String     @id @default(uuid())
@@ -39,7 +42,10 @@ model Post {
 //   postId  String
 // }
 
+
+
 // Schema for bookmark
+
 model Bookmark {
   id      String   @id @default(uuid())
   post    Post     @relation(fields: [postId], references: [id])
