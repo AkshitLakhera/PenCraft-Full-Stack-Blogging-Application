@@ -18,6 +18,7 @@ model User {
   name     String?
   password String
   posts    Post[]
+  bookmark  Bookmark[]
 }
 // Here we are making  one to many realtionship.
 model Post {
@@ -27,12 +28,22 @@ model Post {
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
-  images    Image[]
+  bookmarks Bookmark[]
+  // images    Image[]
 } 
 // Schema for image upload and we  have added it's  relationship with posts.
-model Image {
-  id      String     @id @default(uuid())
-  url     String
-  post    Post        @relation(fields: [postId], references: [id])
-  postId  String
+// model Image {
+//   id      String     @id @default(uuid())
+//   url     String
+//   post    Post        @relation(fields: [postId], references: [id])
+//   postId  String
+// }
+
+// Schema for bookmark
+model Bookmark {
+  id      String   @id @default(uuid())
+  post    Post     @relation(fields: [postId], references: [id])
+  postId String
+  user    User     @relation(fields: [userId], references: [id] )
+  userId  String
 }
