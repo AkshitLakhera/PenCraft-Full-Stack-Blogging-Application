@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import ribbon from "../assets/ribbon.png";
 import ribbonfilled from "../assets/bookmark.png";
 import { useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "@/config";
 
 interface BlogCardProps {
   id: number;
@@ -18,12 +20,25 @@ export const BlogCard = ({
   content,
   publishedDate,
 }: BlogCardProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(true);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const handleClick = (event: { stopPropagation: () => void; preventDefault: () => void; }) => {
+  const handleClick = async (event: { stopPropagation: () => void; preventDefault: () => void; }) => {
     event.stopPropagation(); // Prevent link navigation from bubbling up
     event.preventDefault();
     setIsBookmarked(!isBookmarked);
+    // Make an HTTP request to add or remove the blog post from bookmarks
+    const token = localStorage.getItem('token'); // Assuming you have a token stored in localStorage
+    if (!token) {
+      throw new Error('Authentication token not found');
+    }
+
+    await axios.post(`${BACKEND_URL}/api/v1/bookmark/${id}/bookmarks`
+    , null, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Pass the authentication token
+      },
+    })
+    console.log('Blog post added to bookmarks:', id);
   };
 
   return (
@@ -49,7 +64,7 @@ export const BlogCard = ({
           </div>
           <div onClick={handleClick}>
             <img
-              src={isBookmarked ? ribbon : ribbonfilled}
+              src={isBookmarked ? ribbonfilled : ribbon}
               className="w-5 h-auto"
               alt=""
             />
