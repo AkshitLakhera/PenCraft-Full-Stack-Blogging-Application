@@ -4,7 +4,6 @@ import ribbonfilled from "../assets/bookmark.png";
 import { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
-
 interface BlogCardProps {
   id: number;
   authorName: string;
@@ -12,7 +11,6 @@ interface BlogCardProps {
   content: string;
   publishedDate: string;
 }
-
 export const BlogCard = ({
   id,
   authorName,
@@ -26,19 +24,30 @@ export const BlogCard = ({
     event.stopPropagation(); // Prevent link navigation from bubbling up
     event.preventDefault();
     setIsBookmarked(!isBookmarked);
-    // Make an HTTP request to add or remove the blog post from bookmarks
-    const token = localStorage.getItem('token'); // Assuming you have a token stored in localStorage
-    if (!token) {
-      throw new Error('Authentication token not found');
-    }
+  
+    try {
+      const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
+      if (!token) {
+        throw new Error('Authentication token not found');
+      }
+      console.log('Posting bookmark...');
+      console.log(id)
+      console.log(token)
+      // Make POST request to create bookmark, including user ID in headers
+      await axios.post(
+        `${BACKEND_URL}/api/v1/${id}`,
+        null,
+        {
+          headers: {
+            Authorization: token, // Pass authorization token
+          }
+        }
+      );
 
-    await axios.post(`${BACKEND_URL}/api/v1/bookmark/${id}/bookmarks`
-    , null, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Pass the authentication token
-      },
-    })
-    console.log('Blog post added to bookmarks:', id);
+      console.log('Bookmark added successfully:', id);
+    } catch (error) {
+      console.error('Error adding bookmark:', error);
+    }
   };
 
   return (
@@ -57,7 +66,7 @@ export const BlogCard = ({
           </div>
         </div>
         <div className="text-xl font-semibold pt-2">{title}</div>
-        <div className="text-md font-thin">{content.slice(0, 100) + "..."}</div>
+        <div className=" font-thin text-gray-700 ">{content.slice(0, 100) + "..."}</div>
         <div className="flex justify-between pt-4 items-center cursor-pointer">
           <div className="text-slate-500 text-base font-light pt-4">
             {`${Math.ceil(content.length / 100)} minute(s) read`}
