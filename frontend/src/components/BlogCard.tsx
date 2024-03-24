@@ -34,6 +34,7 @@ export const BlogCard = ({
       console.log(id)
       console.log(token)
       // Make POST request to create bookmark, including user ID in headers
+      if (!isBookmarked){
       await axios.post(
         `${BACKEND_URL}/api/v1/${id}`,
         null,
@@ -45,9 +46,21 @@ export const BlogCard = ({
       );
 
       console.log('Bookmark added successfully:', id);
-    } catch (error) {
+    } else{
+      // To delete the bookmark added
+      const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
+      await axios.delete(
+        `${BACKEND_URL}/api/v1/${id}/bookmarks`,
+        {
+          headers: {
+            Authorization: token, // Pass authorization token
+          }
+        }
+      );
+      console.log("Bookmark deleted")
+    } }  catch (error) {
       console.error('Error adding bookmark:', error);
-    }
+    } 
   };
 
   return (

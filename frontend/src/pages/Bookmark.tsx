@@ -6,9 +6,7 @@ import { BACKEND_URL } from '@/config';
 interface BookmarkProps {
   id: number;
   title: string;
-  summary: string;
-  author: string;
-  date: string;
+  content: string;
 }
 
 export const Bookmark = () => {
@@ -29,13 +27,26 @@ export const Bookmark = () => {
           Authorization:token  // Assuming you have stored the token in localStorage
         }
       });
+      // This how I extracted data from tedious response
+      const info  = response.data.bookmarks;
+      const extractedData = info.map((item: { post: { title: string; content: string; authorId: string; id: string; }; }) => {
+        return {
+          title: item.post.title,
+          content: item.post.content,
+          authorId: item.post.authorId,
+          id: item.post.id
+        };
+      });
+      
+      // Now extractedData will contain an array of objects with the extracted values
+      console.log(extractedData);
       if (response.status === 200) {
-        console.log('Successful response:', response.data);
-        setBookmarks(response.data.bookmarks);
+        console.log('Successful response:');
+        setBookmarks(extractedData);
       } else {
-        console.error('Unexpected response status:', response.status);
+        console.error('Unexpected response status:');
       }
-      setBookmarks(response.data.bookmarks);
+      setBookmarks(extractedData);
     } catch (error) {
       console.error('Error fetching bookmarks:', error);
     }
@@ -50,9 +61,7 @@ export const Bookmark = () => {
             id={bookmark.id}
             key={bookmark.id}
             title={bookmark.title}
-            summary={bookmark.summary}
-            author={bookmark.author}
-            date={bookmark.date}
+            content={bookmark.content.slice(0, 90) + "..."}
           />
         ))}
       </div>
@@ -60,16 +69,15 @@ export const Bookmark = () => {
   );
 };
 
-const Card: React.FC<BookmarkProps> = ({ title, summary, author, date }) => {
+const Card: React.FC<BookmarkProps> = ({ title, content}) => {
   return (
     <div className="blog-card w-96 mx-auto my-8 p-6 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-1">
-      <div className="blog-header text-center">
-        <h2 className="blog-title text-xl font-semibold text-gray-800">{title}</h2>
-        <p className="blog-date text-sm text-gray-600">{date}</p>
+      <div className="blog-header text-left">
+        <h2 className="blog-title text-xl font-semibold text-gray-800 ">{title}</h2>
       </div>
       <div className="blog-content mt-4">
-        <p className="blog-summary text-gray-700">{summary}</p>
-        <p className="blog-author text-gray-600">Author: {author}</p>
+        <p className="blog-summary text-gray-700 text-left">{content}</p>
+        {/* <p className="blog-author text-gray-600">Author: {author}</p> */}
       </div>
     </div>
   );
