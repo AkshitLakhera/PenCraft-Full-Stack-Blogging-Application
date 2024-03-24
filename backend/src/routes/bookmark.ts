@@ -93,6 +93,7 @@ bookMarkRouter.get("/bookmarks", async (c) => {
       },
       include: {
         post: true, // Include related post data
+        // user: true, // Include user details
       },
     });
     // Return bookmarks
