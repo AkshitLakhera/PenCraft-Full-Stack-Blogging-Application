@@ -4,18 +4,19 @@ import { Appbar } from "@/components/Appbar";
 import { BACKEND_URL } from '@/config';
 import { AiOutlineDelete } from 'react-icons/ai'; // Import delete icon
 import Modal from 'react-modal'; // Import modal library
-import Trash from '@/assets/recycle-bin.png';
-
+import Trash from '../assets/recycle-bin.png';
+// Set the app element for the modal
+Modal.setAppElement('#root');
 interface BookmarkProps {
   id: number;
   title: string;
   content: string;
-  onDelete:()=>void;
+  onDelete: (id: number) => void;
 }
 
 export const Bookmark = () => {
   const [bookmarks, setBookmarks] = useState<BookmarkProps[]>([]);
-  const  [selectedBookmark,setSelectedBookmark] = useState<BookmarkProps | null>(null); //to track the selected bookmark for deletion
+  const  [selectedBookmark,setSelectedBookmark] = useState<number|null>(null); //to track the selected bookmark for deletion
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
   useEffect(() => {
     fetchBookmarks();
@@ -56,8 +57,20 @@ export const Bookmark = () => {
       console.error('Error fetching bookmarks:', error);
     }
   };
-  const openDeleteModal = (bookmark: BookmarkProps) => {
-    setSelectedBookmark(bookmark);
+  const handleDelete = async (id:number) => {
+    const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
+    await axios.delete(
+      `${BACKEND_URL}/api/v1/${id}/bookmarks`,
+      {
+        headers: {
+          Authorization: token, // Pass authorization token
+        }
+      }
+    );
+    console.log("Bookmark deleted")
+  }
+  const openDeleteModal = (id:number) => {
+    setSelectedBookmark(id);
     setIsModalOpen(true);
   };
   const closeDeleteModal = () => {
@@ -75,7 +88,7 @@ export const Bookmark = () => {
             key={bookmark.id}
             title={bookmark.title}
             content={bookmark.content.slice(0, 90) + "..."}
-            onDelete = { () => openDeleteModal(bookmark)}
+            onDelete = {openDeleteModal}
           />
         ))}
       </div>  
@@ -91,9 +104,9 @@ export const Bookmark = () => {
             </p>
           </div>
           <div className="flex gap-4">
-            <button className="btn btn-danger w-full">Delete</button>
+            <button className="btn btn-danger w-full" onClick={() => selectedBookmark !== null && handleDelete(selectedBookmark)}>Delete</button>
             <button
-              className="btn btn-light w-full"
+              className="btn btn-light w-full" onClick={closeDeleteModal}
             >
               Cancel
             </button>
@@ -104,7 +117,7 @@ export const Bookmark = () => {
   );
 };
 
-const Card: React.FC<BookmarkProps> = ({ title, content ,onDelete}) => {
+const Card: React.FC<BookmarkProps> = ({ title, content ,id ,onDelete}) => {
   return (
     <div className="blog-card w-96 mx-auto my-8 p-6 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-1">
       <div className="blog-header text-left">
@@ -116,8 +129,9 @@ const Card: React.FC<BookmarkProps> = ({ title, content ,onDelete}) => {
       </div>
        {/* Delete Icon */}
        <div className="flex justify-end mt-4">
-        <AiOutlineDelete className="cursor-pointer" onClick={onDelete} />
+        <AiOutlineDelete className="cursor-pointer" onClick={() => onDelete(id)} />
       </div>
     </div>
   );
 };
+// 
