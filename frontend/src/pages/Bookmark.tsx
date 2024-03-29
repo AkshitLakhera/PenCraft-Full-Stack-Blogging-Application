@@ -58,25 +58,39 @@ export const Bookmark = () => {
     }
   };
   const handleDelete = async (id:number) => {
-    const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
-    await axios.delete(
-      `${BACKEND_URL}/api/v1/${id}/bookmarks`,
-      {
-        headers: {
-          Authorization: token, // Pass authorization token
-        }
+    try {
+      console.log('Deleting bookmark with id:', id);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Authentication token not found');
       }
-    );
-    console.log("Bookmark deleted")
-  }
+      await axios.delete(`${BACKEND_URL}/api/v1/${id}/bookmarks`, {
+        headers: {
+          Authorization: token
+        }
+      });
+      console.log('Bookmark deleted:', id);
+      closeDeleteModal();
+    // Fetch bookmarks again to reflect the changes
+    fetchBookmarks();
+    } catch (error) {
+      console.error('Error deleting bookmark:', error);
+    }
+  };
+  
+  // Inside the openDeleteModal function
   const openDeleteModal = (id:number) => {
+    console.log('Opening delete modal for bookmark with id:', id);
     setSelectedBookmark(id);
     setIsModalOpen(true);
   };
+  
+  // Inside the closeDeleteModal function
   const closeDeleteModal = () => {
+    console.log('Closing delete modal');
     setSelectedBookmark(null);
     setIsModalOpen(false);
-  }
+  };
 
   return (
     <div>
@@ -95,23 +109,26 @@ export const Bookmark = () => {
             {/* Confirmation Modal */}
 
       <Modal isOpen = {isModalOpen} onRequestClose={closeDeleteModal}  contentLabel="Delete Confirmation">
-      <div className="text-center w-56">
-          <Trash/>
-          <div className="mx-auto my-4 w-48">
-            <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
-            <p className="text-sm text-gray-500">
-              Are you sure you want to delete this item?
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <button className="btn btn-danger w-full" onClick={() => selectedBookmark !== null && handleDelete(selectedBookmark)}>Delete</button>
-            <button
-              className="btn btn-light w-full" onClick={closeDeleteModal}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
+      <div className="fixed inset-0 flex items-center justify-center">
+  <div className="bg-white p-8 rounded-lg shadow-lg">
+    <div className="text-center">
+    <div className="flex items-center justify-center mb-4">
+        <img src={Trash} className='w-10' alt="" />
+      </div>
+      <div className="mt-4">
+        <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
+        <p className="text-sm text-gray-500">
+          Are you sure you want to delete this item?
+        </p>
+      </div>
+      <div className="flex gap-4 mt-4 flexc items-center justify-center">
+        <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-xl text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => selectedBookmark !== null && handleDelete(selectedBookmark)}>Delete</button>
+        <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100  font-medium rounded-xl text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={closeDeleteModal}>Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
       </Modal>
     </div>
   );
