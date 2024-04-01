@@ -107,12 +107,16 @@ bookMarkRouter.get("/bookmarks", async (c) => {
 
 // Deletingbook mark
 bookMarkRouter.delete("/:postId/bookmarks", async (c) => {
+  // Connecting to Prisma
+  console.log("Deleting bookmark route called");
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
   const userId = c.get("userId");
   const postId = c.req.param("postId");
+  console.log("UserID:", userId);
+  console.log("PostID:", postId);
 
   try {
     // Check if the bookmark exists
@@ -124,19 +128,23 @@ bookMarkRouter.delete("/:postId/bookmarks", async (c) => {
     });
 
     if (!existingBookmark) {
+      console.log("Bookmark not found");
       c.status(404);
       return c.json({ error: "Bookmark not found" });
     }
 
     // Delete the bookmark
+    console.log("Deleting bookmark:", existingBookmark);
     await prisma.bookmark.delete({
       where: {
         id: existingBookmark.id,
       },
     });
+    await console.log("Bookmark deleted successfully");
 
-    c.status(204); // No content to return
-    return;
+    // Finalize the response
+    c.status(200); // No content to return
+    return c.json({ message: "Bookmark deleted successfully" });
   } catch (error) {
     console.error("Error deleting bookmark:", error);
     c.status(500);
