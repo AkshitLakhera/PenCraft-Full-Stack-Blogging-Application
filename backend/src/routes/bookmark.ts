@@ -133,7 +133,7 @@ bookMarkRouter.delete("/:postId/bookmarks", async (c) => {
       return c.json({ error: "Bookmark not found" });
     }
 
-    // Delete the bookmark
+    // Delete the bookmark  code
     console.log("Deleting bookmark:", existingBookmark);
     await prisma.bookmark.delete({
       where: {
