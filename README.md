@@ -5,21 +5,21 @@ This project aims to create a blogging platform using modern technologies for bo
 ## Technologies Used
 
 - **Frontend:**
+
   - React: A popular JavaScript library for building user interfaces.
   - Zod: A TypeScript-first schema declaration and validation library.
   - TypeScript: A statically typed superset of JavaScript that compiles to plain JavaScript.
-  
+
   - **Styling:**
   - Tailwind CSS: A utility-first CSS framework that provides low-level utility classes to build custom designs.
   - Aceternity UI: A collection of reusable UI components built with Tailwind CSS, designed for rapid development and consistent styling.
 
-  
 - **Backend:**
   - Cloudflare Workers: A serverless execution environment that allows you to create lightweight, scalable backend applications.
   - Prisma: A modern database toolkit for TypeScript and Node.js that simplifies database access.
   - Postgres: A powerful, open-source relational database system.
   - JWT (JSON Web Tokens): A compact, URL-safe means of representing claims to be transferred between two parties securely.
-  - Using WebCrypto  for hashing passsword before storing in the database.
+  - Using WebCrypto for hashing passsword before storing in the database.
 
 ## Setup Instructions
 
@@ -48,9 +48,19 @@ For authentication, this project utilizes JSON Web Tokens (JWT) along with a coo
 3. Subsequent requests from the client include this token in the cookie header.
 4. The server validates the JWT token to authenticate the user for protected routes.
 
-<!-- ## License
+## Additional Functionalities
 
-This project is released under the MIT License. See the [LICENSE](LICENSE) file for more details. -->
+### Bookmark Functionality
+
+Users can bookmark their favorite posts for quick access.
+
+### Search Functionality
+
+Users can search for posts based on keywords or tags.
+
+### Delete Bookmark with Confirmation Model
+
+Users can delete bookmarks with a confirmation model to prevent accidental deletion.
 
 ## Contributors
 
