@@ -121,6 +121,7 @@ bookMarkRouter.delete("/:postId/bookmarks", async (c) => {
   try {
     // Check if the bookmark exists
     const existingBookmark = await prisma.bookmark.findFirst({
+      // userID  check is  a ownership check
       where: {
         userId,
         postId,
@@ -133,7 +134,7 @@ bookMarkRouter.delete("/:postId/bookmarks", async (c) => {
       return c.json({ error: "Bookmark not found" });
     }
 
-    // Delete the bookmark
+    // Delete the bookmark  code
     console.log("Deleting bookmark:", existingBookmark);
     await prisma.bookmark.delete({
       where: {
