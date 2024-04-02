@@ -3,6 +3,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 
 export interface Blog {
+  publishedDate: Date;
   content: string;
   title: string;
   id: number;

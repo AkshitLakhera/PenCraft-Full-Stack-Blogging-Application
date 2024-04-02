@@ -16,6 +16,16 @@ export const Blogs = () => {
   const handleSearch = (query: React.SetStateAction<string>) => {
     setSearchQuery(query);
   };
+  const formatDate = (isoDateString: string): string => {
+    const date = new Date(isoDateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return date.toLocaleString(undefined, options);
+  };
+  
 
   if (loading) {
     return (
@@ -46,7 +56,8 @@ export const Blogs = () => {
                 authorName={blog.author ? blog.author.name || 'Anonymous' : 'Anonymous'}
                 title={blog.title}
                 content={blog.content}
-                publishedDate={'2 March,2024'}
+                publishedDate={blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}
+                
               />
             ))
           ) : (

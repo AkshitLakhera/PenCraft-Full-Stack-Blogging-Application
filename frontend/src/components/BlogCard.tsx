@@ -9,7 +9,7 @@ interface BlogCardProps {
   authorName: string;
   title: string;
   content: string;
-  publishedDate: string;
+  publishedDate:Date | string ;
 }
 export const BlogCard = ({
   id,
@@ -75,7 +75,7 @@ export const BlogCard = ({
             <Circle />
           </div>
           <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-            {publishedDate}
+            {publishedDate.toLocaleString()}
           </div>
         </div>
         <div className="text-xl font-semibold pt-2">{title}</div>

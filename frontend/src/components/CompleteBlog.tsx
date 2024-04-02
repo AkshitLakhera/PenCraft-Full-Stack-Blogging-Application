@@ -3,6 +3,15 @@ import { Appbar } from "./Appbar"
 import { Avatar } from "./BlogCard"
 
 export const CompleteBlog = ({blog} : {blog:Blog}) =>  {
+    const formatDate = (isoDateString: string): string => {
+        const date = new Date(isoDateString);
+        const options: Intl.DateTimeFormatOptions = {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        };
+        return date.toLocaleString(undefined, options);
+      };
     return <div>
        <Appbar onSearch={() => {}} />
         <div className="flex justify-center ">
@@ -12,7 +21,7 @@ export const CompleteBlog = ({blog} : {blog:Blog}) =>  {
                         {blog.title}
                     </div>
                     <div className="text-slate-500 pt-2">
-                        Post on 2nd December 2023
+                        {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
                     </div>
                     <div className="pt-4">
                         {blog.content}
