@@ -42,6 +42,7 @@ blogRouter.post("/", async (c) => {
   try {
     const userId = c.get("userId");
     console.log("userId:", userId); // Log userId for debugging
+    const publishedDate = new Date(); // Get the current date and time
 
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
@@ -59,6 +60,7 @@ blogRouter.post("/", async (c) => {
         title: body.title,
         content: body.content,
         authorId: userId, //blog get saved with specific userId (payload one) automatically
+        publishedDate,
       },
     });
 
@@ -115,6 +117,7 @@ blogRouter.get("/bulk", async (c) => {
       content: true,
       title: true,
       id: true,
+      publishedDate: true,
       author: {
         select: {
           name: true,
@@ -140,6 +143,7 @@ blogRouter.get("/:id", async (c) => {
       id: true,
       title: true,
       content: true,
+      publishedDate: true,
       author: {
         select: {
           name: true,
