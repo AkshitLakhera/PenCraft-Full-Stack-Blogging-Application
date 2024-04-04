@@ -42,7 +42,6 @@ export const Blogs = () => {
       </div>
     );
   }
-
   return (
     <div>
       <Appbar onSearch={handleSearch} />

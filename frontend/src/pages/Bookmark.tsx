@@ -5,6 +5,7 @@ import { BACKEND_URL } from '@/config';
 import { AiOutlineDelete } from 'react-icons/ai'; // Import delete icon
 import Modal from 'react-modal'; // Import modal library
 import Trash from '../assets/recycle-bin.png';
+import { Link } from 'react-router-dom';
 // Set the app element for the modal
 Modal.setAppElement('#root');
 interface BookmarkProps {
@@ -138,7 +139,10 @@ const Card: React.FC<BookmarkProps> = ({ title, content ,id ,onDelete}) => {
   return (
     <div className="blog-card w-96 mx-auto my-8 p-6 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-1">
       <div className="blog-header text-left">
-        <h2 className="blog-title text-xl font-semibold text-gray-800 ">{title}</h2>
+        <h2 className="blog-title text-xl font-semibold text-gray-800 ">  
+ {/* Code added to open whole blog when clicked on card  */}
+        <Link to={`/blog/${id}`}>{title}</Link>
+        </h2>
       </div>
       <div className="blog-content mt-4">
         <p className="blog-summary text-gray-700 text-left">{content}</p>
