@@ -62,6 +62,12 @@ Users can search for posts based on keywords or tags.
 
 Users can delete bookmarks with a confirmation model to prevent accidental deletion.
 
+###
+
+## Image Upload Feature
+
+PenCraft now supports image uploads, allowing users to enhance their blog posts with images. We utilize Cloudinary as our image storage solution for seamless integration and reliable image hosting.
+
 ## Contributors
 
 - Akshit Lakhera
