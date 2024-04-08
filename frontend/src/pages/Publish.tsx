@@ -54,6 +54,24 @@ export const Publish = () => {
           Publish
         </button>
       </div>
+      <ImageUpload/>
     </div>
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function ImageUpload() {
+  const [file, setFile] = useState<string>()
+  function handleChange(e: { target: { files: (Blob | MediaSource)[]; }; }) {
+      console.log(e.target.files);
+      setFile(URL.createObjectURL(e.target.files[0]));
+
+ }
+  return (
+    <div className="  ml-4 ">
+      <h2 className="my-4 font-medium" >Add Image:</h2>
+      <input type="file" onChange={()=> {handleChange}} />
+      <img src={file} />
+    </div>
+  );
+}
