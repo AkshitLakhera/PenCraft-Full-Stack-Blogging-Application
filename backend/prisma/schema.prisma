@@ -32,16 +32,16 @@ model Post {
   authorId      String
   publishedDate DateTime?
   bookmarks     Bookmark[]
-  // images    Image[]
+  images        Image[]
 }
 
 // Schema for image upload and we  have added it's  relationship with posts.
-// model Image {
-//   id      String     @id @default(uuid())
-//   url     String
-//   post    Post        @relation(fields: [postId], references: [id])
-//   postId  String
-// }
+model Image {
+  id     String @id @default(uuid())
+  url    String
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
+}
 
 // Schema for bookmark
 
