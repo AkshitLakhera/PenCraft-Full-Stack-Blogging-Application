@@ -66,7 +66,7 @@ Users can delete bookmarks with a confirmation model to prevent accidental delet
 
 ## Image Upload Feature
 
-PenCraft now supports image uploads, allowing users to enhance their blog posts with images. We utilize Cloudinary as our image storage solution for seamless integration and reliable image hosting.
+Working on to supports image uploads, allowing users to enhance their blog posts with images. (Will add it after I get my credit card)
 
 ## Contributors
 
