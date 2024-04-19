@@ -32,7 +32,7 @@ model Post {
   authorId      String
   publishedDate DateTime?
   bookmarks     Bookmark[]
-  imageUrl      String? // Optional field for image URL
+  // imageUrl      String? // Optional field for image URL
 }
 
 // Schema for bookmark

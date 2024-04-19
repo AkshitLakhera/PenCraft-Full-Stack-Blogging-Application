@@ -79,7 +79,7 @@ export const BlogCard = ({
           </div>
         </div>
         <div className="text-xl font-semibold pt-2">{title}</div>
-        <div className=" font-thin text-gray-700 ">{content.slice(0, 100) + "..."}</div>
+        <div className="pt-4" dangerouslySetInnerHTML={{ __html: content.slice(0, 100) + "..." }} />
         <div className="flex justify-between pt-4 items-center cursor-pointer">
           <div className="text-slate-500 text-base font-light pt-4">
             {`${Math.ceil(content.length / 100)} minute(s) read`}
