@@ -26,6 +26,7 @@ export const CompleteBlog = ({blog}: {blog: Blog}) => {
               {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
             </div>
             <div className="pt-4" dangerouslySetInnerHTML={{ __html: blog.content }} />
+            {/* <div className="pt-4">{blog.content}</div> */}
           </div>
           <div className="col-span-4">
             <div className="text-slate-600 text-lg">

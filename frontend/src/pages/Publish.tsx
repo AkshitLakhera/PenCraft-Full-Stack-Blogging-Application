@@ -15,19 +15,13 @@ export const Publish = () => {
     setTitle(e.target.value);
   };
 
-  const convertToPlainText = (html:string) => {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
-    return tempDiv.innerText.trim(); // Trim leading/trailing whitespace
-  };
 
   const handleSubmit = async () => {
-    const plainTextContent = convertToPlainText(content); // Convert HTML to plain text
 
     try {
       await axios.post(`${BACKEND_URL}/api/v1/blog`, {
         title,
-        content: plainTextContent, // Send plain text content to backend
+        content, // Send plain text content to backend
       }, {
         headers: {
           Authorization: localStorage.getItem("token")
