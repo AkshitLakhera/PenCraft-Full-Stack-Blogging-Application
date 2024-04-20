@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 // import { Link, useNavigate } from "react-router-dom";
 
 interface AppbarProps {
-  onSearch: (query: string) => void; // Specify the type of the onSearch prop
+  onSearch: (query: string) => void;
+
 }
 
 export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
