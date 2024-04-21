@@ -68,6 +68,10 @@ Users can delete bookmarks with a confirmation model to prevent accidental delet
 
 Working on to supports image uploads, allowing users to enhance their blog posts with images. (Will add it after I get my credit card)
 
+## Add rich text editor
+
+Added jodit editor .
+
 ## Contributors
 
 - Akshit Lakhera
