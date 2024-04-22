@@ -17,8 +17,8 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     const userName = response.data.name; // Access user's name from response data
     localStorage.setItem("token",jwt);
     localStorage.setItem("name",userName)
-    // console.log(userName)
-    // console.log(jwt)
+    console.log(userName)
+    console.log(jwt)
     navigate("/blogs") }
     catch(e) {
       alert("Erro on sending request")

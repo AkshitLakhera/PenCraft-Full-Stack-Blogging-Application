@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Avatar } from "./BlogCard";
 // import { Link, useNavigate } from "react-router-dom";
 
 interface AppbarProps {
@@ -29,7 +30,7 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
   const handleHomepage = () => {
     navigate("/blogs")
   }
-
+  const authorname = localStorage.getItem("name") ?? ""; // Default value is an empty string
   return (
     <div className="flex justify-between border-b p-3 m-1" style={{ position: "sticky", top: 0, zIndex: 1000,backgroundColor:"white" }}>
       <div className="font-bold text-lg cursor-pointer" onClick={handleHomepage}>PenCraft</div>
@@ -67,7 +68,7 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
       <div className="flex justify-center gap-5">
         <Button title="Bookmarks" onClick={handleBookmarkClick} />
         <Button title="Create a blog" onClick={handlePublish} />
-        {/* <Avatar name="Akshit" /> */}
+        <Avatar name={authorname} />
       </div>
     </div>
   );
