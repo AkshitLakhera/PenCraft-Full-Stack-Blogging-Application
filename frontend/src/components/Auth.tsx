@@ -14,8 +14,11 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     try {  const response=  await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup" ? "signup" :"signin"}`,postInputs)
     // Sometimes this jwt format can give you lot of pain haha
     const jwt = "Bearer "+response.data.token
+    const userName = response.data.name; // Access user's name from response data
     localStorage.setItem("token",jwt);
-    console.log(jwt)
+    localStorage.setItme("name",userName)
+    // console.log(userName)
+    // console.log(jwt)
     navigate("/blogs") }
     catch(e) {
       alert("Erro on sending request")
