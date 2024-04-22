@@ -16,7 +16,7 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     const jwt = "Bearer "+response.data.token
     const userName = response.data.name; // Access user's name from response data
     localStorage.setItem("token",jwt);
-    localStorage.setItme("name",userName)
+    localStorage.setItem("name",userName)
     // console.log(userName)
     // console.log(jwt)
     navigate("/blogs") }
