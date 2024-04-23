@@ -44,7 +44,9 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
     };
   }, [navigationBoxRef, showNavigationBox]);
   
-
+  const handleMyblogs =  () => {
+    navigate("/myblogs")
+  }
   const handlePublish = () => {
     navigate("/publish");
   };
@@ -75,22 +77,22 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
       <div className="flex justify-center gap-5">
         {/* <Button title="Bookmarks" onClick={handleBookmarkClick} />
         <Button title="Create a blog" onClick={handlePublish} /> */}
-        <div ref={navigationBoxRef} className=" box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px cursor-pointer relative inline-flex items-center justify-center bg-gray-200 w-12 h-12 ml-6 overflow-hidden bg-white-100 rounded-full dark:bg-gray-600" onClick={handleAvatarClick}>
-          <span className="font-medium text-gray-600 dark:text-gray-300">{authorname[0]}</span>
+        <div ref={navigationBoxRef} className="transition-transform duration-1000 ease-in-out box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px cursor-pointer relative inline-flex items-center justify-center bg-gray-200 w-12 h-12 ml-6 overflow-hidden bg-white-100 rounded-full dark:bg-gray-600" onClick={handleAvatarClick}>
+          <span className="font-medium text-gray-1000 dark:text-gray-300">{authorname[0]}</span>
         </div>
         {showNavigationBox && (
-          <div  style ={ {top:"4.5rem"}}className="absolute p-6  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
+          <div  style ={ {top:"4.5rem"}}className=" transition-transform duration-600 ease-in-out absolute p-6  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
             <div className="text-white flex flex-col gap-3"> 
             <div className="flex w-10 h-auto justify-start" onClick={handlePublish}>
-            <img src={blogwrite} alt="blog write"  className="mr-2"/>
+            <img src={blogwrite} alt="blog write"  className="mr-2 cursor-pointer"/>
             <Button title="Write" />
               </div>
             <div className="flex w-10 h-auto justify-start " onClick={handleBookmarkClick}>
-              <img src={ribbon} alt="bookmarky symbol" className="mr-2" />
+              <img src={ribbon} alt="bookmarky symbol" className="mr-2 cursor-pointer" />
               <Button  title="Bookmarks" />
             </div>
-            <div className="flex w-10 h-auto justify-start " >
-              <img src={blogs} alt="blogs" className="mr-2" />
+            <div className="flex w-10 h-auto justify-start "  onClick={handleMyblogs} >
+              <img src={blogs} alt="blogs" className="mr-2 cursor-pointer" />
               <Button  title="My Blogs" />
             </div>
          
