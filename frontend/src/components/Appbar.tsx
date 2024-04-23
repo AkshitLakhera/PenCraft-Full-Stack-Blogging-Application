@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import blogwrite from "@/assets/blog.png";
+import ribbon from "@/assets/ribbon.png";
 interface AppbarProps {
   onSearch: (query: string) => void;
 }
@@ -77,10 +78,18 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
           <span className="font-medium text-gray-600 dark:text-gray-300">{authorname[0]}</span>
         </div>
         {showNavigationBox && (
-          <div  style ={ {top:"4.5rem"}}className="absolute  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
-            <div className="text-white"> 
-            <Button title="Bookmarks" onClick={handleBookmarkClick} />
-        <Button title="Create a blog" onClick={handlePublish} />
+          <div  style ={ {top:"4.5rem"}}className="absolute p-6  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
+            <div className="text-white flex flex-col gap-2"> 
+            <div className="flex w-10 h-auto justify-start">
+            <img src={blogwrite} alt="blog write"  className="mr-2"/>
+            <Button title="Write" onClick={handlePublish} />
+              </div>
+            <div className="flex w-10 h-auto justify-start ">
+              <img src={ribbon} alt="bookmarky symbol" className="mr-2" />
+              <Button  title="Bookmarks" onClick={handleBookmarkClick} />
+            </div>
+         
+       
         </div>
           </div>
         )}
@@ -91,7 +100,7 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
 
 export function Button({ title, onClick }: { title: string; onClick: () => void }) {
   return (
-    <button onClick={onClick} type="button" className="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-xl text-xs px-3 py-2 text-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2 w-32 h-10 flex items-center justify-center">
+    <button onClick={onClick} type="button" className="text-black bg-white font-xl rounded-xl text-xs px-3 py-2 text-center  me-2 mb-2 w-32 h-10 flex items-center justify-start">
       {title}
     </button>
   );
