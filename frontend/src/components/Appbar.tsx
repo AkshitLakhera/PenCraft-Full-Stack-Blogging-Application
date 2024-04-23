@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import blogwrite from "@/assets/blog.png";
 import ribbon from "@/assets/ribbon.png";
+import blogs from "@/assets/blogging.png"
 interface AppbarProps {
   onSearch: (query: string) => void;
 }
@@ -79,14 +80,18 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
         </div>
         {showNavigationBox && (
           <div  style ={ {top:"4.5rem"}}className="absolute p-6  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
-            <div className="text-white flex flex-col gap-2"> 
-            <div className="flex w-10 h-auto justify-start">
+            <div className="text-white flex flex-col gap-3"> 
+            <div className="flex w-10 h-auto justify-start" onClick={handlePublish}>
             <img src={blogwrite} alt="blog write"  className="mr-2"/>
-            <Button title="Write" onClick={handlePublish} />
+            <Button title="Write" />
               </div>
-            <div className="flex w-10 h-auto justify-start ">
+            <div className="flex w-10 h-auto justify-start " onClick={handleBookmarkClick}>
               <img src={ribbon} alt="bookmarky symbol" className="mr-2" />
-              <Button  title="Bookmarks" onClick={handleBookmarkClick} />
+              <Button  title="Bookmarks" />
+            </div>
+            <div className="flex w-10 h-auto justify-start " >
+              <img src={blogs} alt="blogs" className="mr-2" />
+              <Button  title="My Blogs" />
             </div>
          
        
@@ -98,9 +103,9 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
   );
 };
 
-export function Button({ title, onClick }: { title: string; onClick: () => void }) {
+export function Button({ title }: { title: string; }) {
   return (
-    <button onClick={onClick} type="button" className="text-black bg-white font-xl rounded-xl text-xs px-3 py-2 text-center  me-2 mb-2 w-32 h-10 flex items-center justify-start">
+    <button  type="button" className="text-black bg-white font-xl rounded-xl text-xs px-3 py-2 text-center  me-2 mb-2 w-32 h-10 flex items-center justify-start">
       {title}
     </button>
   );
