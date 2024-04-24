@@ -156,8 +156,10 @@ blogRouter.get("/:id", async (c) => {
   return c.json({ blog });
 });
 
+//        Sepecific user
+
 //   Delete blog route
-blogRouter.delete("/:id/delete", async (c) => {
+blogRouter.delete("/:id", async (c) => {
   const authorId = c.get("userId");
   const id = c.req.param("id");
   const prisma = new PrismaClient({
@@ -191,6 +193,32 @@ blogRouter.delete("/:id/delete", async (c) => {
     return c.json({ message: "Blog deleted successfully" });
   } catch (error) {
     console.error("Error deleting blog:", error);
+    c.status(500);
+    return c.json({ error: "Internal server error" });
+  }
+});
+
+// Get all the blogs for the specific user
+blogRouter.get("/user--blogs", async (c) => {
+  const userId = c.get("userId");
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+  try {
+    const userBlogs = await prisma.post.findMany({
+      where: {
+        authorId: userId,
+      },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        publishedDate: true,
+      },
+    });
+    return c.json({ userBlogs });
+  } catch (error) {
+    console.error("Error fetching user's blogs:", error);
     c.status(500);
     return c.json({ error: "Internal server error" });
   }
