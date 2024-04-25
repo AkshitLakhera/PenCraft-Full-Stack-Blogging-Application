@@ -138,6 +138,7 @@ export const Bookmark = () => {
 };
 
 const Card: React.FC<BookmarkProps> = ({ title, content ,id ,onDelete}) => {
+    // const authorname = localStorage.getItem("name") ?? "";
   return (
     <div className="blog-card w-96 mx-auto my-8 p-6 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:-translate-y-1">
       <div className="blog-header text-left">
@@ -147,8 +148,8 @@ const Card: React.FC<BookmarkProps> = ({ title, content ,id ,onDelete}) => {
         </h2>
       </div>
       <div className="blog-content mt-4">
-        <p className="blog-summary text-gray-700 text-left">{content}</p>
-        {/* <p className="blog-author text-gray-600">Author: {author}</p> */}
+      <div className="blog-summary text-gray-700 text-left " dangerouslySetInnerHTML={{ __html: content.slice(0, 100) + "..." }}/>
+        {/* <p className="blog-author text-gray-600">Author: {authorname}</p> */}
       </div>
        {/* Delete Icon */}
        <div className="flex justify-end mt-4">
