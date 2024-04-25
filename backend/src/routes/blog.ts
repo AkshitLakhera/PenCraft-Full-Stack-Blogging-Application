@@ -197,29 +197,3 @@ blogRouter.delete("/:id", async (c) => {
     return c.json({ error: "Internal server error" });
   }
 });
-
-// Get all the blogs for the specific user
-blogRouter.get("/user--blogs", async (c) => {
-  const userId = c.get("userId");
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-  try {
-    const userBlogs = await prisma.post.findMany({
-      where: {
-        authorId: userId,
-      },
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        publishedDate: true,
-      },
-    });
-    return c.json({ userBlogs });
-  } catch (error) {
-    console.error("Error fetching user's blogs:", error);
-    c.status(500);
-    return c.json({ error: "Internal server error" });
-  }
-});

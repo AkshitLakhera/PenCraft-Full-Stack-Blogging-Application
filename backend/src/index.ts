@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { userRouter } from "./routes/user";
 import { blogRouter } from "./routes/blog";
 import { bookMarkRouter } from "./routes/bookmark";
+import { myBlogsRouter } from "./routes/myblogs";
 // This is a way to define type in typescript with hono
 
 // This is how we give type to variables in typescript
@@ -21,4 +22,5 @@ app.use("/*", cors());
 app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
 app.route("/api/v1", bookMarkRouter);
+app.route("api/v1", myBlogsRouter);
 export default app;
