@@ -94,7 +94,8 @@ export const Bookmark = () => {
   };
 
   return (
-    <div>
+    // Using string interpolation to add conditional classes
+    <div className={`${isModalOpen ? 'opacity-50 pointer-events-none' : ''}`}>
       <Appbar onSearch={() => {}} />
       <div className='flex flex-wrap'>
         {bookmarks.map((bookmark) => (
@@ -109,7 +110,8 @@ export const Bookmark = () => {
       </div>  
             {/* Confirmation Modal */}
 
-      <Modal isOpen = {isModalOpen} onRequestClose={closeDeleteModal}  contentLabel="Delete Confirmation">
+      <Modal  className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg"
+   overlayClassName="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50"   isOpen = {isModalOpen} onRequestClose={closeDeleteModal}  contentLabel="Delete Confirmation">
       <div className="fixed inset-0 flex items-center justify-center">
   <div className="bg-white p-8 rounded-lg shadow-lg">
     <div className="text-center">
