@@ -46,11 +46,13 @@ export const Publish = () => {
           placeholder="Enter title"
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
         />
+         <div className="max-h-96 overflow-y-auto">
           <JoditEditor
             ref={editor}
             value={content}
             onChange={newContent => setContent(newContent)} // Update state with HTML content
           />
+          </div>
         <button
           onClick={handleSubmit}
           className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-4"

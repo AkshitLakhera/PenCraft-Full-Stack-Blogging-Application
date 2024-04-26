@@ -152,12 +152,12 @@ export const Myblogs = () => {
       </Modal>
 
       {/* Edit modal */}
-      <Modal  className=" w-3/4 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg"
+      <Modal  className=" max-w-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-lg"
    overlayClassName="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50"   isOpen = {isEditModalOpen} onRequestClose={closeEditModal}  contentLabel="Edit Model">
       <div >
   <div >
     <div className="text-center">
-    <div className="p-4">
+    <div >
         <input
           type="text"
           value={title}
@@ -165,11 +165,13 @@ export const Myblogs = () => {
           placeholder="Enter title"
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
         />
+        <div className="max-h-96 overflow-y-auto">
         <JoditEditor
           ref={editor}
           value={content}
           onChange={newContent => setContent(newContent)} // Update state with HTML content
         />
+        </div>
        <div className="flex gap-4 mt-4 flexc items-center justify-center">
         <button className="bg-slate-900 hover:bg-slate-700 text-white font-bold  rounded-xl text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => selectedBlog !== null && handleEditBlog(selectedBlog)}>Update</button>
         <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100  font-medium rounded-xl text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={closeEditModal}>Cancel</button>
