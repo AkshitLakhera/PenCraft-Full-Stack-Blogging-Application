@@ -123,7 +123,7 @@ myBlogsRouter.delete("/:id", async (c) => {
 });
 //    Update blog code
 // I can see some problem here lets see
-myBlogsRouter.put("/", async (c) => {
+myBlogsRouter.put("/edit", async (c) => {
   const userId = c.get("userId");
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,

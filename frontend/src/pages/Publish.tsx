@@ -5,9 +5,9 @@ import { BACKEND_URL } from "@/config";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from 'jodit-react';
 
-export const Publish = ({ initialTitle,initialContent }: { initialTitle:string,initialContent: string }) => {
-  const [title, setTitle] = useState(initialTitle); // to add prefill title
-  const [content, setContent] = useState(initialContent);// to add prefill content
+export const Publish = () => {
+  const [title, setTitle] = useState(""); // to add prefill title
+  const [content, setContent] = useState("");// to add prefill content
   const editor = useRef(null);
   const navigate = useNavigate();
 
@@ -46,11 +46,11 @@ export const Publish = ({ initialTitle,initialContent }: { initialTitle:string,i
           placeholder="Enter title"
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
         />
-        <JoditEditor
-          ref={editor}
-          value={content}
-          onChange={newContent => setContent(newContent)} // Update state with HTML content
-        />
+          <JoditEditor
+            ref={editor}
+            value={content}
+            onChange={newContent => setContent(newContent)} // Update state with HTML content
+          />
         <button
           onClick={handleSubmit}
           className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-4"
