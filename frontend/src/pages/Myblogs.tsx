@@ -103,6 +103,12 @@ export const Myblogs = () => {
     }
   }
   const openEditModal = (id:number)=> {
+    // Added prefill as blogs (we are store list  of blogs here)
+    const selectedBlog = blogs.find(blog => blog.id === id);
+    if(selectedBlog){
+      setTitle(selectedBlog.title);
+      setContent(selectedBlog.content);
+    }
     setSelectedBlog(id);
     setIsEditModalOpen(true);
   }
