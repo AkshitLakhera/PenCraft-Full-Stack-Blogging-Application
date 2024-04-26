@@ -75,13 +75,11 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
         </div>
       </div>
       <div className="flex justify-center gap-5">
-        {/* <Button title="Bookmarks" onClick={handleBookmarkClick} />
-        <Button title="Create a blog" onClick={handlePublish} /> */}
         <div ref={navigationBoxRef} className="transition-transform duration-1000 ease-in-out box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px cursor-pointer relative inline-flex items-center justify-center bg-gray-200 w-12 h-12 ml-6 overflow-hidden bg-white-100 rounded-full dark:bg-gray-600" onClick={handleAvatarClick}>
           <span className="font-medium text-gray-1000 dark:text-gray-300">{authorname[0]}</span>
         </div>
         {showNavigationBox && (
-          <div  style ={ {top:"4.5rem"}}className=" transition-transform duration-600 ease-in-out absolute p-6  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
+          <div  style ={ {top:"4.5rem"}}className=" absolute p-6  right-0 w-48 bg-white border border-gray-200 shadow-lg p-2 rounded-md" ref={navigationBoxRef}>
             <div className="text-white flex flex-col gap-3"> 
             <div className="flex w-10 h-auto justify-start" onClick={handlePublish}>
             <img src={blogwrite} alt="blog write"  className="mr-2 cursor-pointer"/>
@@ -107,7 +105,7 @@ export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
 
 export function Button({ title }: { title: string; }) {
   return (
-    <button  type="button" className="text-black bg-white font-xl rounded-xl text-xs px-3 py-2 text-center  me-2 mb-2 w-32 h-10 flex items-center justify-start">
+    <button  type="button" className="text-black bg-white font-xl rounded-xl text-xs px-3 py-2 text-center  me-2 mb-2 w-32 h-10 flex items-center justify-start hover:text-gray-400">
       {title}
     </button>
   );

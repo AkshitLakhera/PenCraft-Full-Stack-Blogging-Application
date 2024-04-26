@@ -2,6 +2,7 @@ import { Prisma, PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
+import { updatePost } from "@akshitlakhera/common-zod-app";
 export const myBlogsRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -118,5 +119,37 @@ myBlogsRouter.delete("/:id", async (c) => {
     console.error("Error deleting blog:", error);
     c.status(500);
     return c.json({ error: "Internal server error" });
+  }
+});
+//    Update blog code
+// I can see some problem here lets see
+myBlogsRouter.put("/", async (c) => {
+  const userId = c.get("userId");
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+  const body = await c.req.json();
+  const { success } = updatePost.safeParse(body);
+  if (!success) {
+    c.status(400);
+    return c.json({ error: "invalid input" });
+  }
+  const updateBlog = await prisma.post.update({
+    where: {
+      id: body.id,
+      authorId: userId,
+    },
+    data: {
+      title: body.title,
+      content: body.content,
+    },
+  });
+  if (updateBlog) {
+    return c.json({ messgae: "Blog post successfully updated" });
+  } else {
+    c.status(401);
+    return c.json({
+      error: "Blog does n't get updated",
+    });
   }
 });

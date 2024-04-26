@@ -5,9 +5,9 @@ import { BACKEND_URL } from "@/config";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from 'jodit-react';
 
-export const Publish = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+export const Publish = ({ initialTitle,initialContent }: { initialTitle:string,initialContent: string }) => {
+  const [title, setTitle] = useState(initialTitle); // to add prefill title
+  const [content, setContent] = useState(initialContent);// to add prefill content
   const editor = useRef(null);
   const navigate = useNavigate();
 
