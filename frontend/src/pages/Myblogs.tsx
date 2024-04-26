@@ -26,6 +26,9 @@ export const Myblogs = () => {
   useEffect( () => {
     fetchOwnBlogs();
   },[] )
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
   const fetchOwnBlogs = async () => {
     try{
       const token = localStorage.getItem('token');
@@ -83,6 +86,7 @@ export const Myblogs = () => {
         throw new Error ('Authentication token is not found');
       }
       await axios.put(`${BACKEND_URL}/api/v1/edit`,{
+        id,
         title,
         content,
       },{
@@ -90,7 +94,10 @@ export const Myblogs = () => {
           Authorization: token
         }
       }
-    )}
+    )
+  closeEditModal();
+  fetchOwnBlogs();
+  }
     catch (error) {
       console.error('Error updating blog:', error);
     }
@@ -148,7 +155,7 @@ export const Myblogs = () => {
         <input
           type="text"
           value={title}
-          onChange={() => {}}
+          onChange={handleTitleChange}
           placeholder="Enter title"
           className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
         />
