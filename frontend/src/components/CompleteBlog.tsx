@@ -1,6 +1,7 @@
 import { Blog } from "@/hooks"
 import { Appbar } from "./Appbar"
 import { Avatar } from "./BlogCard"
+import clap from "@/assets/clapping.png"
 
 export const CompleteBlog = ({blog}: {blog: Blog}) => {
   const formatDate = (isoDateString: string): string => {
@@ -25,8 +26,12 @@ export const CompleteBlog = ({blog}: {blog: Blog}) => {
             <div className="text-slate-500 pt-2">
               {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
             </div>
-            <div className="pt-4 mb-8" dangerouslySetInnerHTML={{ __html: blog.content }} />
+            <div className="pt-4 mb-6" dangerouslySetInnerHTML={{ __html: blog.content }} />
             {/* <div className="pt-4">{blog.content}</div> */}
+            <div className="like mb-10 flex gap-2 cursor-pointer">
+              <img src={clap} alt="" className="w-7 h-auto cursoer-pointer" />
+              <div className="text-slate-500 hover:text-slate-600">1.2k claps </div>  
+            </div>
           </div>
           <div className="col-span-4" >
             <div className="text-slate-600 text-lg" >

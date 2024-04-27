@@ -20,6 +20,7 @@ model User {
   password  String
   posts     Post[]
   bookmarks Bookmark[]
+  likes     Like[]
 }
 
 // Here we are making  one to many realtionship.
@@ -32,6 +33,7 @@ model Post {
   authorId      String
   publishedDate DateTime?
   bookmarks     Bookmark[]
+  likes         Like[]
   // imageUrl      String? // Optional field for image URL
 }
 
@@ -42,5 +44,14 @@ model Bookmark {
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
   user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+//  Schema for likes
+model Like {
+  id     String @id @default(uuid())
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 }
