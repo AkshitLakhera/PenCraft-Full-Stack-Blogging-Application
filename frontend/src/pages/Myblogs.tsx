@@ -16,6 +16,7 @@ interface MyblogsProps {
   onEdit :(id: number) => void;
 }
 export const Myblogs = () => {
+  const [searchQuery,setSearchQuery] =useState("");
   const [blogs, setBlogs] =  useState<MyblogsProps[]>([]); 
   const [selectedBlog,setSelectedBlog]= useState<number|null>(null); //it is used to track the selected blog
   const [isModalOpen,setIsModalOpen] = useState(false)//it is used to track delete modal state
@@ -23,6 +24,11 @@ export const Myblogs = () => {
   const [title,setTitle]=useState("");
   const [content,setContent]=useState("");
   const editor = useRef(null);
+  const filteredBlogs =blogs.filter(blog => 
+    blog.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()));
+    const handleSearch= (query :React.SetStateAction<string>) => {
+      setSearchQuery(query)
+    }
   useEffect( () => {
     fetchOwnBlogs();
   },[] )
@@ -119,11 +125,14 @@ export const Myblogs = () => {
 
   return (
     <div className={`${(isModalOpen || isEditModalOpen) ? 'opacity-50 pointer-events-none' : ''}`}>
-         <Appbar onSearch={() => {}} />
+         <Appbar onSearch={handleSearch} />
          <div className='flex flex-wrap'>
-         {blogs.map((blog) => (
+         {filteredBlogs.length > 0 ? (
+         filteredBlogs.map((blog) => (
         <Card key={blog.id} id={blog.id} title={blog.title} content={blog.content.slice(0, 90) + "..."} onDelete={openDeleteModal}  onEdit={openEditModal}/>
-      ))}
+      )) ) : (
+        <div>No blogs found</div>
+      )}
       </div>
        {/* Confirmation Modal */}
 

@@ -19,6 +19,13 @@ export const Bookmark = () => {
   const [bookmarks, setBookmarks] = useState<BookmarkProps[]>([]);
   const  [selectedBookmark,setSelectedBookmark] = useState<number|null>(null); //to track the selected bookmark for deletion
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
+  const [searchQuery, setSearchQuery] = useState('');
+  const filteredBlogs = bookmarks.filter(blog =>
+    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const handleSearch = (query: React.SetStateAction<string>) => {
+    setSearchQuery(query);
+  };
   useEffect(() => {
     fetchBookmarks();
   }, []);
@@ -96,9 +103,10 @@ export const Bookmark = () => {
   return (
     // Using string interpolation to add conditional classes
     <div className={`${isModalOpen ? 'opacity-50 pointer-events-none' : ''}`}>
-      <Appbar onSearch={() => {}} />
+      <Appbar onSearch={handleSearch}/>
       <div className='flex flex-wrap'>
-        {bookmarks.map((bookmark) => (
+        {filteredBlogs.length >0 ? (
+        filteredBlogs.map((bookmark) => (
           <Card
             id={bookmark.id}
             key={bookmark.id}
@@ -106,7 +114,9 @@ export const Bookmark = () => {
             content={bookmark.content.slice(0, 90) + "..."}
             onDelete = {openDeleteModal}
           />
-        ))}
+        ))) : (
+          <div>No blogs found</div>
+        )}
       </div>  
             {/* Confirmation Modal */}
 
