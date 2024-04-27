@@ -4,6 +4,7 @@ import { userRouter } from "./routes/user";
 import { blogRouter } from "./routes/blog";
 import { bookMarkRouter } from "./routes/bookmark";
 import { myBlogsRouter } from "./routes/myblogs";
+import { likeRouter } from "./routes/like";
 // This is a way to define type in typescript with hono
 
 // This is how we give type to variables in typescript
@@ -23,4 +24,5 @@ app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
 app.route("/api/v1", bookMarkRouter);
 app.route("api/v1", myBlogsRouter);
+app.route("api/v1", likeRouter);
 export default app;

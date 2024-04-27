@@ -34,6 +34,7 @@ model Post {
   publishedDate DateTime?
   bookmarks     Bookmark[]
   likes         Like[]
+  likeCount     Int        @default(0) // New field to store the count of likes
   // imageUrl      String? // Optional field for image URL
 }
 
