@@ -108,7 +108,7 @@ likeRouter.post("/:postId/like", async (c) => {
 });
 
 /// Route to dislike a blog post
-likeRouter.post("/dislike/:postId", async (c) => {
+likeRouter.delete("/dislike/:postId", async (c) => {
   try {
     const userId = c.get("userId");
     const postId = c.req.param("postId");
@@ -173,6 +173,38 @@ likeRouter.post("/dislike/:postId", async (c) => {
     }
   } catch (error) {
     console.error("Error disliking blog post:", error);
+    c.status(500); // Internal Server Error
+    return c.json({ error: "Internal server error" });
+  }
+});
+
+// To get the like count
+likeRouter.get("/:postId/likeCount", async (c) => {
+  try {
+    const postId = c.req.param("postId");
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const postWithLikeCount = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+      select: {
+        likeCount: true,
+      },
+    });
+
+    if (!postWithLikeCount) {
+      // Handle the case where the post is not found
+      console.error("Post not found");
+      c.status(404);
+      return c.json({ error: "Post not found" });
+    }
+    return c.json({
+      likeCount: postWithLikeCount.likeCount,
+    });
+  } catch (error) {
+    console.error("Error fetching like count:", error);
     c.status(500); // Internal Server Error
     return c.json({ error: "Internal server error" });
   }
