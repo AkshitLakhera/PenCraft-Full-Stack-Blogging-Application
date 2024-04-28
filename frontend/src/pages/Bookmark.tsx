@@ -6,6 +6,7 @@ import { AiOutlineDelete } from 'react-icons/ai'; // Import delete icon
 import Modal from 'react-modal'; // Import modal library
 import Trash from '../assets/recycle-bin.png';
 import { Link } from 'react-router-dom';
+import { BookmarkmyblogsSkeleton } from '@/components/BookmarkmyblogsSkeleton';
 // Set the app element for the modal
 Modal.setAppElement('#root');
 interface BookmarkProps {
@@ -20,6 +21,8 @@ export const Bookmark = () => {
   const  [selectedBookmark,setSelectedBookmark] = useState<number|null>(null); //to track the selected bookmark for deletion
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
   const [searchQuery, setSearchQuery] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const  [loading,setloading] =useState(true);
   const filteredBlogs = bookmarks.filter(blog =>
     blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -32,6 +35,7 @@ export const Bookmark = () => {
 
   const fetchBookmarks = async () => {
     try {
+      setloading(true)
       const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
       if (!token) {
         throw new Error('Authentication token not found');
@@ -53,9 +57,7 @@ export const Bookmark = () => {
       });
       
       // Now extractedData will contain an array of objects with the extracted values
-      console.log(extractedData);
       if (response.status === 200) {
-        console.log('Successful response:');
         setBookmarks(extractedData);
       } else {
         console.error('Unexpected response status:');
@@ -63,6 +65,9 @@ export const Bookmark = () => {
       setBookmarks(extractedData);
     } catch (error) {
       console.error('Error fetching bookmarks:', error);
+    }finally {
+      // Set loading state to false after fetching regardless of success or failure
+      setloading(false);
     }
   };
   const handleDelete = async (id:number) => {
@@ -99,6 +104,22 @@ export const Bookmark = () => {
     setSelectedBookmark(null);
     setIsModalOpen(false);
   };
+  if (loading) {
+    console.log(loading)
+    return (
+      <div>
+         <Appbar onSearch={handleSearch} />
+        <div className="flex justify-center items-center h-full">
+          <div className="flex  items-center flex-wrap gap-4">
+            <BookmarkmyblogsSkeleton/>
+            <BookmarkmyblogsSkeleton/>
+            <BookmarkmyblogsSkeleton/>
+            <BookmarkmyblogsSkeleton/>  
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     // Using string interpolation to add conditional classes
@@ -114,6 +135,7 @@ export const Bookmark = () => {
             content={bookmark.content.slice(0, 90) + "..."}
             onDelete = {openDeleteModal}
           />
+          
         ))) : (
           <div>No blogs found</div>
         )}

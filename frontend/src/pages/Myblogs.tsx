@@ -8,6 +8,7 @@ import Modal from 'react-modal'; // Import modal library
 import Trash from '../assets/recycle-bin.png';
 import Edit  from '@/assets/edit.png'
 import JoditEditor from 'jodit-react';
+import { BookmarkmyblogsSkeleton } from "@/components/BookmarkmyblogsSkeleton";
 interface MyblogsProps {
   id: number;
   title: string;
@@ -16,6 +17,7 @@ interface MyblogsProps {
   onEdit :(id: number) => void;
 }
 export const Myblogs = () => {
+  const [loading,setloading] = useState(true);
   const [searchQuery,setSearchQuery] =useState("");
   const [blogs, setBlogs] =  useState<MyblogsProps[]>([]); 
   const [selectedBlog,setSelectedBlog]= useState<number|null>(null); //it is used to track the selected blog
@@ -51,6 +53,9 @@ export const Myblogs = () => {
       console.log(info)
     }catch (error) {
       console.error('Error deleting bookmark:', error);
+    }finally {
+      // Set loading state to false after fetching regardless of success or failure
+      setloading(false);
     }
   }
   // Delete code and delete modal
@@ -121,6 +126,22 @@ export const Myblogs = () => {
   const closeEditModal = () => {
     setSelectedBlog(null);
     setIsEditModalOpen(false)
+  }
+  if (loading) {
+    console.log(loading)
+    return (
+      <div>
+         <Appbar onSearch={handleSearch} />
+        <div className="flex justify-center items-center h-full">
+          <div className="flex  items-center flex-wrap gap-4">
+            <BookmarkmyblogsSkeleton/>
+            <BookmarkmyblogsSkeleton/>
+            <BookmarkmyblogsSkeleton/>
+            <BookmarkmyblogsSkeleton/>  
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
