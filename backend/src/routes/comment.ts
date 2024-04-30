@@ -94,3 +94,54 @@ commentRouter.put("/:id", async (c) => {
     return c.json({ error: "Internal server error" });
   }
 });
+// Delete the commentRouter
+commentRouter.delete("/:id", async (c) => {
+  try {
+    const userId = c.get("userId");
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const commentId = c.req.param("id");
+    const existingComment = await prisma.comment.findUnique({
+      where: {
+        id: commentId,
+      },
+    });
+    if (!existingComment || existingComment.userId !== userId) {
+      c.status(401);
+      return c.json({ error: "Unauthorized" });
+    }
+    await prisma.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
+    return c.json({ message: "comment deleted successfully" });
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    c.status(500); // Internal Server Error
+    return c.json({ error: "Internal server error" });
+  }
+});
+// Route to get all comments for a post
+commentRouter.get("/post/:postId", async (c) => {
+  try {
+    const postId = c.req.param("postId");
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    // Get all comments for the post
+    const comments = await prisma.comment.findMany({
+      where: {
+        postId: postId,
+      },
+    });
+
+    return c.json({ comments });
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    c.status(500); // Internal Server Error
+    return c.json({ error: "Internal server error" });
+  }
+});
