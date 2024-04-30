@@ -96,7 +96,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
             <div className={`${toggleComponent ? 'opacity-50 ' : ''}`}>
             <div className="text-5xl font-extrabold">
               {blog.title}
-            d</div>
+             </div>
             <div className="text-slate-500 pt-2">
               {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
             </div>
