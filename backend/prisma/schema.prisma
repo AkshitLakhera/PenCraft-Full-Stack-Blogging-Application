@@ -21,6 +21,7 @@ model User {
   posts     Post[]
   bookmarks Bookmark[]
   likes     Like[]
+  comments  Comment[]
 }
 
 // Here we are making  one to many realtionship.
@@ -35,6 +36,7 @@ model Post {
   bookmarks     Bookmark[]
   likes         Like[]
   likeCount     Int        @default(0) // New field to store the count of likes
+  comments      Comment[]
   // imageUrl      String? // Optional field for image URL
 }
 
@@ -50,9 +52,26 @@ model Bookmark {
 
 //  Schema for likes
 model Like {
-  id     String @id @default(uuid())
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  id        String   @id @default(uuid())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String?
+}
+
+// Schema for comments 
+model Comment {
+  id            String    @id @default(uuid())
+  content       String
+  timestamp     DateTime  @default(now())
+  post          Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  parentComment Comment?  @relation("ChildComments", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId      String?
+  childComments Comment[] @relation("ChildComments")
+  likes         Like[]
 }
