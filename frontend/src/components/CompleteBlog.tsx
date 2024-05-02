@@ -7,6 +7,7 @@ import comment from  "@/assets/bubble-chat.png"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
+import { Comment } from "./Comment"
 
 export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const formatDate = (isoDateString: string): string => {
@@ -119,16 +120,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
       {toggleComponent && (
         <div className={`fixed top-0 right-0 h-full box-border overflow-auto bg-white p-8 flex flex-col justify-start transition-transform duration-100 ${toggleComponent ? 'transform translate-x-0' : 'transform -translate-x-full'}`} style={{zIndex:540,width:412 ,boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px'  }}>
           {/* Your comment section UI */}
-          <div className="mb-10">
-            <h1>Response:</h1>
-          </div>
-          <textarea
-            placeholder="Write your comment here..."
-            className="w-full h-32 border border-gray-300 rounded p-2"
-          />
-          <button className="mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            Post Comment
-          </button>
+         <Comment/>
         </div>
       )}
           </div>
