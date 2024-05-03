@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { Comment } from "./Comment"
+import AddedComment from "./AddedComment"
 
 
 export const CompleteBlog = ({ blog }: { blog: Blog }) => {
@@ -124,6 +125,14 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
         <div className={`fixed top-0 right-0 h-full box-border overflow-auto bg-white p-8 flex flex-col justify-start transition-transform duration-100 ${toggleComponent ? 'transform translate-x-0' : 'transform -translate-x-full'}`} style={{zIndex:540,width:412 ,boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px'  }}>
           {/* Your comment section UI */}
          <Comment handleCancel={handleCancel}/>
+         <div className="mt-5">
+         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+        </div>
         </div>
       )}
           </div>
