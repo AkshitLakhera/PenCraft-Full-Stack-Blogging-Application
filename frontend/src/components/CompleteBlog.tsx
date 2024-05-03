@@ -9,6 +9,7 @@ import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { Comment } from "./Comment"
 
+
 export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const formatDate = (isoDateString: string): string => {
     const date = new Date(isoDateString);
@@ -26,7 +27,9 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const OntoggleComment = () => {
     setIsToggleComponent(!toggleComponent);
   }
-
+  const handleCancel = () => {
+    setIsToggleComponent(!toggleComponent);
+  }
   useEffect(() => {
     const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
       if (!token) {
@@ -120,7 +123,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
       {toggleComponent && (
         <div className={`fixed top-0 right-0 h-full box-border overflow-auto bg-white p-8 flex flex-col justify-start transition-transform duration-100 ${toggleComponent ? 'transform translate-x-0' : 'transform -translate-x-full'}`} style={{zIndex:540,width:412 ,boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px'  }}>
           {/* Your comment section UI */}
-         <Comment/>
+         <Comment handleCancel={handleCancel}/>
         </div>
       )}
           </div>
