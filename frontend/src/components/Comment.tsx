@@ -1,11 +1,40 @@
 import { useState } from "react"
-
-export const Comment = ({ handleCancel }: { handleCancel: (event: React.MouseEvent<HTMLButtonElement>) => void }) => {
+import axios from "axios";
+import { BACKEND_URL } from "@/config";
+interface CommentProps {
+  handleCancel: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  blogID: number;
+}
+export const Comment =({ handleCancel, blogID }: CommentProps) => {
+  const [content,setContent] = useState<string>("");
   const [isActive,setIsActive]=useState(false);
   const handleTextareaChange = (event :React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
     // Check if the textarea value contains at least one word
     setIsActive(event.target.value.trim().length > 0);
   };
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/posts/${blogID}/comments`,
+        {
+          // Add the request body here, like content and parentId if applicable
+          content: content,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log("Comment submitted successfully:", response.data);
+      // Handle success, update UI or perform any additional actions
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+      // Handle error, show error message to the user or retry logic
+    }
+  };
+  
   return (
     <div>
         <div className="mb-6">
@@ -24,6 +53,7 @@ export const Comment = ({ handleCancel }: { handleCancel: (event: React.MouseEve
     placeholder="What are yours thoughts?"
     className="w-full h-10 border border-gray-300 rounded p-2 mt-2 resize-none"
     onChange={handleTextareaChange}
+    value={content}
   />
    <div className="flex justify-between mt-3">
     <button onClick={handleCancel} className="hover:text-gray-500">Cancel</button>
@@ -32,6 +62,7 @@ export const Comment = ({ handleCancel }: { handleCancel: (event: React.MouseEve
   className={`text-white font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none 
              ${isActive ? 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' : 'bg-gray-400 cursor-not-allowed'}`}
   disabled={!isActive}
+  onClick={handleSubmit}
 >
   Respond
 </button>
