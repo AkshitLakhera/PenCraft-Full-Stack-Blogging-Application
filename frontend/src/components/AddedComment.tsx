@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
 interface Comment {
-  author: string;
   content: string;
-  authorInitial: string;
 }
 
 const AddedComment: React.FC<{ comment: Comment }> = ({ comment }) => {
@@ -28,12 +26,12 @@ const AddedComment: React.FC<{ comment: Comment }> = ({ comment }) => {
         {/* Avatar */}
         <div className="flex-shrink-0">
           <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-            <span className="text-gray-600 text-lg">{comment.authorInitial}</span>
+            <span className="text-gray-600 text-lg">{}</span>
           </div>
         </div>
         {/* Comment content */}
         <div className="ml-4">
-          <div className="text-gray-800 font-medium">{comment.author}</div>
+          <div className="text-gray-800 font-medium">{}</div>
           <div className="text-gray-600">{comment.content}</div>
         </div>
       </div>

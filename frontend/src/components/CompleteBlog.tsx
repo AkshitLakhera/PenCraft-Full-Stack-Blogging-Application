@@ -9,6 +9,15 @@ import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { Comment } from "./Comment"
 import AddedComment from "./AddedComment"
+interface Comment {
+  id: string;
+  content: string;
+  timestamp: string;
+  postId: string;
+  userId: string;
+  parentId: string | null;
+  childComments?: Comment[]; // Array of nested comments
+}
 
 export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const formatDate = (isoDateString: string): string => {
@@ -20,7 +29,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
     };
     return date.toLocaleString(undefined, options);
   };
-
+  const [comments, setComments] = useState<Comment[]>([]);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState<number>(0); // State to hold the like count
   const [toggleComponent,setIsToggleComponent]= useState(false); // State  to manage state section visibility 
@@ -30,6 +39,25 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const handleCancel = () => {
     setIsToggleComponent(!toggleComponent);
   }
+  // To fetch comments 
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/api/v1/posts/${blog.id}/comments`, {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        });
+        setComments(response.data.comments);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+
+      fetchComments();
+
+  }, [blog.id, toggleComponent]);
+  
   useEffect(() => {
     const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
       if (!token) {
@@ -125,12 +153,9 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
           {/* Your comment section UI */}
          <Comment handleCancel={handleCancel} blogID = {blog.id}/>
          <div className="mt-5">
-         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
-         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
-         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
-         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
-         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
-         <AddedComment comment={{ author: 'John Doe', content: 'In tech you are either learning or earning - and this is a great example of a chance to learn and carry that forward with greater returns.!', authorInitial: 'J' }} />
+         {comments.map((comment) => (
+              <AddedComment key={comment.id} comment={comment} />
+            ))}
         </div>
         </div>
       )}

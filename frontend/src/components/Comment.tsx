@@ -29,10 +29,11 @@ export const Comment =({ handleCancel, blogID }: CommentProps) => {
       );
       console.log("Comment submitted successfully:", response.data);
       // Handle success, update UI or perform any additional actions
+      setContent("");
     } catch (error) {
       console.error("Error submitting comment:", error);
       // Handle error, show error message to the user or retry logic
-    }
+    } 
   };
   
   return (
