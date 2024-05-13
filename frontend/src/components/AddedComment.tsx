@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 interface Comment {
   content: string;
 }
-
 const AddedComment: React.FC<{ comment: Comment }> = ({ comment }) => {
   const [isReplying, setIsReplying] = useState(false);
   const [isActive,setIsActive] = useState(false)
