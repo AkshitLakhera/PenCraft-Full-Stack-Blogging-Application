@@ -7,8 +7,8 @@ import comment from  "@/assets/bubble-chat.png"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
-import { Comment } from "./Comment"
-import AddedComment from "./AddedComment"
+import { Comment } from "./fearture/Comment"
+import AddedComment from "./fearture/AddedComment"
 interface Comment {
   id: string;
   content: string;
@@ -154,7 +154,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
          <Comment handleCancel={handleCancel} blogID = {blog.id}/>
          <div className="mt-5">
          {comments.map((comment) => (
-              <AddedComment key={comment.id} comment={comment} />
+              <AddedComment key={comment.id} comment={comment }   />
             ))}
         </div>
         </div>

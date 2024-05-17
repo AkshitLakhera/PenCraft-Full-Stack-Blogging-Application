@@ -4,6 +4,7 @@ import ribbonfilled from "../assets/bookmark.png";
 import { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
+// import  blogdemo  from  "@/assets/lukas-blazek-GnvurwJsKaY-unsplash.jpg"
 interface BlogCardProps {
   id: number;
   authorName: string;
@@ -77,6 +78,8 @@ export const BlogCard = ({
           <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
             {publishedDate.toLocaleString()}
           </div>
+          {/* image */}
+
         </div>
         <div className="text-xl font-semibold pt-2">{title}</div>
         <div className="pt-4" dangerouslySetInnerHTML={{ __html: content.slice(0, 100) + "..." }} />
