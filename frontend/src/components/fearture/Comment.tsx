@@ -45,7 +45,7 @@ export const Comment =({ handleCancel, blogID }: CommentProps) => {
     <div className="  flex gap-2 ">
       <div>
     <div className="transition-transform duration-1000 ease-in-out box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px cursor-pointer relative inline-flex justify-center bg-gray-200 w-12 h-12  overflow-hidden bg-white-100 rounded-full dark:bg-gray-600  felx-col items-center">
-          <span className="font-medium text-gray-1000 dark:text-gray-300">N</span>
+          <span className="font-medium text-gray-1000 dark:text-gray-300">{}</span>
         </div>
         </div>
         <div className="authorName  flex  items-center">Naval ravikant</div>

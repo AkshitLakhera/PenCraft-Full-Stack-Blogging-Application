@@ -144,7 +144,11 @@ commentRouter.get("/posts/:postId/comments", async (c) => {
       include: {
         // Include nested comments
         childComments: true,
-        user: true,
+        user: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 

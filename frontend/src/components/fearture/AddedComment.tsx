@@ -1,4 +1,13 @@
 import React, { useState } from 'react';
+interface User {
+  name: string;
+}
+
+interface Comment {
+  content: string;
+  id: string;
+  user: User;
+}
 
 interface Comment {
   content: string;
@@ -26,14 +35,13 @@ const AddedComment: React.FC<{ comment: Comment }> = ({ comment }) => {
         {/* Avatar */}
         <div className="flex-shrink-0">
           <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-            <span className="text-gray-600 text-lg">{}</span>
+            <span className="text-gray-600 text-lg">{comment.user.name[0]}</span>
           </div>
         </div>
         {/* Comment content */}
         <div className="ml-4">
-          <div className="text-gray-800 font-medium">{}</div>
+          <div className="text-gray-800 font-medium">{comment.user.name}</div>
           <div className="text-gray-600">{comment.content}</div>
-          <div className="text-gray-600">{comment.id}</div>
         </div>
       </div>
       {/* Reply section */}
