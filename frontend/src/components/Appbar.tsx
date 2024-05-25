@@ -6,7 +6,7 @@ import blogs from "@/assets/blogging.png"
 interface AppbarProps {
   onSearch: (query: string) => void;
 }
-
+// main appbar code is  here
 export const Appbar: React.FC<AppbarProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showNavigationBox, setShowNavigationBox] = useState<boolean>(false);
