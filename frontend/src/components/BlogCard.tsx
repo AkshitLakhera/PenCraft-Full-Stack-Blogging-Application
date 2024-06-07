@@ -4,7 +4,7 @@ import ribbonfilled from "../assets/bookmark.png";
 import { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
-// import  blogdemo  from  "@/assets/lukas-blazek-GnvurwJsKaY-unsplash.jpg"
+
 interface BlogCardProps {
   id: number;
   authorName: string;
