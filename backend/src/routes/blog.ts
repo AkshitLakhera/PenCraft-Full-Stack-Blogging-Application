@@ -15,7 +15,6 @@ export const blogRouter = new Hono<{
 }>();
 
 // Middleware
-// My first goal is to check these middleware calls why there are giving errors.
 // The * character in the route pattern /api/v1/blog/* acts as a wildcard.
 blogRouter.use(async (c, next) => {
   try {
