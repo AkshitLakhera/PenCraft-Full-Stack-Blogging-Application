@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom"
+import Loader from './ui/Loader'
 import { SignupType } from "@akshitlakhera/common-zod-app"; 
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
@@ -31,6 +32,7 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
   }
   return (
     <div className=" h-screen flex justify-center items-center flex-col ">
+      
       <div className="flex justify-center ">
         <div>
         <div className="max-w-lg text-4xl font-bold px-10 text-center">
@@ -61,7 +63,10 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
                 ...postInputs, password:e.target.value
               })
             }}/>
-            <button onClick={sendRequest} type="button" className={`w-full mt-4   ${loading? "bg-gray-700 text-gray-500": "bg-gray-800 text-white"} hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700`} disabled={loading}>{loading? type === "signin"? "Signing in... ": "Signing up... " : type === "signup" ? "Sign up" : "Sign in"}</button>
+            <button onClick={sendRequest} type="button" className={`w-full mt-4   ${loading? "bg-gray-700 text-gray-500": "bg-gray-800 text-white"} hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700`} disabled={loading}>
+              {loading? (<div className="flex gap-3 justify-center items-center">
+                <span>{type==="signin"? "Signin In": "Signin Up "}</span>      
+                <Loader/></div>) : type === "signup" ? "Sign up" : "Sign in"}</button>
 
         </div>
         </div>
