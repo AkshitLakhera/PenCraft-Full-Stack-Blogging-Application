@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom"
 import Loader from './ui/Loader'
+import {IoIosWarning} from 'react-icons/io' 
+import { RxCross2 } from "react-icons/rx";
 import { SignupType } from "@akshitlakhera/common-zod-app"; 
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
@@ -12,6 +14,10 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     name:"",
   });
   const [loading, setloading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); 
+
+
+
   async function sendRequest() {
     setloading(true)
     try {  const response=  await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup" ? "signup" :"signin"}`,postInputs)
@@ -24,12 +30,16 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     console.log(jwt)
     navigate("/blogs") }
     catch(e) {
-      alert("Error on sending request")
+      setErrorMessage("Invalid Details ")
     }finally{
       setloading(false)
     }
- 
   }
+
+  const handleClose = () => {
+    setErrorMessage(''); 
+  }
+ 
   return (
     <div className=" h-screen flex justify-center items-center flex-col ">
       
@@ -44,6 +54,11 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
           </div>
           
           </div>
+
+        { errorMessage &&  (<div className="Error-div bg-red-300 mt-2 flex items-center justify-between rounded-xl py-4 px-3 ">
+          <span className="text-red-500 flex items-center gap-2 "><IoIosWarning/>{errorMessage}</span>
+          <button onClick={handleClose}><RxCross2/></button>
+          </div>)}
 
           <div className="max-w-md mt-6">
             {type === "signup" ?  <InputBox label="Name" placeholder="Enter your Username"  type="text" 
