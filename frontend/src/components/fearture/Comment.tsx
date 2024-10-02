@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
+import { RxCross2 } from "react-icons/rx";
 interface CommentProps {
   handleCancel: (event: React.MouseEvent<HTMLButtonElement>) => void;
   blogID: number;
@@ -38,8 +39,9 @@ export const Comment =({ handleCancel, blogID }: CommentProps) => {
   
   return (
     <div>
-        <div className="mb-6">
+        <div className="mb-6 flex  justify-between items-center">
     <h1 className="text-2xl font-extrabold">Response:</h1>
+    <button onClick={handleCancel} className="text-2xl font-semibold"><RxCross2/></button>
   </div>
     <div className="border-2 border-gray-300 rounded-xl p-4 "> 
     <div className="  flex gap-2 ">
