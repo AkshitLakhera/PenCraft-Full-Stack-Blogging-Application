@@ -10,7 +10,9 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     password:"",
     name:"",
   });
+  const [loading, setloading] = useState(false);
   async function sendRequest() {
+    setloading(true)
     try {  const response=  await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup" ? "signup" :"signin"}`,postInputs)
     // Sometimes this jwt format can give you lot of pain haha
     const jwt = "Bearer "+response.data.token
@@ -21,7 +23,9 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     console.log(jwt)
     navigate("/blogs") }
     catch(e) {
-      alert("Erro on sending request")
+      alert("Error on sending request")
+    }finally{
+      setloading(false)
     }
  
   }
@@ -57,7 +61,7 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
                 ...postInputs, password:e.target.value
               })
             }}/>
-            <button onClick={sendRequest} type="button" className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{type === "signup" ? "Sign up" : "Sign in"}</button>
+            <button onClick={sendRequest} type="button" className={`w-full mt-4   ${loading? "bg-gray-700 text-gray-500": "bg-gray-800 text-white"} hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700`} disabled={loading}>{loading? type === "signin"? "Signing in... ": "Signing up... " : type === "signup" ? "Sign up" : "Sign in"}</button>
 
         </div>
         </div>
