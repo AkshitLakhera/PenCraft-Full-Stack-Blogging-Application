@@ -1,14 +1,14 @@
-import { Blog } from "@/hooks"
-import { Appbar } from "./Appbar"
-import { Avatar } from "./BlogCard"
-import clap from "@/assets/clapping.png"
-import filledCap from "@/assets/filledclapping(1).png"
-import comment from  "@/assets/bubble-chat.png"
+import { Blog } from "@/hooks";
+import { Appbar } from "./Appbar";
+import clap from "@/assets/clapping.png";
+import filledCap from "@/assets/filledclapping(1).png";
+import comment from "@/assets/bubble-chat.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
-import { Comment } from "./fearture/Comment"
-import AddedComment from "./fearture/AddedComment"
+import { Comment } from "./fearture/Comment";
+import AddedComment from "./fearture/AddedComment";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 interface User {
   name: string;
 }
@@ -28,165 +28,195 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const formatDate = (isoDateString: string): string => {
     const date = new Date(isoDateString);
     const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     };
     return date.toLocaleString(undefined, options);
   };
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState<number>(0); // State to hold the like count
-  const [toggleComponent,setIsToggleComponent]= useState(false); // State  to manage state section visibility 
+  const [toggleComponent, setIsToggleComponent] = useState(false); // State  to manage state section visibility
   const OntoggleComment = () => {
     setIsToggleComponent(!toggleComponent);
-  }
+  };
   const handleCancel = () => {
     setIsToggleComponent(!toggleComponent);
-  }
-  // To fetch comments 
+  };
+  // To fetch comments
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`${BACKEND_URL}/api/v1/posts/${blog.id}/comments`, {
-          headers: {
-            Authorization: localStorage.getItem('token')
+        const response = await axios.get(
+          `${BACKEND_URL}/api/v1/posts/${blog.id}/comments`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
           }
-        });
+        );
         setComments(response.data.comments);
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
     };
 
-      fetchComments();
-
+    fetchComments();
   }, [blog.id, toggleComponent]);
-  
+
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
-      if (!token) {
-        throw new Error('Authentication token not found');
-      }
+    const token = localStorage.getItem("token"); // Retrieve JWT token from localStorage
+    if (!token) {
+      throw new Error("Authentication token not found");
+    }
     // Fetch the like count when the component mounts
     const fetchLikeCount = async () => {
       try {
-        const response = await axios.get(`${BACKEND_URL}/api/v1/${blog.id}/likeCount`,{
-          headers :{
-            Authorization: token,
+        const response = await axios.get(
+          `${BACKEND_URL}/api/v1/${blog.id}/likeCount`,
+          {
+            headers: {
+              Authorization: token,
+            },
           }
-        });
+        );
         setLikeCount(response.data.likeCount);
       } catch (error) {
-        console.error('Error fetching like count:', error);
+        console.error("Error fetching like count:", error);
       }
     };
 
     fetchLikeCount();
   }, [blog.id]); // Fetch like count when blog id changes
 
-  const handleClick = async (event: { stopPropagation: () => void; preventDefault: () => void; }) => {
+  const handleClick = async (event: {
+    stopPropagation: () => void;
+    preventDefault: () => void;
+  }) => {
     event.stopPropagation(); // Prevent link navigation from bubbling up
     event.preventDefault();
     setIsLiked(!isLiked);
     try {
-      const token = localStorage.getItem('token'); // Retrieve JWT token from localStorage
+      const token = localStorage.getItem("token"); // Retrieve JWT token from localStorage
       if (!token) {
-        throw new Error('Authentication token not found');
+        throw new Error("Authentication token not found");
       }
       if (!isLiked) {
-        await axios.post(
-          `${BACKEND_URL}/api/v1/${blog.id}/like`,
-          null,
-          {
-            headers: {
-              Authorization: token,
-            }
-          }
-        );
+        await axios.post(`${BACKEND_URL}/api/v1/${blog.id}/like`, null, {
+          headers: {
+            Authorization: token,
+          },
+        });
         setLikeCount(likeCount + 1); // Update like count
       } else {
-        const token = localStorage.getItem('token');
-        await axios.delete(
-          `${BACKEND_URL}/api/v1/dislike/${blog.id}`,
-          {
-            headers: {
-              Authorization: token,
-            }
-          }
-        );
+        const token = localStorage.getItem("token");
+        await axios.delete(`${BACKEND_URL}/api/v1/dislike/${blog.id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         setLikeCount(likeCount - 1); // Update like count
       }
     } catch (error) {
-      console.error('Error handling like:', error);
+      console.error("Error handling like:", error);
     }
-  }
+  };
   // const transformValue = toggleComponent ? 'translateX(0)' : 'translateX(-100%)';
   return (
-    <div >
-      <div className={`${toggleComponent ? 'opacity-50 ' : ''}`} >
-      <Appbar onSearch={() => { }}  />
+    <div>
+      <div className={`${toggleComponent ? "opacity-50 " : ""}`}>
+        <Appbar onSearch={() => {}} />
       </div>
       <div className={`flex justify-center `}>
         <div className="grid grid-cols-12 px-10 w-full pt-200 max-w-screen-xl pt-12">
           <div className="col-span-8 mr-4">
-            <div className={`${toggleComponent ? 'opacity-50 ' : ''}`}>
-            <div className="text-5xl font-extrabold">
-              {blog.title}
-             </div>
-            <div className="text-slate-500 pt-2">
-              {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
-            </div>
-            <div className="pt-4 mb-6" dangerouslySetInnerHTML={{ __html: blog.content }} />
-            <div className="flex gap-8">
-              {/* Like section  */}
-            <div className="like mb-10 flex gap-2 cursor-pointer" onClick={handleClick}>
-              <img src={isLiked ? filledCap : clap} alt="" className="w-7 h-auto cursoer-pointer" />
-              <div className="text-slate-500 hover:text-slate-600">{likeCount} {likeCount > 1 ? 'claps' : 'clap'} </div>
-            </div>
-            {/* Comment section */}
-            <div className="comment mb-10 flex gap-2 cursor-pointer" onClick={OntoggleComment}>
-              <img src={comment} alt="comment" className="w-7 h-auto cursoer-pointer"/>
-              <div className="text-slate-500 hover:text-slate-600">4</div>
-            </div>
-            </div>
+            <div className={`${toggleComponent ? "opacity-50 " : ""}`}>
+              <div className="text-5xl font-extrabold">{blog.title}</div>
+              <div className="text-slate-500 pt-2">
+                {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
+              </div>
+              <div
+                className="pt-4 mb-6"
+                dangerouslySetInnerHTML={{ __html: blog.content }}
+              />
+              <div className="flex gap-8">
+                {/* Like section  */}
+                <div
+                  className="like mb-10 flex gap-2 cursor-pointer"
+                  onClick={handleClick}
+                >
+                  <img
+                    src={isLiked ? filledCap : clap}
+                    alt=""
+                    className="w-7 h-auto cursoer-pointer"
+                  />
+                  <div className="text-slate-500 hover:text-slate-600">
+                    {likeCount} {likeCount > 1 ? "claps" : "clap"}{" "}
+                  </div>
+                </div>
+                {/* Comment section */}
+                <div
+                  className="comment mb-10 flex gap-2 cursor-pointer"
+                  onClick={OntoggleComment}
+                >
+                  <img
+                    src={comment}
+                    alt="comment"
+                    className="w-7 h-auto cursoer-pointer"
+                  />
+                  <div className="text-slate-500 hover:text-slate-600">4</div>
+                </div>
+              </div>
             </div>
 
-
-      {toggleComponent && (
-        <div className={`fixed top-0 right-0 h-full box-border overflow-auto bg-white p-8 flex flex-col justify-start transition-transform duration-100 ${toggleComponent ? 'transform translate-x-0' : 'transform -translate-x-full'}`} style={{zIndex:540,width:412 ,boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px'  }}>
-          {/* Your comment section UI */}
-         <Comment handleCancel={handleCancel} blogID = {blog.id} />
-         <div className="mt-5">
-         {comments.map((comment) => (
-              <AddedComment key={comment.id} comment={comment }   />
-            ))}
-        </div>
-        </div>
-      )}
+            {toggleComponent && (
+              <div
+                className={`fixed top-0 right-0 h-full box-border overflow-auto bg-white p-8 flex flex-col justify-start transition-transform duration-100 ${toggleComponent ? "transform translate-x-0" : "transform -translate-x-full"}`}
+                style={{
+                  zIndex: 540,
+                  width: 412,
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
+                }}
+              >
+                {/* Your comment section UI */}
+                <Comment handleCancel={handleCancel} blogID={blog.id} />
+                <div className="mt-5">
+                  {comments.map((comment) => (
+                    <AddedComment key={comment.id} comment={comment} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           {/* Hide when comment card is open */}
-         { !toggleComponent &&  (<div className="col-span-4 ml-14" >
-            <div className="text-slate-600 text-lg" >
-              Author
-            </div>
-            <div className="flex w-full">
-              <div className="pr-4 flex flex-col justify-center">
-                <Avatar name={blog.author.name || "Anonymous"} />
-              </div>
-              <div>
-                <div className="text-xl font-bold">
-                  {blog.author.name || "Anonymous"}
+          {!toggleComponent && (
+            <div className="col-span-4 ml-14">
+              <div className="text-slate-600 text-lg">Author</div>
+              <div className="flex w-full">
+                <div className="pr-4 flex flex-col justify-center">
+                  <Avatar className="w-9 h-9 rounded-sm">
+                    <AvatarImage />
+                    <AvatarFallback className="w-9 h-9 rounded-sm capitalize">
+                      {blog.author.name.slice(0, 1) || "Anonymous"}
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
-                <div className="pt-2 text-slate-500">
-                  Random catch phrase about the author's ability to grab the user's attention
+                <div>
+                  <div className="text-xl font-bold">
+                    {blog.author.name || "Anonymous"}
+                  </div>
+                  <div className="pt-2 text-slate-500">
+                    Random catch phrase about the author's ability to grab the
+                    user's attention
+                  </div>
                 </div>
               </div>
             </div>
-          </div>)}
+          )}
         </div>
       </div>
     </div>
   );
 };
-
