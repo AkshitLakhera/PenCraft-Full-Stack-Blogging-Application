@@ -1,5 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom"
+import Loader from './ui/Loader'
+import {IoIosWarning} from 'react-icons/io' 
+import { RxCross2 } from "react-icons/rx";
 import { SignupType } from "@akshitlakhera/common-zod-app"; 
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
@@ -10,7 +13,13 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     password:"",
     name:"",
   });
+  const [loading, setloading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); 
+
+
+
   async function sendRequest() {
+    setloading(true)
     try {  const response=  await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup" ? "signup" :"signin"}`,postInputs)
     // Sometimes this jwt format can give you lot of pain haha
     const jwt = "Bearer "+response.data.token
@@ -21,12 +30,19 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
     console.log(jwt)
     navigate("/blogs") }
     catch(e) {
-      alert("Erro on sending request")
+      setErrorMessage("Invalid Details ")
+    }finally{
+      setloading(false)
     }
- 
   }
+
+  const handleClose = () => {
+    setErrorMessage(''); 
+  }
+ 
   return (
     <div className=" h-screen flex justify-center items-center flex-col ">
+      
       <div className="flex justify-center ">
         <div>
         <div className="max-w-lg text-4xl font-bold px-10 text-center">
@@ -38,6 +54,11 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
           </div>
           
           </div>
+
+        { errorMessage &&  (<div className="Error-div bg-red-300 mt-2 flex items-center justify-between rounded-xl py-4 px-3 ">
+          <span className="text-red-500 flex items-center gap-2 "><IoIosWarning/>{errorMessage}</span>
+          <button onClick={handleClose}><RxCross2/></button>
+          </div>)}
 
           <div className="max-w-md mt-6">
             {type === "signup" ?  <InputBox label="Name" placeholder="Enter your Username"  type="text" 
@@ -57,7 +78,10 @@ const Auth = ({type} : { type:"signin"|"signup"}) => {
                 ...postInputs, password:e.target.value
               })
             }}/>
-            <button onClick={sendRequest} type="button" className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{type === "signup" ? "Sign up" : "Sign in"}</button>
+            <button onClick={sendRequest} type="button" className={`w-full mt-4   ${loading? "bg-gray-700 text-gray-500": "bg-gray-800 text-white"} hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700`} disabled={loading}>
+              {loading? (<div className="flex gap-3 justify-center items-center">
+                <span>{type==="signin"? "Signin In": "Signin Up "}</span>      
+                <Loader/></div>) : type === "signup" ? "Sign up" : "Sign in"}</button>
 
         </div>
         </div>
