@@ -56,14 +56,14 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
             },
           }
         );
-        setComments(response.data.comments);
+        setComments(response.data.comments); 
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
     };
 
     fetchComments();
-  }, [blog.id, toggleComponent]);
+  }, [blog.id, toggleComponent,comments]);
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // Retrieve JWT token from localStorage
@@ -182,8 +182,8 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
               >
                 {/* Your comment section UI */}
                 <Comment handleCancel={handleCancel} blogID={blog.id} />
-                <div className="mt-5">
-                  {comments.map((comment) => (
+                <div className="mt-5 ">
+                  {comments.slice().reverse().map((comment) => (
                     <AddedComment key={comment.id} comment={comment} />
                   ))}
                 </div>
