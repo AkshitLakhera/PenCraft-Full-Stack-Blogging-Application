@@ -7,24 +7,25 @@ import { Publish } from "./pages/Publish"
 import { Landing } from "./pages/Landing"
 import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
-
+import { ThemeProvider } from "@/components/theme-provider"
 
 function App() {
   return (
-   <>
-   <BrowserRouter>
-   <Routes>
-    <Route path="/bookmark"   element={<Bookmark/>} />
-    <Route path="/"   element={<Landing/>} />
-    <Route path="/signup"   element={<Signup/>} />
-    <Route path="/signin"   element={<Signin/>} />
-    <Route path="/blog/:id"   element={<Blog/>} />
-    <Route path="/blogs"   element={<Blogs/>} />
-    <Route path="/publish"   element={<Publish/>} />
-    <Route path="/myblogs"   element={<Myblogs/>} />
-   </Routes>
-   </BrowserRouter>
-   </>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/bookmark" element={<Bookmark />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/blog/:id" element={<Blog />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/publish" element={<Publish />} />
+          <Route path="/myblogs" element={<Myblogs />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+
   )
 }
 
