@@ -48,7 +48,7 @@ export function TypewriterEffectSmoothDemo() {
           Unlock Your Creativity Here
         </p>
         <TypewriterEffectSmooth words={words} />
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
+        <div className="flex flex-col md:flex-row pb-4 space-x-0 space-y-2 md:space-y-0 md:space-x-4">
           <button onClick={handleSignin} className="w-40 h-10 rounded-xl bg-black border dark:border-white border-white text-white text-sm transition duration-300 ease-in-out hover:bg-white hover:text-black hover:border-black">
            Sign In
           </button>
