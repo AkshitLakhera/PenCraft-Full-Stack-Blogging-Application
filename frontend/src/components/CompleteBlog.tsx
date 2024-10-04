@@ -194,7 +194,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
                     alt="comment"
                     className="w-7 h-auto cursoer-pointer"
                   />
-                  <div className="text-slate-500 hover:text-slate-600">4</div>
+                  <div className="text-slate-500 hover:text-slate-600">{comments.length}</div>
                 </div>
               </div>
             </div>
