@@ -154,3 +154,22 @@ blogRouter.get("/:id", async (c) => {
   });
   return c.json({ blog });
 });
+
+//route to get the specific part of a blog with a specific id
+
+// blogRouter.get("/:id/content", async (c) => {
+//   const id = c.req.param("id");
+//   const prisma = new PrismaClient({
+//     datasourceUrl: c.env.DATABASE_URL,
+//   }).$extends(withAccelerate());
+//   const blog = await prisma.post.findUnique({
+//     where: {
+//       id,
+//     },
+//     select: {
+//       content: true
+//     }
+//   });
+
+//   return c.json({ content: content })
+// })
