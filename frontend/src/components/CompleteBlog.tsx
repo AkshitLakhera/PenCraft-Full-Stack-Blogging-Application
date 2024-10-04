@@ -38,6 +38,10 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState<number>(0); // State to hold the like count
   const [toggleComponent, setIsToggleComponent] = useState(false); // State  to manage state section visibility
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [finalfilteredContent, setFinalFilteredContent] = useState<string[]>([])
+
+
   const OntoggleComment = () => {
     setIsToggleComponent(!toggleComponent);
   };
@@ -56,14 +60,14 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
             },
           }
         );
-        setComments(response.data.comments); 
+        setComments(response.data.comments);
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
     };
 
     fetchComments();
-  }, [blog.id, toggleComponent,comments]);
+  }, [blog.id, toggleComponent, comments]);
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // Retrieve JWT token from localStorage
@@ -123,10 +127,29 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
     }
   };
   // const transformValue = toggleComponent ? 'translateX(0)' : 'translateX(-100%)';
+
+  //adding search functionality
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const paragraphs = blog.content.split('. ');
+
+    const filteredContent = paragraphs.filter(paragraph =>
+      paragraph.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+
+
+    const highlightedContent = filteredContent.map(paragraph =>
+      paragraph.replace(new RegExp(query, 'gi'), match => `<span class="bg-yellow-500 font-bold">${match}</span>`)
+    )
+
+    setFinalFilteredContent(highlightedContent.length > 0 ? highlightedContent : ['No matches found.'])
+
+  }
   return (
     <div>
       <div className={`${toggleComponent ? "opacity-50 " : ""}`}>
-        <Appbar onSearch={() => {}} />
+        <Appbar onSearch={handleSearch} />
       </div>
       <div className={`flex justify-center `}>
         <div className="grid grid-cols-12 px-10 w-full pt-200 max-w-screen-xl pt-12">
@@ -137,9 +160,15 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
                 {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
               </div>
               <div
-                className="pt-4 mb-6"
-                dangerouslySetInnerHTML={{ __html: blog.content }}
-              />
+                className="pt-4 mb-6">
+                {searchQuery && finalfilteredContent.length > 0 ? (
+                  finalfilteredContent.map((paragraph, index) => (
+                    <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                  ))
+                ) : (
+                  <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+                )}
+              </div>
               <div className="flex gap-8">
                 {/* Like section  */}
                 <div
