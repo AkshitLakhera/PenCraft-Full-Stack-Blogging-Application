@@ -151,11 +151,11 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
       <div className={`${toggleComponent ? "opacity-50 " : ""}`}>
         <Appbar onSearch={handleSearch} />
       </div>
-      <div className={`flex justify-center `}>
-        <div className="grid grid-cols-12 px-10 w-full pt-200 max-w-screen-xl pt-12">
+      <div className={`flex justify-center  `}>
+        <div className="lg:grid lg:grid-cols-12 flex flex-col-reverse px-10 w-full pt-200 max-w-screen-xl pt-12">
           <div className="col-span-8 mr-4">
             <div className={`${toggleComponent ? "opacity-50 " : ""}`}>
-              <div className="text-5xl font-extrabold">{blog.title}</div>
+              <div className="lg:text-5xl md:text-4xl text-3xl  font-extrabold">{blog.title}</div>
               <div className="text-slate-500 pt-2">
                 {`post on ${blog.publishedDate ? formatDate(blog.publishedDate.toLocaleString()) : "2 March 2024"}`}
               </div>
@@ -221,13 +221,13 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
           </div>
           {/* Hide when comment card is open */}
           {!toggleComponent && (
-            <div className="col-span-4 ml-14">
+            <div className="col-span-4 lg:ml-14 py-3 px-3 mb-8 md:ml-0 -ml-3  ">
               <div className="text-slate-600 text-lg">Author</div>
-              <div className="flex w-full">
-                <div className="pr-4 flex flex-col justify-center">
-                  <Avatar className="w-9 h-9 rounded-sm">
+              <div className="flex w-full md:ml-0  -ml-2">
+                <div className="flex flex-col md:px-5 md:py-2 py-1 px-2 ">
+                  <Avatar className="md:w-9 md:h-9 h-6 w-6  rounded-sm">
                     <AvatarImage />
-                    <AvatarFallback className="w-9 h-9 rounded-sm capitalize">
+                    <AvatarFallback className="md:w-9 md:h-9 w-6 h-6  rounded-sm capitalize">
                       {blog.author.name.slice(0, 1) || "Anonymous"}
                     </AvatarFallback>
                   </Avatar>
@@ -236,7 +236,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
                   <div className="text-xl font-bold">
                     {blog.author.name || "Anonymous"}
                   </div>
-                  <div className="pt-2 text-slate-500">
+                  <div className="md:pt-2 pt-1 md:ml-0 -ml-8 text-slate-500">
                     Random catch phrase about the author's ability to grab the
                     user's attention
                   </div>
