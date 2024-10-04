@@ -21,6 +21,7 @@ export default function SignIn() {
 
   const handleClose = () => {
     setErrorMessage("");
+    setloading(false);
   };
 
   async function sendRequest() {
@@ -49,8 +50,12 @@ export default function SignIn() {
   const [reset, setReset] = useState(false);
   return (
     <main className="w-full overflow-x-hidden min-h-screen flex flex-col items-center justify-center sm:px-4 relative">
-      <div className="absolute top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      <div className="w-full  space-y-6 text-gray-600 sm:max-w-md md:max-w-xl lg:max-w-xl px-5 py-10  rounded-2xl  transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]">
+      <div
+        className="absolute top-0 z-[0] h-screen w-screen"
+      ></div>
+      <div style={{
+                background: "linear-gradient(120deg, rgba(49,115,242,0.4) 0%, rgba(0,0,0,10) 50%, rgba(53,155,255,0.4) 100%)",
+            }} className="w-full  space-y-6 text-gray-600 sm:max-w-md md:max-w-xl lg:max-w-xl px-5 py-10  rounded-2xl  transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]">
         <div className="text-center">
           <img
             src="https://farmui.com/logo.svg"
@@ -251,7 +256,7 @@ export default function SignIn() {
               disabled={loading}
             >
               Sign in
-              {loading ? (
+              {!loading ? (
                 <ChevronRight className="inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300" />
               ) : (
                 <Loader className="inline-flex justify-center items-center w-4 h-4 ml-2 " />

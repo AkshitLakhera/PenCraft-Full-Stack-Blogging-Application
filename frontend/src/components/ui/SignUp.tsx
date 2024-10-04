@@ -59,13 +59,13 @@ export default function SignUp() {
             className="rounded-full"
           />
           <div className=" mt-10 space-y-3">
-            <h3 className="text-white text-3xl md:text-4xl lg:text-5xl font-normal font-geist tracking-tighter">
-              Start growing your business quickly
+            <h3 className="text-white text-3xl md:text-4xl lg:text-6xl font-normal font-geist tracking-tighter">
+              PenCraft
             </h3>
 
             {/* <Separator className="h-px bg-white/20 w-[100px] mr-auto" /> */}
             <p className="text-gray-300 text-md md:text-xl font-geist tracking-tight">
-              Create an account and get access to all features for 30-days, No
+              Create an account and get access to all features , No
               credit card required.
             </p>
             <div className="flex items-center -space-x-2 overflow-hidden">
@@ -104,6 +104,7 @@ export default function SignUp() {
           }
         >
           <div className="absolute  inset-0 opacity-15   w-full bg-transparent  bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+          
           <img
             className="absolute inset-x-0 -top-20 opacity-25 "
             src={
