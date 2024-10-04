@@ -3,7 +3,7 @@ import { Appbar } from "./Appbar";
 import clap from "@/assets/clapping.png";
 import filledCap from "@/assets/filledclapping(1).png";
 import comment from "@/assets/bubble-chat.png";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { Comment } from "./fearture/Comment";
