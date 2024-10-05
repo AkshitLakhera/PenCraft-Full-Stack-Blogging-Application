@@ -9,6 +9,7 @@ import { SignupType } from "@akshitlakhera/common-zod-app";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { Loader } from "lucide-react";
+import { useTheme } from "../theme-provider";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -19,7 +20,17 @@ export default function SignUp() {
   });
   const [loading, setloading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { theme, setTheme } = useTheme();
+  // console.log(theme);
+  if (theme === "system") {
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
 
+    // console.log(systemTheme);
+    setTheme(systemTheme);
+  }
   const handleClose = () => {
     setErrorMessage("");
   };
@@ -58,14 +69,17 @@ export default function SignUp() {
             className="rounded-full"
           />
           <div className=" mt-10 space-y-3">
-            <h3 className="text-white text-3xl md:text-4xl lg:text-6xl font-normal font-geist tracking-tighter">
+            <h3
+              className={`${theme === "light" ? "text-black" : "text-white"} text-3xl md:text-4xl lg:text-6xl font-normal font-geist tracking-tighter`}
+            >
               PenCraft
             </h3>
 
-            
-            <p className="text-gray-300 text-md md:text-xl font-geist tracking-tight">
-              Create an account and get access to all features , No
-              credit card required.
+            <p
+              className={`${theme === "light" ? "text-gray-800" : `text-gray-300`} text-md md:text-xl font-geist tracking-tight`}
+            >
+              Create an account and get access to all features , No credit card
+              required.
             </p>
             <div className="flex items-center -space-x-2 overflow-hidden">
               <img
@@ -88,7 +102,9 @@ export default function SignUp() {
                 src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e"
                 className="w-10 h-10 rounded-full border-2 border-white"
               />
-              <p className="text-sm text-gray-400 font-medium translate-x-5">
+              <p
+                className={`${theme === "light" ? " text-gray-800" : "text-gray-400"} text-sm font-medium translate-x-5`}
+              >
                 Join 5.000+ users
               </p>
             </div>
@@ -102,8 +118,10 @@ export default function SignUp() {
             }
           }
         >
-          <div className="absolute  inset-0 opacity-15   w-full bg-transparent  bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
-          
+          <div
+            className={`absolute bg-transparent inset-0 opacity-15   w-full   bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]`}
+          ></div>
+
           <img
             className="absolute inset-x-0 -top-20 opacity-25 "
             src={
@@ -133,16 +151,20 @@ export default function SignUp() {
               className="lg:hidden rounded-full"
             />
             <div className="mt-5 space-y-2">
-              <h3 className="text-gray-200 text-3xl  font-semibold tracking-tighter sm:text-4xl">
-                Sign up - Start journey
+              <h3
+                className={`${theme === `light` ? `text-gray-900` : `text-gray-200`} text-3xl  font-semibold tracking-tighter sm:text-4xl`}
+              >
+                Sign up
               </h3>
-              <p className="text-gray-400">
+              <p
+                className={`${theme === `light` ? `text-gray-900` : `text-gray-400`}`}
+              >
                 Already have an account?{" "}
                 <Link
                   to={"/signin"}
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="font-medium text-indigo-800 hover:text-indigo-800"
                 >
-                  Sign in
+                  sign in
                 </Link>
               </p>
             </div>
@@ -151,11 +173,11 @@ export default function SignUp() {
             <button
               onMouseEnter={() => setReset(false)}
               onMouseLeave={() => setReset(true)}
-              className="group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50"
+              className={`${theme === `light` ? `border-2 border-gray-800` : ""} group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50`}
             >
               <svg
                 className={cn(
-                  "w-5 h-5 group-hover:-translate-y-1 duration-300 transition-all ",
+                  "w-5 h-5 group-hover:-translate-y-1 duration-300 transition-all",
                   reset ? "translate-y-0" : "tranistion-transform"
                 )}
                 viewBox="0 0 48 48"
@@ -191,7 +213,7 @@ export default function SignUp() {
             <button
               onMouseEnter={() => setReset(false)}
               onMouseLeave={() => setReset(true)}
-              className="group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50"
+              className={`${theme === `light` ? `border-2 border-gray-800` : ""} group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50`}
             >
               <svg
                 className={cn(
@@ -211,7 +233,7 @@ export default function SignUp() {
             <button
               onMouseEnter={() => setReset(false)}
               onMouseLeave={() => setReset(true)}
-              className="group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50"
+              className={`${theme === `light` ? `border-2 border-gray-800` : ""} group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50`}
             >
               <svg
                 className={cn(
@@ -266,77 +288,92 @@ export default function SignUp() {
               </svg>
             </button>
           </div>
-          
+
           <form
             noValidate
             onSubmit={(e) => e.preventDefault()}
-            className="space-y-5 z-20"
+            className="space-y-10 z-20"
           >
             {errorMessage && (
-              <div className="Error-div bg-zinc-700 mt-2 flex items-center justify-between rounded-xl py-4 px-3 ">
-                <span className="text-red-500 flex items-center gap-2 ">
+              <div
+                className={`${theme === `light` ? `bg-gray-400` : "bg-zinc-700"} mt-2 flex items-center justify-between rounded-xl py-4 px-3 border-2 border-gray-900`}
+              >
+                <span className="text-red-500 font-semibold flex items-center gap-2 ">
                   <IoIosWarning />
                   {errorMessage}
                 </span>
-                <button className="text-red-500" onClick={handleClose}>
+                <button
+                  className="text-red-500 font-semibold"
+                  onClick={handleClose}
+                >
                   <RxCross2 />
                 </button>
               </div>
             )}
+
             <div>
-              <label className="font-medium text-gray-100/50 font-geist">
+              <label
+                className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
+              >
                 Name
               </label>
               <Input
-                type="text"
+                type="name"
                 required
+                placeholder="name"
                 onChange={(e) => {
                   setPostInputs({
                     ...postInputs,
                     name: e.target.value,
                   });
                 }}
-                className="w-full mt-2 px-3 py-5 text-gray-500 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg"
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
               />
             </div>
             <div>
-              <label className="font-medium text-gray-100/50 font-geist">
+              <label
+                className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
+              >
                 Email
               </label>
               <Input
                 type="email"
                 required
+                placeholder="@email"
                 onChange={(e) => {
                   setPostInputs({
                     ...postInputs,
                     email: e.target.value,
                   });
                 }}
-                className="w-full mt-2 px-3 py-5 text-gray-500 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg"
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
               />
             </div>
             <div>
-              <label className="font-medium text-gray-100/50 font-geist">
+              <label
+                className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
+              >
                 Password
               </label>
               <Input
                 type="password"
                 required
+                placeholder="password"
                 onChange={(e) => {
                   setPostInputs({
                     ...postInputs,
                     password: e.target.value,
                   });
                 }}
-                className="w-full mt-2 px-3 py-5 text-gray-500 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg"
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
               />
             </div>
             <button
               onClick={sendRequest}
-              className={`w-full font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-2`}
+              className={`${theme === `light` ? `border-none` : "ring-offset-2 ring-offset-zinc-950"} w-full font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50  transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-2`}
               disabled={loading}
             >
-              Create account
+              Create Account
               {loading === true && (
                 <div className="flex gap-3 justify-center items-center">
                   <Loader />
