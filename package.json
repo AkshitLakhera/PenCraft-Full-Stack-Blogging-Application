@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@kinfe123/farm-ui": "^1.0.12",
+    "clsx": "^2.1.1",
+    "pnpm": "^9.12.0",
+    "tailwind-merge": "^2.5.3"
+  }
+}
