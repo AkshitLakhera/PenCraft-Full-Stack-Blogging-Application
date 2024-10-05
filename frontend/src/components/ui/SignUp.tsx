@@ -142,7 +142,7 @@ export default function SignUp() {
                   to={"/signin"}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Log in
+                  Sign in
                 </Link>
               </p>
             </div>
