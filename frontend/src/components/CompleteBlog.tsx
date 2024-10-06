@@ -61,6 +61,7 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
           }
         );
         setComments(response.data.comments);
+        console.log("Comments", comments)
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
@@ -211,10 +212,30 @@ export const CompleteBlog = ({ blog }: { blog: Blog }) => {
               >
                 {/* Your comment section UI */}
                 <Comment handleCancel={handleCancel} blogID={blog.id} />
-                <div className="mt-5 ">
-                  {comments.slice().reverse().map((comment) => (
-                    <AddedComment key={comment.id} comment={comment} />
-                  ))}
+                <div className="mt-5">
+                  {comments.map((comment) => {
+                    let childComments = comment.childComments || [];
+                    // Collect IDs of comments to be deleted
+                    let deletedCommentIds = [];
+                    if (comment.parentId) {
+                      deletedCommentIds.push(comment.id);
+                    }
+                    // Check for duplicates in childComments
+                    const findAndMergeDuplicates = (childComments: any[]) => {
+                      childComments.forEach(childComment => {
+                        if (deletedCommentIds.includes(childComment.id)) {
+                          // Merge user and childComments from deleted comment
+                          childComment.user = comment.user; // Assuming comment is the deleted one
+                          childComment.childComments = [...(childComment.childComments || []), ...(comment.childComments || [])];
+                        }
+                        // Recursively check for duplicates in nested childComments
+                        findAndMergeDuplicates(childComment.childComments || []);
+                      });
+                    };
+                    findAndMergeDuplicates(childComments);
+                    return <AddedComment key={comment.id} comment={comment} />;
+                  })}
+
                 </div>
               </div>
             )}
