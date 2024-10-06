@@ -78,12 +78,18 @@ Added jodit editor .
 
 ## Contributors
 
-<!-- - [Other Contributors] -->
-
-Feel free to contribute by forking and submitting pull requests!
-
-<!-- For detailed documentation and contribution guidelines, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file. -->
-
-Happy coding! 🚀
-
-this is test line
+- **Akshit lakhera** - [@akshitlakhera14](https://github.com/akshitlakhera14)
+- **Bhumika** - [@sharmabhmi](https://github.com/sharmabhmi)
+- **MIGHTY1o1** - [@shubhagarwalcse](https://github.com/shubhagarwalcse)
+- **Pavan Shanmukha Madhav Gunda** - [@pavanshanmukhmadhav](https://github.com/pavanshanmukhmadhav)
+- **Rahul Kumar** - [@rahulbarnwalonlyu2](https://github.com/rahulbarnwalonlyu2)
+- **Risheendra183** - [@yannamrishee](https://github.com/yannamrishee)
+- **Saksham Saraf** - [@122025299+sakshamsaraf23](https://github.com/122025299+sakshamsaraf23)
+- **Samyak Aditya** - [@91079592+samyak-aditya](https://github.com/91079592+samyak-aditya)
+- **Siddhi Sahu** - [@himanisahu739](https://github.com/himanisahu739)
+- **Umesh Kumar** - [@149981630+UmeshKumar0143](https://github.com/149981630+UmeshKumar0143)
+- **UmeshKumar0143** - [@umeshkumar153654](https://github.com/umeshkumar153654)
+- **ayushrana83** - [@168258223+ayushrana83](https://github.com/168258223+ayushrana83)
+- **dependabot** - [@49699333+dependabot[bot]](https://github.com/49699333+dependabot[bot])
+- **kartikeyyy** - [@kartikeykvk369](https://github.com/kartikeykvk369)
+- **tejasbenibagde** - [@124677750+tejasbenibagde](https://github.com/124677750+tejasbenibagde)
