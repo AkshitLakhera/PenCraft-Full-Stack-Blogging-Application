@@ -66,7 +66,7 @@ export const Comment =({ handleCancel, blogID }: CommentProps) => {
     value={content}
   />
    <div className="flex justify-between mt-3">
-    <button onClick={handleCancel} className="hover:text-gray-500">Cancel</button>
+    <button onClick={handleCancel} className="text-gray-500">Cancel</button>
     <button 
   type="button" 
   className={`text-white font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none 
