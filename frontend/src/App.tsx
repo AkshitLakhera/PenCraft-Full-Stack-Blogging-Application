@@ -8,7 +8,7 @@ import { Landing } from "./pages/Landing"
 import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
 import { ThemeProvider } from "@/components/theme-provider"
-
+import {BlogForm} form "@/components/BlogForm"
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -22,6 +22,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/myblogs" element={<Myblogs />} />
+          <Route path="/uploadimage" element={<BlogForm/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
