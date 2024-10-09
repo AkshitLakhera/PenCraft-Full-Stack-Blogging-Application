@@ -4,6 +4,10 @@ import axios from "axios";
 import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
 import { createPostInput, updatePost } from "@akshitlakhera/common-zod-app";
+import cloudinary from "cloudinary";
+import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+
 export const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -14,8 +18,25 @@ export const blogRouter = new Hono<{
   };
 }>();
 
+// Cloudinary configuration
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Multer configuration for Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary.v2,
+  params: {
+    folder: "blog-images",
+    allowedFormats: ["jpg", "png", "jpeg"],
+  },
+});
+
+const upload = multer({ storage: storage });
+
 // Middleware
-// The * character in the route pattern /api/v1/blog/* acts as a wildcard.
 blogRouter.use(async (c, next) => {
   try {
     const jwt = c.req.header("Authorization");
@@ -23,7 +44,7 @@ blogRouter.use(async (c, next) => {
       c.status(401);
       return c.json({ error: "Unauthorized" });
     }
-    const token = jwt.split(" ")[1]; // Corrected token split
+    const token = jwt.split(" ")[1];
     const payload = await verify(token, c.env.JWT_SECRET);
     if (!payload) {
       c.status(401);
@@ -37,31 +58,34 @@ blogRouter.use(async (c, next) => {
     return c.json({ error: "Unauthorized" });
   }
 });
-// Routing
-// Routing
-blogRouter.post("/", async (c) => {
+
+// Create a blog post with optional image upload
+blogRouter.post("/", upload.single("image"), async (c) => {
   try {
     const userId = c.get("userId");
-    console.log("userId:", userId); // Log userId for debugging
-    const publishedDate = new Date(); // Get the current date and time
+    console.log("userId:", userId);
+    const publishedDate = new Date();
 
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
 
     const body = await c.req.json();
-    // zod check
     const { success } = createPostInput.safeParse(body);
     if (!success) {
       c.status(400);
-      return c.json({ error: "invalid input" });
+      return c.json({ error: "Invalid input" });
     }
+
+    const imageUrl = c.req.file ? c.req.file.path : null;
+
     const blog = await prisma.post.create({
       data: {
         title: body.title,
         content: body.content,
-        authorId: userId, //blog get saved with specific userId (payload one) automatically
+        authorId: userId,
         publishedDate,
+        imageUrl, // Saving the image URL
       },
     });
 
@@ -70,13 +94,34 @@ blogRouter.post("/", async (c) => {
     });
   } catch (error) {
     console.error("Error creating blog:", error);
-    c.status(500); // Internal Server Error
+    c.status(500);
     return c.json({ error: "Internal server error" });
   }
 });
 
-//    Update blog code
-// I can see some problem here lets see
+// Image Upload Route
+blogRouter.post("/upload-image", upload.single("image"), async (c) => {
+  try {
+    const file = c.req.file;
+    if (!file) {
+      c.status(400);
+      return c.json({ error: "No file uploaded" });
+    }
+
+    const imageUrl = file.path;
+
+    return c.json({
+      message: "Image uploaded successfully",
+      imageUrl: imageUrl,
+    });
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    c.status(500);
+    return c.json({ error: "Failed to upload image" });
+  }
+});
+
+// Update blog post
 blogRouter.put("/", async (c) => {
   const userId = c.get("userId");
   const prisma = new PrismaClient({
@@ -86,7 +131,7 @@ blogRouter.put("/", async (c) => {
   const { success } = updatePost.safeParse(body);
   if (!success) {
     c.status(400);
-    return c.json({ error: "invalid input" });
+    return c.json({ error: "Invalid input" });
   }
   const updateBlog = await prisma.post.update({
     where: {
@@ -99,16 +144,16 @@ blogRouter.put("/", async (c) => {
     },
   });
   if (updateBlog) {
-    return c.json({ messgae: "Blog post successfully updated" });
+    return c.json({ message: "Blog post successfully updated" });
   } else {
     c.status(401);
     return c.json({
-      error: "Blog does n't get updated",
+      error: "Blog doesn't get updated",
     });
   }
 });
 
-//    Route to get all the blogs
+// Get all blogs
 blogRouter.get("/bulk", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -130,7 +175,8 @@ blogRouter.get("/bulk", async (c) => {
     blogs,
   });
 });
-//  Route to get all the blogs with specific id
+
+// Get a specific blog by id
 blogRouter.get("/:id", async (c) => {
   const id = c.req.param("id");
   const prisma = new PrismaClient({
@@ -154,22 +200,3 @@ blogRouter.get("/:id", async (c) => {
   });
   return c.json({ blog });
 });
-
-//route to get the specific part of a blog with a specific id
-
-// blogRouter.get("/:id/content", async (c) => {
-//   const id = c.req.param("id");
-//   const prisma = new PrismaClient({
-//     datasourceUrl: c.env.DATABASE_URL,
-//   }).$extends(withAccelerate());
-//   const blog = await prisma.post.findUnique({
-//     where: {
-//       id,
-//     },
-//     select: {
-//       content: true
-//     }
-//   });
-
-//   return c.json({ content: content })
-// })
