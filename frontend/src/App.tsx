@@ -9,7 +9,6 @@ import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from 'react-hot-toast';
-import { Size } from "@tsparticles/engine"
 
 
 function App() {
