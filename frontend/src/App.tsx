@@ -8,10 +8,22 @@ import { Landing } from "./pages/Landing"
 import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from 'react-hot-toast';
+import { Size } from "@tsparticles/engine"
+
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Toaster position="top-center"
+  toastOptions={{
+    style: {
+      
+      background: '#333',
+      color: '#fff',},
+      duration: 4000, // duration in milliseconds
+    }}
+  />
       <BrowserRouter>
         <Routes>
           <Route path="/bookmark" element={<Bookmark />} />
