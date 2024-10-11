@@ -9,7 +9,24 @@ import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
 import { ThemeProvider } from "@/components/theme-provider"
 
+// Lenis - for smooth scrolling
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
+
 function App() {
+
+  // Initialize Lenis
+  const lenis = new Lenis();
+  lenis.on('scroll', (e) => {
+    console.log(e);
+  }); // Listen for the scroll event and log the event data
+  function raf(time:number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  } // Use requestAnimationFrame to continuously update the scroll
+  requestAnimationFrame(raf);
+
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
