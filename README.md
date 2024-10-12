@@ -81,6 +81,7 @@ Added jodit editor .
 - **Akshit lakhera** - [@akshitlakhera14](https://github.com/akshitlakhera14)
 - **Bhumika** - [@sharmabhmi](https://github.com/sharmabhmi)
 - **MIGHTY1o1** - [@shubhagarwalcse](https://github.com/shubhagarwalcse)
+- **Nikhil Saxena** - [@91839763+Cleveridiot07](https://github.com/91839763+Cleveridiot07)
 - **Pavan Shanmukha Madhav Gunda** - [@pavanshanmukhmadhav](https://github.com/pavanshanmukhmadhav)
 - **Rahul Kumar** - [@rahulbarnwalonlyu2](https://github.com/rahulbarnwalonlyu2)
 - **Risheendra183** - [@yannamrishee](https://github.com/yannamrishee)
