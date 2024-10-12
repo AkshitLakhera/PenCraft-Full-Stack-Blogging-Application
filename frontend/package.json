@@ -27,6 +27,7 @@
     "framer-motion": "^11.0.8",
     "jodit-react": "^4.0.25",
     "jwt-decode": "^4.0.0",
+    "lenis": "^1.1.14",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
