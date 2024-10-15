@@ -1,0 +1,158 @@
+'use client'
+
+import { useState } from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ArrowBigUp, ArrowBigDown, MessageSquare, ChevronDown, ChevronRight } from "lucide-react"
+
+type Comment = {
+  id: number
+  author: string
+  content: string
+  votes: number
+  replies: Comment[]
+}
+
+const initialComments: Comment[] = [
+  {
+    id: 1,
+    author: 'user1',
+    content: 'This is a top-level comment',
+    votes: 5,
+    replies: [
+      {
+        id: 2,
+        author: 'user2',
+        content: 'This is a reply to the top-level comment',
+        votes: 3,
+        replies: [
+          {
+            id: 4,
+            author: 'user4',
+            content: 'This is a nested reply',
+            votes: 1,
+            replies: []
+          }
+        ]
+      },
+      {
+        id: 5,
+        author: 'user5',
+        content: 'This is another reply to the top-level comment',
+        votes: 2,
+        replies: []
+      }
+    ]
+  },
+  {
+    id: 3,
+    author: 'user3',
+    content: 'This is another top-level comment',
+    votes: 2,
+    replies: []
+  }
+]
+
+function CommentComponent({ comment, depth = 0, onAddReply }: { comment: Comment, depth?: number, onAddReply: (parentId: number, content: string) => void }) {
+  const [isReplying, setIsReplying] = useState(false)
+  const [replyContent, setReplyContent] = useState('')
+  const [isExpanded, setIsExpanded] = useState(true)
+
+  const handleAddReply = () => {
+    if (replyContent.trim()) {
+      onAddReply(comment.id, replyContent)
+      setReplyContent('')
+      setIsReplying(false)
+    }
+  }
+
+  const toggleReplies = () => {
+    setIsExpanded(!isExpanded)
+  }
+
+  return (
+    <Card className={`mb-4 ${depth > 0 ? 'ml-8' : ''}`}>
+      <CardContent className="p-4">
+        <div className="flex items-center mb-2">
+          <Avatar className="h-6 w-6 mr-2">
+            <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${comment.author}`} alt={comment.author} />
+            <AvatarFallback>{comment.author[0].toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <span className="font-semibold">{comment.author}</span>
+        </div>
+        <p className="mb-2">{comment.content}</p>
+        <div className="flex items-center space-x-2 mb-2">
+          <Button variant="ghost" size="sm">
+            <ArrowBigUp className="h-4 w-4 mr-1" />
+            {comment.votes}
+          </Button>
+          <Button variant="ghost" size="sm">
+            <ArrowBigDown className="h-4 w-4" />
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => setIsReplying(!isReplying)}>
+            <MessageSquare className="h-4 w-4 mr-1" />
+            Reply
+          </Button>
+          {comment.replies.length > 0 && (
+            <Button variant="ghost" size="sm" onClick={toggleReplies}>
+              {isExpanded ? <ChevronDown className="h-4 w-4 mr-1" /> : <ChevronRight className="h-4 w-4 mr-1" />}
+              {isExpanded ? 'Collapse' : 'Expand'} ({comment.replies.length})
+            </Button>
+          )}
+        </div>
+        {isReplying && (
+          <div className="flex items-center mt-2">
+            <Input
+              value={replyContent}
+              onChange={(e) => setReplyContent(e.target.value)}
+              placeholder="Write a reply..."
+              className="mr-2"
+            />
+            <Button onClick={handleAddReply}>Submit</Button>
+          </div>
+        )}
+        {isExpanded && comment.replies.map((reply) => (
+          <CommentComponent key={reply.id} comment={reply} depth={depth + 1} onAddReply={onAddReply} />
+        ))}
+      </CardContent>
+    </Card>
+  )
+}
+
+export default function CommentThread() {
+  const [comments, setComments] = useState<Comment[]>(initialComments)
+
+  const addReply = (parentId: number, content: string) => {
+    const newComment: Comment = {
+      id: Date.now(),
+      author: 'currentUser',
+      content,
+      votes: 0,
+      replies: []
+    }
+
+    const addReplyToComment = (comments: Comment[]): Comment[] => {
+      return comments.map(comment => {
+        if (comment.id === parentId) {
+          return { ...comment, replies: [...comment.replies, newComment] }
+        } else if (comment.replies.length > 0) {
+          return { ...comment, replies: addReplyToComment(comment.replies) }
+        }
+        return comment
+      })
+    }
+
+    setComments(addReplyToComment(comments))
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto mt-8">
+      <h2 className="text-2xl font-bold mb-4">Comments</h2>
+      {comments.map((comment) => (
+        <CommentComponent key={comment.id} comment={comment} onAddReply={addReply} />
+      ))}
+    </div>
+  )
+}
