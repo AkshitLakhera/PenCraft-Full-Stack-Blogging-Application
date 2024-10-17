@@ -43,7 +43,7 @@ export function TypewriterEffectSmoothDemo() {
       },
     ];
     return (
-      <div className="flex flex-col items-center justify-start h-4/6 bg-black ">
+      <div className="flex flex-col items-center justify-start h-4/6 pt-[20vh] lg:pt-24 bg-black ">
         <p className="text-neutral-600 dark:text-neutral-200 text-lg sm:text-base">
           Unlock Your Creativity Here
         </p>
@@ -65,7 +65,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 
 export function SparklesPreview() {
   return (
-    <div className="h-[35rem] w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
+    <div className="h-1/3 w-full pt-[10vh] lg:pt-16 bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
       <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
         PenCraft
       </h1>
