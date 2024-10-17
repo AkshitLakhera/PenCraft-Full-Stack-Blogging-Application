@@ -67,9 +67,11 @@ export function TypewriterEffectSmoothDemo() {
         </button>
       </div>
       <div>
+        <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-blue-500/30" />
         <AboutUs />
       </div>
       <div>
+        <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-blue-500/30" />
         <Explore />
       </div>
     </div>
