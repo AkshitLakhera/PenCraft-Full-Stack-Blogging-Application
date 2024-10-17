@@ -75,6 +75,11 @@ Working on to supports image uploads, allowing users to enhance their blog posts
 
 Added jodit editor .
 
+## Images:
+
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/4c11eff6-fe58-4304-ab25-ec4b26883022">
+
+
 ## ❤️Our Valuable Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=AkshitLakhera/PenCraft-Full-Stack-Blogging-Application)](https://github.com/AkshitLakhera/PenCraft-Full-Stack-Blogging-Application/graphs/contributors)
