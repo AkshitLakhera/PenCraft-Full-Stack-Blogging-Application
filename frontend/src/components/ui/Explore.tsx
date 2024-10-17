@@ -1,34 +1,35 @@
 import Blog from "../ui/Blog";
+
 export const Explore = () => {
   return (
-    <div className=" flex flex-col">
-      <h1 className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold whitespace-nowrap">
+    <div className="flex flex-col max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <h1 className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold whitespace-nowrap mb-10">
         Blog
       </h1>
-      <p>
+      <p className="mb-10 text-xs sm:text-base md:text-base lg:text-base xl:text-lg">
         Here, we share travel tips, guides, and stories that inspire your next
         adventure.
       </p>
       <ul className="flex justify-between">
-        <li className="text-center font-bold rounded-md cursor-pointer hover:bg-white hover:text-blue-500">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           All
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer hover:bg-white hover:text-blue-500">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Destination
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer hover:bg-white hover:text-blue-500">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Culinary
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer hover:bg-white hover:text-blue-500">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Lifestyle
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer hover:bg-white hover:text-blue-500">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Tips & Hacks
         </li>
       </ul>
       <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
         <div className="border-b mb-5 flex justify-between text-sm">
-          <div className="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase">
+          <div className="text-blue-400 flex items-center pb-2 pr-2 border-b-2 border-blue-400 uppercase">
             <svg
               className="h-6 mr-3"
               version="1.1"
@@ -42,19 +43,61 @@ export const Explore = () => {
               </g>
             </svg>
             <a href="#" className="font-semibold inline-block">
-              Cooking Blog
+              All
             </a>
           </div>
           <a href="#">See All</a>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
+          <Blog
+            imgSrc="https://images.squarespace-cdn.com/content/v1/651f3729b2f69811ea357c79/74a113a6-ab95-493d-9c33-fab940272ca4/clay-banks-IYLcwiyYUgc-unsplash-no+guy.jpg?format=1500w"
+            heading="Unveiling the Secrets Beyond the Tourist Trails"
+            description="Dive into the local culture, discover hidden spots, and experience the authentic charm that often..."
+            time="20"
+            comments={10}
+            tag="Destination"
+          />
+          <Blog
+            imgSrc="https://plus.unsplash.com/premium_photo-1670604211960-82b8d84f6aea?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            heading="Culinary Delights: Must-Try Dishes from Around the World"
+            description="Embark on a culinary journey with these must-try dishes that capture the essence of their regions..."
+            time="30"
+            comments={8}
+            tag="Culinary"
+          />
+          <Blog
+            imgSrc="https://images.unsplash.com/photo-1556740738-b6a63e27c4df"
+            heading="Lifestyle Tips for a Happier, Healthier You"
+            description="Transform your daily routine with these lifestyle changes that promote well-being and positivity..."
+            time="25"
+            comments={15}
+            tag="Lifestyle"
+          />
+          <Blog
+            imgSrc="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+            heading="Top Travel Hacks for a Smoother Journey"
+            description="Simplify your travel experience with these smart tips and tricks that every traveler should know..."
+            time="15"
+            comments={5}
+            tag="Tips & Hacks"
+          />
+          <Blog
+            imgSrc="https://images.unsplash.com/photo-1683009427666-340595e57e43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVzdGluYXRpb258ZW58MHx8MHx8fDA%3D"
+            heading="Exploring Hidden Destinations Off the Beaten Path"
+            description="Step away from the crowded tourist spots and uncover these hidden gems that offer a unique experience..."
+            time="40"
+            comments={22}
+            tag="Destination"
+          />
+          <Blog
+            imgSrc="https://images.unsplash.com/photo-1505870136463-c17bc84b30a2?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            heading="The Ultimate Guide to Street Food Around the World"
+            description="Discover the best street food scenes from bustling markets to charming alleys across the globe..."
+            time="35"
+            comments={18}
+            tag="Culinary"
+          />
         </div>
       </div>
     </div>

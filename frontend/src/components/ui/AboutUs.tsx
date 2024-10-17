@@ -1,12 +1,12 @@
 import pen from "../../assets/hero-pen.png";
 export const AboutUs = () => {
   return (
-    <div className="mt-12 flex flex-col border-red-600 p-5">
+    <div className="mt-12 flex flex-col max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
       <h1 className="text-center text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold whitespace-nowrap">
         Crafting a World of Ideas
       </h1>
-      <div className="flex justify-around">
-        <div className="imagePart w-1/2  min-h-64">
+      <div className="flex justify-center items-center">
+        <div className="imagePart  min-h-64">
           <img
             className=" object-contain w-3/4 rounded-2xl"
             src={pen}
