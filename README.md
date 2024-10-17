@@ -1,6 +1,6 @@
 # PenCraft
 
-<img width="1708" alt="image" src="https://github.com/user-attachments/assets/5efbcdd9-fb49-4202-a0c4-d508843e860d">
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/f7c0adb4-6e0b-4de2-b914-34a9d3bdd47e">
 
 
 This project aims to create a blogging platform using modern technologies for both frontend and backend. It utilizes a robust stack including React for the frontend, Cloudflare Workers for the backend, and a combination of other tools for validation, ORM, database, and authentication.
