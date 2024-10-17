@@ -7,6 +7,7 @@ import { Publish } from "./pages/Publish"
 import { Landing } from "./pages/Landing"
 import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
+import ContributorPage from "./pages/ContributorPage"
 import { ThemeProvider } from "@/components/theme-provider"
 
 // Lenis - for smooth scrolling
@@ -39,6 +40,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/myblogs" element={<Myblogs />} />
+          <Route path="/contributor" element={<ContributorPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
