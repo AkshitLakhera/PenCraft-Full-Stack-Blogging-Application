@@ -143,7 +143,7 @@ export default function SignUp() {
           height={1000}
           alt="back bg"
         />
-        <div className="w-full max-w-md md:max-w-lg space-y-8 px-4  text-gray-600 sm:px-0 z-20">
+        <div className="w-full max-w-md md:max-w-lg space-y-8 px-4   sm:px-0 z-20">
           <div className="relative">
             <img
               src="https://farmui.com/logo.svg"
@@ -296,7 +296,7 @@ export default function SignUp() {
           >
             {errorMessage && (
               <div
-                className={`${theme === `light` ? `bg-gray-400` : "bg-zinc-700"} mt-2 flex items-center justify-between rounded-xl py-4 px-3 border-2 border-gray-900`}
+                className={`${theme === `light` ? `bg-gray-400` : "bg-zinc-700"} mt-2 flex items-center justify-between rounded-xl p-3 border-2 border-gray-900 -mb-4`}
               >
                 <span className="text-red-500 font-semibold flex items-center gap-2 ">
                   <IoIosWarning />
@@ -327,7 +327,7 @@ export default function SignUp() {
                     name: e.target.value,
                   });
                 }}
-                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-white"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
               />
             </div>
             <div>
