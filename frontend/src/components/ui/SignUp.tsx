@@ -122,99 +122,93 @@ export default function SignUp() {
                       className={`absolute bg-transparent inset-0 opacity-15   w-full   bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]`}
                   ></div>
 
-                  <img
-                      className="absolute inset-x-0 -top-20 opacity-25 "
-                      src={
-                          "https://pipe.com/_next/image?url=%2Fassets%2Fimg%2Fhero-left.png&w=384&q=75"
-                      }
-                      width={1000}
-                      height={1000}
-                      alt="back bg"
-                  />
-              </div>
+          <img
+            className="absolute inset-x-0 -top-20 opacity-25 "
+            src={
+              "https://pipe.com/_next/image?url=%2Fassets%2Fimg%2Fhero-left.png&w=384&q=75"
+            }
+            width={1000}
+            height={1000}
+            alt="back bg"
+          />
+        </div>
+      </div>
+      <div className="flex-1 relative flex items-center justify-center min-h-full">
+        <img
+          className="absolute inset-x-0 -z-1 -top-20 opacity-75 "
+          src={
+            "https://pipe.com/_next/image?url=%2Fassets%2Fimg%2Fhero-left.png&w=384&q=75"
+          }
+          width={1000}
+          height={1000}
+          alt="back bg"
+        />
+        <div className="w-full max-w-md md:max-w-lg space-y-8 px-4   sm:px-0 z-20">
+          <div className="relative">
+            <img
+              src="https://farmui.com/logo.svg"
+              width={100}
+              className="lg:hidden rounded-full"
+            />
+            <div className="mt-5 space-y-2">
+              <h3
+                className={`${theme === `light` ? `text-gray-900` : `text-gray-200`} text-3xl  font-semibold tracking-tighter sm:text-4xl`}
+              >
+                Sign up
+              </h3>
+              <p
+                className={`${theme === `light` ? `text-gray-900` : `text-gray-400`}`}
+              >
+                Already have an account?{" "}
+                <Link
+                  to={"/signin"}
+                  className="font-medium text-indigo-800 hover:text-indigo-800"
+                >
+                  sign in
+                </Link>
+              </p>
+            </div>
           </div>
-          <div className="flex-1 relative flex items-center justify-center min-h-full">
-              <img
-                  className="absolute inset-x-0 -z-1 -top-20 opacity-75 "
-                  src={
-                      "https://pipe.com/_next/image?url=%2Fassets%2Fimg%2Fhero-left.png&w=384&q=75"
-                  }
-                  width={1000}
-                  height={1000}
-                  alt="back bg"
-              />
-              <div className="w-full max-w-md md:max-w-lg space-y-8 px-4  text-gray-600 sm:px-0 z-20">
-                  <div className="relative">
-                      <img
-                          src="https://farmui.com/logo.svg"
-                          width={100}
-                          className="lg:hidden rounded-full"
-                      />
-                      <div className="mt-5 space-y-2">
-                          <h3
-                              className={`${theme === `light` ? `text-gray-900` : `text-gray-200`} text-3xl  font-semibold tracking-tighter sm:text-4xl`}
-                          >
-                              Sign up
-                          </h3>
-                          <p
-                              className={`${theme === `light` ? `text-gray-900` : `text-gray-400`}`}
-                          >
-                              Already have an account?{" "}
-                              <Link
-                                  to={"/signin"}
-                                  className="font-medium text-indigo-800 hover:text-indigo-800"
-                              >
-                                  sign in
-                              </Link>
-                          </p>
-                      </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-x-3">
-                      <button
-                          onMouseEnter={() => setReset(false)}
-                          onMouseLeave={() => setReset(true)}
-                          className={`${theme === `light` ? `border-2 border-gray-800` : ""} group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50`}
-                      >
-                          <svg
-                              className={cn(
-                                  "w-5 h-5 group-hover:-translate-y-1 duration-300 transition-all",
-                                  reset
-                                      ? "translate-y-0"
-                                      : "tranistion-transform"
-                              )}
-                              viewBox="0 0 48 48"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                          >
-                              <g clipPath="url(#clip0_17_40)">
-                                  <path
-                                      d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z"
-                                      fill="#4285F4"
-                                  />
-                                  <path
-                                      d="M24.48 48.0016C30.9529 48.0016 36.4116 45.8764 40.3888 42.2078L32.6549 36.2111C30.5031 37.675 27.7252 38.5039 24.4888 38.5039C18.2275 38.5039 12.9187 34.2798 11.0139 28.6006H3.03296V34.7825C7.10718 42.8868 15.4056 48.0016 24.48 48.0016Z"
-                                      fill="#34A853"
-                                  />
-                                  <path
-                                      d="M11.0051 28.6006C9.99973 25.6199 9.99973 22.3922 11.0051 19.4115V13.2296H3.03298C-0.371021 20.0112 -0.371021 28.0009 3.03298 34.7825L11.0051 28.6006Z"
-                                      fill="#FBBC04"
-                                  />
-                                  <path
-                                      d="M24.48 9.49932C27.9016 9.44641 31.2086 10.7339 33.6866 13.0973L40.5387 6.24523C36.2 2.17101 30.4414 -0.068932 24.48 0.00161733C15.4055 0.00161733 7.10718 5.11644 3.03296 13.2296L11.005 19.4115C12.901 13.7235 18.2187 9.49932 24.48 9.49932Z"
-                                      fill="#EA4335"
-                                  />
-                              </g>
-                              <defs>
-                                  <clipPath id="clip0_17_40">
-                                      <rect
-                                          width="48"
-                                          height="48"
-                                          fill="white"
-                                      />
-                                  </clipPath>
-                              </defs>
-                          </svg>
-                      </button>
+          <div className="grid grid-cols-3 gap-x-3">
+            <button
+              onMouseEnter={() => setReset(false)}
+              onMouseLeave={() => setReset(true)}
+              className={`${theme === `light` ? `border-2 border-gray-800` : ""} group flex transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  border-white/10  items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50`}
+            >
+              <svg
+                className={cn(
+                  "w-5 h-5 group-hover:-translate-y-1 duration-300 transition-all",
+                  reset ? "translate-y-0" : "tranistion-transform"
+                )}
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_17_40)">
+                  <path
+                    d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z"
+                    fill="#4285F4"
+                  />
+                  <path
+                    d="M24.48 48.0016C30.9529 48.0016 36.4116 45.8764 40.3888 42.2078L32.6549 36.2111C30.5031 37.675 27.7252 38.5039 24.4888 38.5039C18.2275 38.5039 12.9187 34.2798 11.0139 28.6006H3.03296V34.7825C7.10718 42.8868 15.4056 48.0016 24.48 48.0016Z"
+                    fill="#34A853"
+                  />
+                  <path
+                    d="M11.0051 28.6006C9.99973 25.6199 9.99973 22.3922 11.0051 19.4115V13.2296H3.03298C-0.371021 20.0112 -0.371021 28.0009 3.03298 34.7825L11.0051 28.6006Z"
+                    fill="#FBBC04"
+                  />
+                  <path
+                    d="M24.48 9.49932C27.9016 9.44641 31.2086 10.7339 33.6866 13.0973L40.5387 6.24523C36.2 2.17101 30.4414 -0.068932 24.48 0.00161733C15.4055 0.00161733 7.10718 5.11644 3.03296 13.2296L11.005 19.4115C12.901 13.7235 18.2187 9.49932 24.48 9.49932Z"
+                    fill="#EA4335"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_17_40">
+                    <rect width="48" height="48" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </button>
 
                       <button
                           onMouseEnter={() => setReset(false)}
@@ -308,100 +302,100 @@ export default function SignUp() {
                       </button>
                   </div>
 
-                  <form
-                      noValidate
-                      onSubmit={(e) => e.preventDefault()}
-                      className="space-y-10 z-20"
-                  >
-                      {errorMessage && (
-                          <div
-                              className={`${theme === `light` ? `bg-gray-400` : "bg-zinc-700"} mt-2 flex items-center justify-between rounded-xl py-4 px-3 border-2 border-gray-900`}
-                          >
-                              <span className="text-red-500 font-semibold flex items-center gap-2 ">
-                                  <IoIosWarning />
-                                  {errorMessage}
-                              </span>
-                              <button
-                                  className="text-red-500 font-semibold"
-                                  onClick={handleClose}
-                              >
-                                  <RxCross2 />
-                              </button>
-                          </div>
-                      )}
-
-                      <div>
-                          <label
-                              className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
-                          >
-                              Name
-                          </label>
-                          <Input
-                              type="name"
-                              required
-                              placeholder="name"
-                              onChange={(e) => {
-                                  setPostInputs({
-                                      ...postInputs,
-                                      name: e.target.value,
-                                  });
-                              }}
-                              className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
-                          />
-                      </div>
-                      <div>
-                          <label
-                              className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
-                          >
-                              Email
-                          </label>
-                          <Input
-                              type="email"
-                              required
-                              placeholder="@email"
-                              onChange={(e) => {
-                                  setPostInputs({
-                                      ...postInputs,
-                                      email: e.target.value,
-                                  });
-                              }}
-                              className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
-                          />
-                      </div>
-                      <div>
-                          <label
-                              className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
-                          >
-                              Password
-                          </label>
-                          <Input
-                              type="password"
-                              required
-                              placeholder="password"
-                              onChange={(e) => {
-                                  setPostInputs({
-                                      ...postInputs,
-                                      password: e.target.value,
-                                  });
-                              }}
-                              className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
-                          />
-                      </div>
-                      <button
-                          onClick={sendRequest}
-                          className={`${theme === `light` ? `border-none` : "ring-offset-2 ring-offset-zinc-950"} w-full font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50  transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-2`}
-                          disabled={loading}
-                      >
-                          Create Account
-                          {loading === true && (
-                              <div className="flex gap-3 justify-center items-center">
-                                  <Loader />
-                              </div>
-                          )}
-                      </button>
-                  </form>
+          <form
+            noValidate
+            onSubmit={(e) => e.preventDefault()}
+            className="space-y-10 z-20"
+          >
+            {errorMessage && (
+              <div
+                className={`${theme === `light` ? `bg-gray-400` : "bg-zinc-700"} mt-2 flex items-center justify-between rounded-xl p-3 border-2 border-gray-900 -mb-4`}
+              >
+                <span className="text-red-500 font-semibold flex items-center gap-2 ">
+                  <IoIosWarning />
+                  {errorMessage}
+                </span>
+                <button
+                  className="text-red-500 font-semibold"
+                  onClick={handleClose}
+                >
+                  <RxCross2 />
+                </button>
               </div>
-          </div>
-      </main>
+            )}
+
+            <div>
+              <label
+                className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
+              >
+                Name
+              </label>
+              <Input
+                type="name"
+                required
+                placeholder="name"
+                onChange={(e) => {
+                  setPostInputs({
+                    ...postInputs,
+                    name: e.target.value,
+                  });
+                }}
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-white"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
+              />
+            </div>
+            <div>
+              <label
+                className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
+              >
+                Email
+              </label>
+              <Input
+                type="email"
+                required
+                placeholder="@email"
+                onChange={(e) => {
+                  setPostInputs({
+                    ...postInputs,
+                    email: e.target.value,
+                  });
+                }}
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
+              />
+            </div>
+            <div>
+              <label
+                className={`${theme === `light` ? `text-gray-800` : "text-gray-100/50"} font-medium  font-geist`}
+              >
+                Password
+              </label>
+              <Input
+                type="password"
+                required
+                placeholder="password"
+                onChange={(e) => {
+                  setPostInputs({
+                    ...postInputs,
+                    password: e.target.value,
+                  });
+                }}
+                className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
+              />
+            </div>
+            <button
+              onClick={sendRequest}
+              className={`${theme === `light` ? `border-none` : "ring-offset-2 ring-offset-zinc-950"} w-full font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50  transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-2`}
+              disabled={loading}
+            >
+              Create Account
+              {loading === true && (
+                <div className="flex gap-3 justify-center items-center">
+                  <Loader />
+                </div>
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
   );
 }

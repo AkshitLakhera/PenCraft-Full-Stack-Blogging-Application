@@ -1,5 +1,8 @@
 # PenCraft
 
+<img width="1226" alt="image" src="https://github.com/user-attachments/assets/f075039a-a8a2-4330-b7c8-b26d66ca2e8c">
+
+
 This project aims to create a blogging platform using modern technologies for both frontend and backend. It utilizes a robust stack including React for the frontend, Cloudflare Workers for the backend, and a combination of other tools for validation, ORM, database, and authentication.
 
 ## Technologies Used
@@ -72,6 +75,13 @@ Working on to supports image uploads, allowing users to enhance their blog posts
 
 Added jodit editor .
 
+## Images:
+
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/f7c0adb4-6e0b-4de2-b914-34a9d3bdd47e">
+
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/4c11eff6-fe58-4304-ab25-ec4b26883022">
+
+
 ## ❤️Our Valuable Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=AkshitLakhera/PenCraft-Full-Stack-Blogging-Application)](https://github.com/AkshitLakhera/PenCraft-Full-Stack-Blogging-Application/graphs/contributors)
@@ -87,6 +97,7 @@ Added jodit editor .
 - **Risheendra183** - [@yannamrishee](https://github.com/yannamrishee)
 - **Saksham Saraf** - [@122025299+sakshamsaraf23](https://github.com/122025299+sakshamsaraf23)
 - **Samyak Aditya** - [@91079592+samyak-aditya](https://github.com/91079592+samyak-aditya)
+- **Shubham Pandey** - [@69081168+heizshubham](https://github.com/69081168+heizshubham)
 - **Siddhi Sahu** - [@himanisahu739](https://github.com/himanisahu739)
 - **Umesh Kumar** - [@149981630+UmeshKumar0143](https://github.com/149981630+UmeshKumar0143)
 - **UmeshKumar0143** - [@umeshkumar153654](https://github.com/umeshkumar153654)
@@ -94,5 +105,6 @@ Added jodit editor .
 - **dependabot** - [@49699333+dependabot[bot]](https://github.com/49699333+dependabot[bot])
 - **iamDyeus** - [@dyeusyt](https://github.com/dyeusyt)
 - **kartikeyyy** - [@kartikeykvk369](https://github.com/kartikeykvk369)
+- **khaulanauman** - [@khaulanauman](https://github.com/khaulanauman)
 - **tarunkumar2005** - [@tarunkumar6258278](https://github.com/tarunkumar6258278)
 - **tejasbenibagde** - [@124677750+tejasbenibagde](https://github.com/124677750+tejasbenibagde)
