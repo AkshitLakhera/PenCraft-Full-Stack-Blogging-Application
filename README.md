@@ -1,5 +1,8 @@
 # PenCraft
 
+<img width="1226" alt="image" src="https://github.com/user-attachments/assets/f075039a-a8a2-4330-b7c8-b26d66ca2e8c">
+
+
 This project aims to create a blogging platform using modern technologies for both frontend and backend. It utilizes a robust stack including React for the frontend, Cloudflare Workers for the backend, and a combination of other tools for validation, ORM, database, and authentication.
 
 ## Technologies Used
@@ -71,6 +74,13 @@ Working on to supports image uploads, allowing users to enhance their blog posts
 ## Add rich text editor
 
 Added jodit editor .
+
+## Images:
+
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/f7c0adb4-6e0b-4de2-b914-34a9d3bdd47e">
+
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/4c11eff6-fe58-4304-ab25-ec4b26883022">
+
 
 ## ❤️Our Valuable Contributors
 
