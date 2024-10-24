@@ -94,5 +94,6 @@ Added jodit editor .
 - **dependabot** - [@49699333+dependabot[bot]](https://github.com/49699333+dependabot[bot])
 - **iamDyeus** - [@dyeusyt](https://github.com/dyeusyt)
 - **kartikeyyy** - [@kartikeykvk369](https://github.com/kartikeykvk369)
+- **khaulanauman** - [@khaulanauman](https://github.com/khaulanauman)
 - **tarunkumar2005** - [@tarunkumar6258278](https://github.com/tarunkumar6258278)
 - **tejasbenibagde** - [@124677750+tejasbenibagde](https://github.com/124677750+tejasbenibagde)
