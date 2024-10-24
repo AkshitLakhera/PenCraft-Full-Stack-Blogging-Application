@@ -60,67 +60,67 @@ export default function SignUp() {
 
   const [reset, setReset] = React.useState(false);
   return (
-    <main className="w-full min-h-screen flex overflow-y-hidden">
-      <div className="relative flex-1 hidden items-center justify-center min-h-screen bg-transparent lg:flex">
-        <div className="relative z-10 w-full max-w-lg">
-          <img
-            src="https://farmui.com/logo-dark.svg"
-            width={100}
-            className="rounded-full"
-          />
-          <div className=" mt-10 space-y-3">
-            <h3
-              className={`${theme === "light" ? "text-black" : "text-white"} text-3xl md:text-4xl lg:text-6xl font-normal font-geist tracking-tighter`}
-            >
-              PenCraft
-            </h3>
+      <main className="w-full min-h-screen flex overflow-y-hidden">
+          <div className="relative flex-1 hidden items-center justify-center min-h-screen bg-transparent lg:flex">
+              <div className="relative z-10 w-full max-w-lg">
+                  <img
+                      src="https://farmui.com/logo-dark.svg"
+                      width={100}
+                      className="rounded-full"
+                  />
+                  <div className=" mt-10 space-y-3">
+                      <h3
+                          className={`${theme === "light" ? "text-black" : "text-white"} text-3xl md:text-4xl lg:text-6xl font-normal font-geist tracking-tighter`}
+                      >
+                          PenCraft
+                      </h3>
 
-            <p
-              className={`${theme === "light" ? "text-gray-800" : `text-gray-300`} text-md md:text-xl font-geist tracking-tight`}
-            >
-              Create an account and get access to all features , No credit card
-              required.
-            </p>
-            <div className="flex items-center -space-x-2 overflow-hidden">
-              <img
-                src="https://randomuser.me/api/portraits/women/79.jpg"
-                className="w-10 h-10 rounded-full border-2 border-white"
-              />
-              <img
-                src="https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg"
-                className="w-10 h-10 rounded-full border-2 border-white"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=a72ca28288878f8404a795f39642a46f"
-                className="w-10 h-10 rounded-full border-2 border-white"
-              />
-              <img
-                src="https://randomuser.me/api/portraits/men/86.jpg"
-                className="w-10 h-10 rounded-full border-2 border-white"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e"
-                className="w-10 h-10 rounded-full border-2 border-white"
-              />
-              <p
-                className={`${theme === "light" ? " text-gray-800" : "text-gray-400"} text-sm font-medium translate-x-5`}
+                      <p
+                          className={`${theme === "light" ? "text-gray-800" : `text-gray-300`} text-md md:text-xl font-geist tracking-tight`}
+                      >
+                          Create an account and get access to all features , No
+                          credit card required.
+                      </p>
+                      <div className="flex items-center -space-x-2 overflow-hidden">
+                          <img
+                              src="https://randomuser.me/api/portraits/women/79.jpg"
+                              className="w-10 h-10 rounded-full border-2 border-white"
+                          />
+                          <img
+                              src="https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg"
+                              className="w-10 h-10 rounded-full border-2 border-white"
+                          />
+                          <img
+                              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=a72ca28288878f8404a795f39642a46f"
+                              className="w-10 h-10 rounded-full border-2 border-white"
+                          />
+                          <img
+                              src="https://randomuser.me/api/portraits/men/86.jpg"
+                              className="w-10 h-10 rounded-full border-2 border-white"
+                          />
+                          <img
+                              src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e"
+                              className="w-10 h-10 rounded-full border-2 border-white"
+                          />
+                          <p
+                              className={`${theme === "light" ? " text-gray-800" : "text-gray-400"} text-sm font-medium translate-x-5`}
+                          >
+                              Join 5.000+ users
+                          </p>
+                      </div>
+                  </div>
+              </div>
+              <div
+                  className="absolute inset-0 my-auto h-full"
+                  style={
+                      {
+                          // background: "linear- gradient(152.92deg, rgba(192, 132, 252, 0.2) 4.54%, rgba(232, 121, 249, 0.26) 34.2%, rgba(192, 132, 252, 0.1) 77.55%)", filter: "blur(118px)"
+                      }
+                  }
               >
-                Join 5.000+ users
-              </p>
-            </div>
-          </div>
-        </div>
-        <div
-          className="absolute inset-0 my-auto h-full"
-          style={
-            {
-              // background: "linear- gradient(152.92deg, rgba(192, 132, 252, 0.2) 4.54%, rgba(232, 121, 249, 0.26) 34.2%, rgba(192, 132, 252, 0.1) 77.55%)", filter: "blur(118px)"
-            }
-          }
-        >
-          <div
-            className={`absolute bg-transparent inset-0 opacity-15   w-full   bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]`}
-          ></div>
+                  <div
+                      className={`absolute bg-transparent inset-0 opacity-15   w-full   bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]`}
+                  ></div>
 
           <img
             className="absolute inset-x-0 -top-20 opacity-25 "
