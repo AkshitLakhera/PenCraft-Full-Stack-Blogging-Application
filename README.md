@@ -97,6 +97,7 @@ Added jodit editor .
 - **Risheendra183** - [@yannamrishee](https://github.com/yannamrishee)
 - **Saksham Saraf** - [@122025299+sakshamsaraf23](https://github.com/122025299+sakshamsaraf23)
 - **Samyak Aditya** - [@91079592+samyak-aditya](https://github.com/91079592+samyak-aditya)
+- **Shariq** - [@shariqsd2003](https://github.com/shariqsd2003)
 - **Shubham Pandey** - [@69081168+heizshubham](https://github.com/69081168+heizshubham)
 - **Siddhi Sahu** - [@himanisahu739](https://github.com/himanisahu739)
 - **Umesh Kumar** - [@149981630+UmeshKumar0143](https://github.com/149981630+UmeshKumar0143)
