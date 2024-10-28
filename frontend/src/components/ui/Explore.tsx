@@ -3,27 +3,27 @@ import Blog from "../ui/Blog";
 export const Explore = () => {
   return (
     <div className="flex flex-col max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
-      <h1 className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold whitespace-nowrap mb-10">
+      <h1 className="text-sm sm:text-lg md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap mb-10">
         Blog
       </h1>
       <p className="mb-10 text-xs sm:text-base md:text-base lg:text-base xl:text-lg">
         Here, we share travel tips, guides, and stories that inspire your next
         adventure.
       </p>
-      <ul className="flex justify-between">
-        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
+      <ul className="flex flex-wrap justify-start lg:justify-between mb-5">
+        <li className="text-center  font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mx-2 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           All
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mx-2 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Destination
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mx-2 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Culinary
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mx-2 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Lifestyle
         </li>
-        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
+        <li className="text-center font-bold rounded-md cursor-pointer bg-blue-400 px-4 py-2 text-white mt-3 mx-2 hover:bg-white hover:text-blue-400 transition duration-500 ease-in-out">
           Tips & Hacks
         </li>
       </ul>
