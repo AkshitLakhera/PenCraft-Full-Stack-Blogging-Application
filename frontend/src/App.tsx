@@ -9,6 +9,7 @@ import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
 import ContributorPage from "./pages/ContributorPage"
 import { ThemeProvider } from "@/components/theme-provider"
+import ChatbotEmbed from "./components/Chatbot.tsx"
 import GTranslateLoader from "./components/GTranslateLoader.tsx"
 
 // Lenis - for smooth scrolling
@@ -44,6 +45,7 @@ function App() {
           <Route path="/contributor" element={<ContributorPage />} />
         </Routes>
       </BrowserRouter>
+      <ChatbotEmbed />
       <GTranslateLoader />
     </ThemeProvider>
 
