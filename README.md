@@ -106,5 +106,6 @@ Added jodit editor .
 - **iamDyeus** - [@dyeusyt](https://github.com/dyeusyt)
 - **kartikeyyy** - [@kartikeykvk369](https://github.com/kartikeykvk369)
 - **khaulanauman** - [@khaulanauman](https://github.com/khaulanauman)
+- **smog-root** - [@machha.shashank](https://github.com/machha.shashank)
 - **tarunkumar2005** - [@tarunkumar6258278](https://github.com/tarunkumar6258278)
 - **tejasbenibagde** - [@124677750+tejasbenibagde](https://github.com/124677750+tejasbenibagde)
