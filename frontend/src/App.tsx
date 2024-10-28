@@ -10,6 +10,7 @@ import { Myblogs } from "./pages/Myblogs"
 import ContributorPage from "./pages/ContributorPage"
 import { ThemeProvider } from "@/components/theme-provider"
 import ChatbotEmbed from "./components/Chatbot.tsx"
+import GTranslateLoader from "./components/GTranslateLoader.tsx"
 
 // Lenis - for smooth scrolling
 import Lenis from 'lenis'
@@ -45,6 +46,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <ChatbotEmbed />
+      <GTranslateLoader />
     </ThemeProvider>
 
   )
