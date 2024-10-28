@@ -3,7 +3,7 @@ import Blog from "../ui/Blog";
 export const Explore = () => {
   return (
     <div className="flex flex-col max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
-      <h1 className="text-sm sm:text-lg md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap mb-10">
+      <h1 className="text-lg md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap mb-10">
         Blog
       </h1>
       <p className="mb-10 text-xs sm:text-base md:text-base lg:text-base xl:text-lg">
