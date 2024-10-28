@@ -37,6 +37,13 @@ export default function SignUp() {
 
   async function sendRequest() {
     setloading(true);
+    // Password validation
+    if (!validatePassword(postInputs.password)) {
+        alert("Password must be at least 8 characters long, contain a mix of uppercase and lowercase letters, numbers, and special characters (e.g., @, #, $).");
+        setloading(false);
+        return; // Exit the function if validation fails
+    }
+    
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/signup`,
@@ -56,6 +63,23 @@ export default function SignUp() {
       setloading(false);
     }
     console.log(postInputs);
+  }
+
+  // Updated password validation function
+  function validatePassword(password: string): boolean {
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/; // At least one uppercase letter
+    const hasLowercase = /[a-z]/; // At least one lowercase letter
+    const hasNumber = /\d/; // At least one number
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/; // At least one special character
+
+    return (
+        password.length >= minLength &&
+        hasUppercase.test(password) &&
+        hasLowercase.test(password) &&
+        hasNumber.test(password) &&
+        hasSpecialChar.test(password)
+    );
   }
 
   const [reset, setReset] = React.useState(false);
