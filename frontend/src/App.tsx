@@ -7,11 +7,34 @@ import { Publish } from "./pages/Publish"
 import { Landing } from "./pages/Landing"
 import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
+import ContributorPage from "./pages/ContributorPage"
 import { ThemeProvider } from "@/components/theme-provider"
+
 import { Toaster } from 'react-hot-toast';
+
+=======
+import ChatbotEmbed from "./components/Chatbot.tsx"
+import GTranslateLoader from "./components/GTranslateLoader.tsx"
+
+// Lenis - for smooth scrolling
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 
 
 function App() {
+
+  // Initialize Lenis
+  const lenis = new Lenis();
+  lenis.on('scroll', (e) => {
+    console.log(e);
+  }); // Listen for the scroll event and log the event data
+  function raf(time:number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  } // Use requestAnimationFrame to continuously update the scroll
+  requestAnimationFrame(raf);
+
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Toaster position="top-center"
@@ -33,8 +56,11 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/myblogs" element={<Myblogs />} />
+          <Route path="/contributor" element={<ContributorPage />} />
         </Routes>
       </BrowserRouter>
+      <ChatbotEmbed />
+      <GTranslateLoader />
     </ThemeProvider>
 
   )

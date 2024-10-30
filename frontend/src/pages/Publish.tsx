@@ -1,27 +1,41 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react"; // Add useEffect to the imports
 import { Appbar } from "@/components/Appbar";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from 'jodit-react';
+import { useTheme } from "@/components/theme-provider"; // Import useTheme
 
 export const Publish = () => {
-  const [title, setTitle] = useState(""); // to add prefill title
-  const [content, setContent] = useState("");// to add prefill content
+  const { theme } = useTheme(); // Access current theme
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const editor = useRef(null);
   const navigate = useNavigate();
+
+  // Set editor configuration based on theme
+  const [config, setConfig] = useState({
+    theme: theme === "dark" ? "dark" : "light", // Set initial theme
+    readonly: false,
+  });
+
+  useEffect(() => {
+    // Update editor configuration when theme changes
+    setConfig({
+      theme: theme === "dark" ? "dark" : "light", // Change theme dynamically
+      readonly: false,
+    });
+  }, [theme]); // Dependency array to watch for theme changes
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-
   const handleSubmit = async () => {
-
     try {
       await axios.post(`${BACKEND_URL}/api/v1/blog`, {
         title,
-        content, // Send plain text content to backend
+        content,
       }, {
         headers: {
           Authorization: localStorage.getItem("token")
@@ -44,15 +58,16 @@ export const Publish = () => {
           value={title}
           onChange={handleTitleChange}
           placeholder="Enter title"
-          className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
+          className="border text-black border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus outline-none"
         />
-         <div className="max-h-96 overflow-y-auto">
+        <div className="max-h-96 overflow-y-auto">
           <JoditEditor
+            config={config}
             ref={editor}
             value={content}
             onChange={newContent => setContent(newContent)} // Update state with HTML content
           />
-          </div>
+        </div>
         <button
           onClick={handleSubmit}
           className="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-4"
