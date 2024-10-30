@@ -20,6 +20,7 @@ export default function SignIn() {
   });
   const [loading, setloading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [passwordError, setPasswordError] = useState(""); // Add state for password error
   const { theme, setTheme } = useTheme();
   // console.log(theme);
   if (theme === "system") {
@@ -37,6 +38,11 @@ export default function SignIn() {
   async function sendRequest() {
     setloading(true);
     try {
+      if (postInputs.password.length < 6) { // Check for password length
+        setPasswordError("Password must be at least 6 characters long.");
+        setloading(false);
+        return; // Exit if validation fails
+      }
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/signin`,
         postInputs
@@ -350,9 +356,15 @@ export default function SignIn() {
                     ...postInputs,
                     password: e.target.value,
                   });
+                  setPasswordError(""); // Clear error on input change
                 }}
                 className={`${theme === `light` ? `text-gray-800 border-gray-800 border` : "text-gray-500"}w-full mt-2 px-3 py-5  bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg `}
               />
+              {passwordError && ( // Display password error message
+                <div className="text-red-500 font-semibold">
+                  {passwordError}
+                </div>
+              )}
             </div>
             <button
               onClick={sendRequest}
@@ -372,3 +384,4 @@ export default function SignIn() {
     </main>
   );
 }
+
