@@ -88,6 +88,7 @@ Added jodit editor .
 
 ## Contributors
 
+- **Abhi-hertz** - [@93651229+AE-Hertz](https://github.com/93651229+AE-Hertz)
 - **Akshit lakhera** - [@akshitlakhera14](https://github.com/akshitlakhera14)
 - **Bhumika** - [@sharmabhmi](https://github.com/sharmabhmi)
 - **MIGHTY1o1** - [@shubhagarwalcse](https://github.com/shubhagarwalcse)
