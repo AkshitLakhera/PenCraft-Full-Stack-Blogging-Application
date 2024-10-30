@@ -9,12 +9,17 @@ import { Bookmark } from "./pages/Bookmark"
 import { Myblogs } from "./pages/Myblogs"
 import ContributorPage from "./pages/ContributorPage"
 import { ThemeProvider } from "@/components/theme-provider"
+
+import { Toaster } from 'react-hot-toast';
+
+=======
 import ChatbotEmbed from "./components/Chatbot.tsx"
 import GTranslateLoader from "./components/GTranslateLoader.tsx"
 
 // Lenis - for smooth scrolling
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
+
 
 function App() {
 
@@ -32,6 +37,15 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Toaster position="top-center"
+  toastOptions={{
+    style: {
+      
+      background: '#333',
+      color: '#fff',},
+      duration: 4000, // duration in milliseconds
+    }}
+  />
       <BrowserRouter>
         <Routes>
           <Route path="/bookmark" element={<Bookmark />} />

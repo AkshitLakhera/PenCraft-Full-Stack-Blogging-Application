@@ -10,6 +10,7 @@ import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { Loader } from "lucide-react";
 import { useTheme } from "../theme-provider";
+import { toast } from 'react-hot-toast';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function SignIn() {
       console.log(jwt);
       navigate("/blogs");
     } catch (e) {
-      setErrorMessage("Invalid Details ");
+      toast.error("Invalid Details");
     } finally {
       setloading(false);
     }
