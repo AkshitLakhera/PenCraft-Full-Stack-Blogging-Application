@@ -1,23 +1,24 @@
 import pen from "../../assets/hero-pen.png";
+
 export const AboutUs = () => {
   return (
     <div className="mt-12 flex flex-col max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
-      <h1 className="text-center text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold whitespace-nowrap">
+      <h1 className="text-center text-sm sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
         Crafting a World of Ideas
       </h1>
-      <div className="flex justify-center items-center">
-        <div className="imagePart  min-h-64">
+      <div className="flex flex-col sm:flex-row justify-center items-center mt-8">
+        <div className="imagePart min-h-64 flex justify-center mb-5 sm:mb-0">
           <img
-            className=" object-contain w-3/4 rounded-2xl"
+            className="object-contain w-3/4 rounded-2xl sm:w-1/2"
             src={pen}
             alt="image"
           />
         </div>
-        <div className="textPart w-1/2 p-5 flex flex-col  justify-center">
-          <h3 className="text-xs sm:text-base md:text-lg lg:text:xl xl:text-2xl text-center mb-10">
+        <div className="textPart w-full sm:w-1/2 p-5 flex flex-col justify-center">
+          <h3 className="text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center mb-5">
             Your voice, your platform.
           </h3>
-          <p className="mb-10 text-xs sm:text-base md:text-base lg:text-base xl:text-lg">
+          <p className="mb-5 text-xs sm:text-base md:text-base lg:text-base xl:text-lg">
             You hold the key to your stories, audience, and growth. With full
             creative control and zero intermediaries, you can publish content
             that reflects your vision and connects with readers on your terms.
