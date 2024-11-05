@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { BookOpen, ChevronRight, Search } from "lucide-react";
-import Image from '../public/file.png'
+import Image from '/Error404.png'
 const NotFound = () => {
   return (
     <div className="min-h-screen bg-black">
