@@ -47,6 +47,7 @@ function App() {
       </BrowserRouter>
       <ChatbotEmbed />
       <GTranslateLoader />
+      
     </ThemeProvider>
 
   )
