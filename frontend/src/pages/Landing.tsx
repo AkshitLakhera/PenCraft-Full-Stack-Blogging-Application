@@ -75,12 +75,16 @@ export function TypewriterEffectSmoothDemo() {
         <hr className="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-blue-500/30" />
         <Explore />
       </div>
+      <div>
+        <FAQ/>
+      </div>
     </div>
   );
 }
 //  Effect sparkel ui aceternity
 ("use client");
 import { SparklesCore } from "@/components/ui/sparkles";
+import FAQ from "@/components/ui/faq";
 
 export function SparklesPreview() {
   return (

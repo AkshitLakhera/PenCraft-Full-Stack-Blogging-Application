@@ -1,3 +1,4 @@
 node_modules
 frontend/.env
 .gitignore
+wrangler.toml
