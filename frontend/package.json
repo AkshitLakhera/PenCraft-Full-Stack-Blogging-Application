@@ -24,6 +24,7 @@
     "axios": "^1.7.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "firebase": "^11.0.1",
     "framer-motion": "^11.0.8",
     "jodit-react": "^4.0.25",
     "jwt-decode": "^4.0.0",
