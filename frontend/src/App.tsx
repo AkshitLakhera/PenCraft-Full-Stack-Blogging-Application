@@ -11,6 +11,7 @@ import ContributorPage from "./pages/ContributorPage"
 import { ThemeProvider } from "@/components/theme-provider"
 import ChatbotEmbed from "./components/Chatbot.tsx"
 import GTranslateLoader from "./components/GTranslateLoader.tsx"
+import NotFound from "./not-found.tsx"
 
 //for the back to top button
 import { ScrollToTop } from "react-simple-scroll-up";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/myblogs" element={<Myblogs />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/contributor" element={<ContributorPage />} />
         </Routes>
       </BrowserRouter>
