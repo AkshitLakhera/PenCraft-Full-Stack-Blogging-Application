@@ -12,9 +12,13 @@ import { ThemeProvider } from "@/components/theme-provider"
 import ChatbotEmbed from "./components/Chatbot.tsx"
 import GTranslateLoader from "./components/GTranslateLoader.tsx"
 
+//for the back to top button
+import { ScrollToTop } from "react-simple-scroll-up";
+
 // Lenis - for smooth scrolling
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
+import ProgressBar from "./components/Progressbar.tsx"
 
 function App() {
 
@@ -32,11 +36,12 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <ProgressBar />
       <BrowserRouter>
         <Routes>
           <Route path="/bookmark" element={<Bookmark />} />
           <Route path="/" element={<Landing />} />
-          <Route path="/signup" element={<SignUpPage/>} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/blogs" element={<Blogs />} />
@@ -47,10 +52,18 @@ function App() {
       </BrowserRouter>
       <ChatbotEmbed />
       <GTranslateLoader />
-      
+      <ScrollToTop
+        className="scroll-to-top mr-16"
+        symbol={<span style={{fontSize:"2.2rem"}}  >&#8593;</span>}
+        size={60}
+        bgColor="#2C2A2A"
+        strokeWidth={5}
+        strokeFillColor="#fff"
+        strokeEmptyColor="#505050"
+        symbolColor="#F5FBFA"
+      />
     </ThemeProvider>
-
-  )
+  );
 }
 
 export default App
