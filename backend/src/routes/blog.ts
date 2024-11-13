@@ -29,7 +29,7 @@ blogRouter.use(async (c, next) => {
       c.status(401);
       return c.json({ error: "Unauthorized" });
     }
-    c.set("userId", payload.id);
+    c.set("userId", payload.id as string);
     await next();
   } catch (error) {
     console.error("Error verifying JWT token:", error);
@@ -99,11 +99,11 @@ blogRouter.put("/", async (c) => {
     },
   });
   if (updateBlog) {
-    return c.json({ messgae: "Blog post successfully updated" });
+    return c.json({ message: "Blog post successfully updated" }); // Fixed typo: "messgae" to "message"
   } else {
-    c.status(401);
+    c.status(404); // Changed status to 404 for not found
     return c.json({
-      error: "Blog does n't get updated",
+      error: "Blog doesn't get updated", // Fixed typo: "does n't" to "doesn't"
     });
   }
 });
