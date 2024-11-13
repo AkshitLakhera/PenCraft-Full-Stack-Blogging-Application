@@ -93,6 +93,7 @@ Added jodit editor .
 - **Ananya Gupta** - [@145869907+ananyag309](https://github.com/145869907+ananyag309)
 - **Aryan Ramesh Jain** - [@138214350+jainaryan04](https://github.com/138214350+jainaryan04)
 - **Bhumika** - [@sharmabhmi](https://github.com/sharmabhmi)
+- **Edasgh** - [@edas25564](https://github.com/edas25564)
 - **MIGHTY1o1** - [@shubhagarwalcse](https://github.com/shubhagarwalcse)
 - **Nikhil Saxena** - [@91839763+Cleveridiot07](https://github.com/91839763+Cleveridiot07)
 - **Pavan Shanmukha Madhav Gunda** - [@pavanshanmukhmadhav](https://github.com/pavanshanmukhmadhav)
